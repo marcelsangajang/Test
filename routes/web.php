@@ -15,7 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function() {
+Route::get('/public/test', 'TestController@doTheTest');
+Route::get('/test', 'TestController@doTheTest');
+
+//Route::get('/public/test', function() {
+//	return view('test');
+//});
+
+/*Route::get('/test', function() {
 	
 	$temp = DB::table('personal_agenda')->latest()->get();//find($id);
 
@@ -29,4 +36,4 @@ Route::get('/{about}', function($id) {
 	return view('test', compact('temp'));
 
 	
-});
+});*/

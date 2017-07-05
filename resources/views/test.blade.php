@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-
+<html>
+	
 <head>
-	<title></title>
+	<title>title</title>
 </head>
 
 <body>
-	<h1> about us </h1>
+	<h1> TEEEEEEEEEST</h1>
 
-	<?php dd($temp);?>
 </body>
 
-<html>
-	
+
 </html>
