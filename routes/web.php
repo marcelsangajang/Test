@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function() {
+	
+	$temp = DB::table('personal_agenda')->latest()->get();//find($id);
+
+	return view('test', compact('temp'));
+});
+
+Route::get('/{about}', function($id) {
+
+	$temp = DB::table('personal_agenda')->find($id);
+	
+	return view('test', compact('temp'));
+
+	
+});
