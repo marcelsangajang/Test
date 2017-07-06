@@ -15,8 +15,8 @@ class CreateAgendaPersonalWeekdays extends Migration
     {
         Schema::create('agenda_personal_weekdays', function (Blueprint $table) {
             $table->increments('id');
-            $table->int('agenda_personal_period_id');
-            $table->int('interval');
+            $table->integer('agenda_personal_period_id');
+            $table->integer('interval');
             $table->time('begin_time');
             $table->time('end_time');
             $table->string('day', 3);
