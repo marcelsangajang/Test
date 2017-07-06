@@ -15,6 +15,9 @@ class CreateTableAgendaChairPeriod extends Migration
     {
         Schema::create('agenda_chair_period', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('begin_date');
+            $table->date('end_date');
+            $table->string('description', 40);
             $table->timestamps();
         });
     }

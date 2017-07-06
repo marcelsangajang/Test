@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableAgendaPersonalPeriodBreak extends Migration
+class CreateAgendaChairWeekdays extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateTableAgendaPersonalPeriodBreak extends Migration
      */
     public function up()
     {
-        Schema::create('agenda_personal_period_break', function (Blueprint $table) {
+        Schema::create('agenda_chair_weekdays', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('period_id');
+            $table->int('agenda_chair_period_id');
+            $table->int('interval');
             $table->time('begin_time');
             $table->time('end_time');
             $table->string('day', 3);
@@ -30,6 +31,6 @@ class CreateTableAgendaPersonalPeriodBreak extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agenda_personal_period_break');
+        Schema::dropIfExists('agenda_chair_weekdays');
     }
 }
