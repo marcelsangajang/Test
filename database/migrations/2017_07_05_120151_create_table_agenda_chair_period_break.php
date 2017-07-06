@@ -15,6 +15,10 @@ class CreateTableAgendaChairPeriodBreak extends Migration
     {
         Schema::create('agenda_chair_period_break', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('period_id');
+            $table->time('begin_time');
+            $table->time('end_time');
+            $table->string('day', 3);
             $table->timestamps();
         });
     }

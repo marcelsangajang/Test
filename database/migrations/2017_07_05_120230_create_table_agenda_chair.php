@@ -15,6 +15,8 @@ class CreateTableAgendaChair extends Migration
     {
         Schema::create('agenda_chair', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('description_intern', 40);
+            $table->string('description_extern', 40);
             $table->timestamps();
         });
     }
