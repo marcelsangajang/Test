@@ -16,7 +16,7 @@
         
     {{ Form::label('description_extern', 'Description extern') }}
     <br>
-    {{ Form::text('description_intern') }}
+    {{ Form::text('description_extern') }}
     <br>
                 
     {{ Form::label('type', 'type') }}
