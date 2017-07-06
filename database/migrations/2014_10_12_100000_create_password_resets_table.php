@@ -8,12 +8,11 @@ use Illuminate\Database\Migrations\Migration;
 /*
  * Standaard migration voorbeelden van Laravel, Uitgecommentarieerd zodat deze niet steeds automatisch gaat draaien
  * 
-
+*/
 class CreatePasswordResetsTable extends Migration
 {
 
-     // Run the migrations.
-     
+     // Run the migrations.     
     //  @return void
 
     public function up()
@@ -26,8 +25,7 @@ class CreatePasswordResetsTable extends Migration
     }
 
 
-     // Reverse the migrations.
-     
+     // Reverse the migrations.     
      // @return void
 
     public function down()
@@ -36,4 +34,3 @@ class CreatePasswordResetsTable extends Migration
     }
 }
 
-*/

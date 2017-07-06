@@ -8,7 +8,7 @@ use Illuminate\Database\Migrations\Migration;
 /*
  * Standaard migration voorbeelden van Laravel, Uitgecommentarieerd zodat deze niet steeds automatisch gaat draaien
  * 
-
+*/
 class CreateUsersTable extends Migration
 {
 
@@ -28,14 +28,11 @@ class CreateUsersTable extends Migration
     }
 
 
-    // Reverse the migrations.
-     
-    // @return void
+    //Reverse the migrations.     
+    //@return void
    
     public function down()
     {
         Schema::dropIfExists('users');
     }
 }
-
-*/
