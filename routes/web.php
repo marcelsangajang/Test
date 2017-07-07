@@ -16,9 +16,12 @@ Route::get('/', function () {
 });
 
 // Create personal agenda FORM
-Route::get('createpersonalagenda', 'createPersonalAgendaController@funcformview');
+Route::get('createpersonalagenda', ['as' => 'createpersonalagenda', 'uses' => 'createPersonalAgendaFormController@funcformview']);
 //POST personal agenda 
-Route::post('post', 'createPersonalAgendaController@funcpost');
+Route::post('post', 'createPersonalAgendaFormController@funcpost');
+
+
+Route::get('fullagenda', ['as' => 'fullagenda', 'uses' => 'PersonalAgendaController@test']);
 
 
 Route::get('/public/test', 'TestController@doTheTest');
