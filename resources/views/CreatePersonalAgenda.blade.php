@@ -19,7 +19,7 @@
     {{ Form::text('description_extern') }}
     <br>
                 
-    {{ Form::label('type', 'type') }}
+    {{ Form::label('type', 'Type') }}
     <br>
     {{ Form::select('type', array(
        'Tandarts' => 'Tandarts',
