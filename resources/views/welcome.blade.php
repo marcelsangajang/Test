@@ -91,7 +91,7 @@
                     <a href="/test">Test</a>
                     <a href="/AgendaPersonalFormView">Create personal agenda</a>
                     <a href="/AgendaPersonalPeriodFormView">Create period</a>
-                    <a href="/AgendaPersonalWeekdaysFormView">Create Weekdays</a>
+                    
                 </div>
             </div>
         </div>
