@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AgendaPersonalPeriod extends Model
+class AgendaPersonalPeriodModel extends Model
 {
     protected $table = 'agenda_personal_period';
     

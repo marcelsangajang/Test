@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
-use App\models\AgendaPersonalPeriod;
-use App\models\AgendaPersonalPeriodWeekdays;
+use App\models\AgendaPersonalPeriodModel;
+use App\models\AgendaPersonalPeriodWeekdaysModel;
 use App\Http\Controllers\Controller;
 use Input;
 
 
-class PeriodController extends Controller
+class AgendaPersonalPeriodFormController extends Controller
 {
     public function period() {
-        return view('CreatePersonalPeriod');
+        return view('AgendaPersonalPeriodFormView');
     }
 
 
@@ -29,7 +29,7 @@ class PeriodController extends Controller
          
 
         //Create a period for a personal agenda
-        $agendaPersonalPeriod = new AgendaPersonalPeriod();
+        $agendaPersonalPeriod = new AgendaPersonalPeriodModel();
         $agenda_personal_id = 1;//Input::get('');
         $description = Input::get('description');
         $start_date = Input::get('start_date');
@@ -37,14 +37,14 @@ class PeriodController extends Controller
 
           
         $agendaPersonalPeriod->description = $description;
-        $agendaPersonalPeriod->agenda_personal_id = $agenda_personal_id;
+        $agendaPersonalPeriod->agenda_id = $agenda_personal_id;
         $agendaPersonalPeriod->start_date = $start_date;
         $agendaPersonalPeriod->end_date = $end_date;
         $agendaPersonalPeriod->save();
 
         //Create the weekdays for this period
         //MONDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdaysModel();
         $start_time = Input::get('start_time_mo');
         $end_time = Input::get('end_time_mo');
         $day = 'mo';
@@ -57,7 +57,7 @@ class PeriodController extends Controller
         $agendaPersonalPeriodWeekdays->save();
 
         //THUESDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdaysModel();
         $start_time = Input::get('start_time_tu');
         $end_time = Input::get('end_time_tu');
         $day = 'tu';
@@ -70,7 +70,7 @@ class PeriodController extends Controller
         $agendaPersonalPeriodWeekdays->save();
       
         //WEDNESDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdaysModel();
         $start_time = Input::get('start_time_we');
         $end_time = Input::get('end_time_we');
         $day = 'we';
@@ -83,7 +83,7 @@ class PeriodController extends Controller
         $agendaPersonalPeriodWeekdays->save();
         
         //THURSDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdaysModel();
         $start_time = Input::get('start_time_th');
         $end_time = Input::get('end_time_th');
         $day = 'th';
@@ -96,7 +96,7 @@ class PeriodController extends Controller
         $agendaPersonalPeriodWeekdays->save();
 
         //FRIDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdaysModel();
         $start_time = Input::get('start_time_fr');
         $end_time = Input::get('end_time_fr');
         $day = 'fr';

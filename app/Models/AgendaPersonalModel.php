@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
 
-class AgendaPersonal extends Model
+class AgendaPersonalModel extends Model
 {
     protected $table = 'agenda_personal';
     
