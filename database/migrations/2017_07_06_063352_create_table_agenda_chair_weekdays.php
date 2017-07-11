@@ -15,7 +15,7 @@ class CreateTableAgendaChairWeekdays extends Migration
     {
         Schema::create('agenda_chair_weekdays', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('agenda_chair_period_id');
+            $table->integer('period_id');
             $table->integer('interval');
             $table->time('begin_time');
             $table->time('end_time');

@@ -18,7 +18,6 @@ class CreateTableAgendaChairPeriodBreak extends Migration
             $table->integer('weekday_id');
             $table->time('begin_time');
             $table->time('end_time');
-            $table->string('day', 3);
             $table->timestamps();
         });
     }
