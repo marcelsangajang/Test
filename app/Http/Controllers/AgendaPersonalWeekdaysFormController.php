@@ -1,18 +1,27 @@
 <?php
-
+/*Form controller for generating weekdays. This data is needed by AgendaPersonalPeriodFormController to generate periods*/
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
-class AgendaPersonalWeekdayFormController extends Controller
+use Illuminate\Support\Facades\Request;
+use App\models\AgendaPersonalWeekdaysModel;
+use App\Http\Controllers\Controller;
+use Input;
+
+class AgendaPersonalWeekdaysFormController extends Controller
 {
-    //Create the weekdays for this period
-        //MONDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+	public function weekdays() {
+		return view('AgendaPersonalWeekdaysFormView');
+	}
+
+	public function funcpostWeekdays() {
+		$period_id = Input::get('period_id');
+
+		//MONDAY
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
         $start_time = Input::get('start_time_mo');
         $end_time = Input::get('end_time_mo');
         $day = 'mo';
-        $period_id = $agendaPersonalPeriod->id;
 
         $agendaPersonalPeriodWeekdays->period_id =$period_id;
         $agendaPersonalPeriodWeekdays->start_time = $start_time;
@@ -21,37 +30,34 @@ class AgendaPersonalWeekdayFormController extends Controller
         $agendaPersonalPeriodWeekdays->save();
 
         //THUESDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
         $start_time = Input::get('start_time_tu');
         $end_time = Input::get('end_time_tu');
         $day = 'tu';
-        $period_id = $agendaPersonalPeriod->id;
 
         $agendaPersonalPeriodWeekdays->period_id =$period_id;
         $agendaPersonalPeriodWeekdays->start_time = $start_time;
         $agendaPersonalPeriodWeekdays->end_time = $end_time;
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
-      
+
         //WEDNESDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
         $start_time = Input::get('start_time_we');
         $end_time = Input::get('end_time_we');
         $day = 'we';
-        $period_id = $agendaPersonalPeriod->id;
 
         $agendaPersonalPeriodWeekdays->period_id =$period_id;
         $agendaPersonalPeriodWeekdays->start_time = $start_time;
         $agendaPersonalPeriodWeekdays->end_time = $end_time;
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
-        
+
         //THURSDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
         $start_time = Input::get('start_time_th');
         $end_time = Input::get('end_time_th');
         $day = 'th';
-        $period_id = $agendaPersonalPeriod->id;
 
         $agendaPersonalPeriodWeekdays->period_id =$period_id;
         $agendaPersonalPeriodWeekdays->start_time = $start_time;
@@ -60,11 +66,10 @@ class AgendaPersonalWeekdayFormController extends Controller
         $agendaPersonalPeriodWeekdays->save();
 
         //FRIDAY
-        $agendaPersonalPeriodWeekdays = new AgendaPersonalPeriodWeekdays();
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
         $start_time = Input::get('start_time_fr');
         $end_time = Input::get('end_time_fr');
         $day = 'fr';
-        $period_id = $agendaPersonalPeriod->id;
 
         $agendaPersonalPeriodWeekdays->period_id =$period_id;
         $agendaPersonalPeriodWeekdays->start_time = $start_time;
@@ -72,8 +77,29 @@ class AgendaPersonalWeekdayFormController extends Controller
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
 
-        public function weekday() {
+        //SATURDAY
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
+        $start_time = Input::get('start_time_sa');
+        $end_time = Input::get('end_time_sa');
+        $day = 'sa';
 
-        }
-        
+        $agendaPersonalPeriodWeekdays->period_id =$period_id;
+        $agendaPersonalPeriodWeekdays->start_time = $start_time;
+        $agendaPersonalPeriodWeekdays->end_time = $end_time;
+        $agendaPersonalPeriodWeekdays->day = $day;
+        $agendaPersonalPeriodWeekdays->save();
+
+        //SUNDAY
+        $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
+        $start_time = Input::get('start_time_su');
+        $end_time = Input::get('end_time_su');
+        $day = 'su';
+
+        $agendaPersonalPeriodWeekdays->period_id =$period_id;
+        $agendaPersonalPeriodWeekdays->start_time = $start_time;
+        $agendaPersonalPeriodWeekdays->end_time = $end_time;
+        $agendaPersonalPeriodWeekdays->day = $day;
+        $agendaPersonalPeriodWeekdays->save();
+
+	}
 }

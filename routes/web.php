@@ -21,11 +21,17 @@ Route::get('AgendaPersonalFormView', ['as' => 'AgendaPersonalFormView', 'uses' =
 Route::post('post', 'AgendaPersonalFormController@funcpost');
 
 
-// Create period and workdays
+// Create period
 Route::get('AgendaPersonalPeriodFormView', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalPeriodFormController@period']);
 
 //POST period (from personal agenda)
 Route::post('postPeriod', 'AgendaPersonalPeriodFormController@funcpostPeriod');
+
+// Create weekdays
+Route::get('AgendaPersonalWeekdaysFormView', ['as' => 'AgendaPersonalWeekdaysFormView', 'uses' => 'AgendaPersonalWeekdaysFormController@weekdays']);
+
+//POST weekdays (from personal agenda)
+Route::post('postWeekdays', 'AgendaPersonalWeekdaysFormController@funcpostWeekdays');
 
 
 Route::get('fullagenda', ['as' => 'fullagenda', 'uses' => 'PersonalAgendaController@test']);
