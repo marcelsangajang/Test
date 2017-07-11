@@ -88,7 +88,9 @@
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                    <a href="/public/test">Test</a>
+                    <a href="/test">Test</a>
+                    <a href="/createpersonalagenda">Create personal agenda</a>
+                    <a href="/period">Create period</a>
                 </div>
             </div>
         </div>

@@ -21,10 +21,17 @@ Route::get('createpersonalagenda', ['as' => 'createpersonalagenda', 'uses' => 'c
 Route::post('post', 'createPersonalAgendaFormController@funcpost');
 
 
+// Create period and workdays
+Route::get('period', ['as' => 'createpersonalagenda', 'uses' => 'periodController@period']);
+
+//POST period (from personal agenda)
+Route::post('postPeriod', 'periodController@funcpostPeriod');
+
+
 Route::get('fullagenda', ['as' => 'fullagenda', 'uses' => 'PersonalAgendaController@test']);
 
 
-Route::get('/public/test', 'TestController@doTheTest');
+//Route::get('/public/test', 'TestController@doTheTest');
 Route::get('/test', 'TestController@doTheTest');
 
 //Route::get('/public/test', function() {
