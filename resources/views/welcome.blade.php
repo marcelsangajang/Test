@@ -90,7 +90,7 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                     <a href="/test">Test</a>
                     <a href="/createpersonalagenda">Create personal agenda</a>
-                    <a href="/period">Create period</a>
+                    <a href="/AgendaPersonalPeriodFormView">Create period</a>
                 </div>
             </div>
         </div>

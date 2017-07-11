@@ -16,16 +16,16 @@ Route::get('/', function () {
 });
 
 // Create personal agenda FORM
-Route::get('createpersonalagenda', ['as' => 'createpersonalagenda', 'uses' => 'createPersonalAgendaFormController@funcformview']);
+Route::get('AgendaPersonalFormView', ['as' => 'AgendaPersonalFormView', 'uses' => 'AgendaPersonalFormController@funcformview']);
 //POST personal agenda 
-Route::post('post', 'createPersonalAgendaFormController@funcpost');
+Route::post('post', 'AgendaPersonalFormController@funcpost');
 
 
 // Create period and workdays
-Route::get('period', ['as' => 'createpersonalagenda', 'uses' => 'periodController@period']);
+Route::get('AgendaPersonalPeriodFormView', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalPeriodFormController@period']);
 
 //POST period (from personal agenda)
-Route::post('postPeriod', 'periodController@funcpostPeriod');
+Route::post('postPeriod', 'AgendaPersonalPeriodFormController@funcpostPeriod');
 
 
 Route::get('fullagenda', ['as' => 'fullagenda', 'uses' => 'PersonalAgendaController@test']);

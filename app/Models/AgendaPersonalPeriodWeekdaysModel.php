@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AgendaPersonalPeriodWeekdays extends Model
+class AgendaPersonalPeriodWeekdaysModel extends Model
 {
     protected $table = 'agenda_personal_weekdays';
     
