@@ -14,7 +14,7 @@ class AgendaPersonalFormController extends Controller {
     
     public function funcformview() {
         
-        return view('agendaPersonalForm');        
+        return view('agendaPersonalFormView');        
     }
       
 
