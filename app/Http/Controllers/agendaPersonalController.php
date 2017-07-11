@@ -11,6 +11,39 @@ use App\Models\AgendaPersonalPeriodWeekdays;
 
 
 
+class AgendaPersonalWrapper {
+   
+    public $agenda;
+
+    $this->agenda   = AgendaPersonal::find(1);
+    
+    
+}
+
+class Period {
+    
+    
+    
+    
+}
+
+class Weekdays {
+    
+    
+    
+    
+}
+
+class Breaks {
+    
+    
+    
+    
+}
+
+
+
+/*
 class PersonalAgendaController extends Controller {
     
     public $agenda;
@@ -77,7 +110,7 @@ class PersonalAgendaController extends Controller {
 
 }
 
-
+*/
 
 
 ?>
