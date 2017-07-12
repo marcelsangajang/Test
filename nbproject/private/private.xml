@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/simplex2Lar/app/Http/Controllers/createPersonalAgendaController.php</file>
-            <file>file:/C:/wamp64/www/simplex2Lar/resources/views/CreatePersonalAgenda.blade.php</file>
-            <file>file:/C:/wamp64/www/simplex2Lar/app/models/AgendaPersonal.php</file>
+            <file>file:/C:/wamp64/www/simplex2Lar/app/Models/AgendaPersonalSuperModel.php</file>
+            <file>file:/C:/wamp64/www/simplex2Lar/database/migrations/2017_07_05_101211_create_table_agenda_personal_period.php</file>
+            <file>file:/C:/wamp64/www/simplex2Lar/app/Http/Controllers/FullAgenda.php</file>
             <file>file:/C:/wamp64/www/simplex2Lar/routes/web.php</file>
         </group>
     </open-files>

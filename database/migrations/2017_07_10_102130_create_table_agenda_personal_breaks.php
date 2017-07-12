@@ -17,7 +17,7 @@ class CreateTableAgendaPersonalBreaks extends Migration
             $table->increments('id');
             $table->integer('weekday_id');
             $table->time('begin_time');
-            $table->time('end_time');
+            $table->time('end_time');         
             $table->timestamps();
         });
     }
