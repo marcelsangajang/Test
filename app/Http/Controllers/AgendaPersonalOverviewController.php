@@ -13,7 +13,7 @@ use App\models\AgendaPersonalSuperModel;
 use App\Http\Controllers\Controller;
 use Input;
 
-class FullAgenda {
+class AgendaPersonalOverviewController {
     
             
     public function test() {

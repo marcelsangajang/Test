@@ -16,6 +16,7 @@ class CreateTableAgendaPersonalPeriod extends Migration
         Schema::create('agenda_personal_period', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('agenda_id');
+            $table->integer('interval', 3);
             $table->date('start_date');
             $table->date('end_date');
             $table->string('description', 40);

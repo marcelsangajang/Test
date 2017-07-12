@@ -1,6 +1,6 @@
 <?php
 
-/* Controller with functions to push data to view
+/*
  * 
  * 
  * 
@@ -95,9 +95,7 @@ class AgendaPersonalSuperModel extends PeriodWeekdaysBreaks {
         }
         
     }
-    
-
-    
+     
 }
 
 
