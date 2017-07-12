@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use App\models\AgendaPersonalPeriodModel;
 use App\models\AgendaPersonalWeekdaysModel;
+use App\models\AgendaPersonalBreakModel;
 use App\Http\Controllers\Controller;
 use Input;
 
@@ -45,7 +46,21 @@ class AgendaPersonalPeriodFormController extends Controller
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
 
-        //THUESDAY
+        //Monday breaks
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break1_start_mo');
+        $agendaPersonalBreak->end_time = Input::get('break1_end_mo'); 
+        $agendaPersonalBreak->save();
+
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break2_start_mo');
+        $agendaPersonalBreak->end_time = Input::get('break2_end_mo'); 
+        $agendaPersonalBreak->save();
+
+
+        //TUESDAY
         $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
         $start_time = Input::get('start_time_tu');
         $end_time = Input::get('end_time_tu');
@@ -56,6 +71,19 @@ class AgendaPersonalPeriodFormController extends Controller
         $agendaPersonalPeriodWeekdays->end_time = $end_time;
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
+
+        //Tuesday breaks
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break1_start_tu');
+        $agendaPersonalBreak->end_time = Input::get('break1_end_mo'); 
+        $agendaPersonalBreak->save();
+
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break2_start_tu');
+        $agendaPersonalBreak->end_time = Input::get('break2_end_tu'); 
+        $agendaPersonalBreak->save();
 
         //WEDNESDAY
         $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
@@ -69,6 +97,19 @@ class AgendaPersonalPeriodFormController extends Controller
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
 
+        //Wednesday breaks
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break1_start_we');
+        $agendaPersonalBreak->end_time = Input::get('break1_end_we'); 
+        $agendaPersonalBreak->save();
+
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break2_start_we');
+        $agendaPersonalBreak->end_time = Input::get('break2_end_we'); 
+        $agendaPersonalBreak->save();
+
         //THURSDAY
         $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
         $start_time = Input::get('start_time_th');
@@ -80,6 +121,19 @@ class AgendaPersonalPeriodFormController extends Controller
         $agendaPersonalPeriodWeekdays->end_time = $end_time;
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
+
+        //Thursday breaks
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break1_start_th');
+        $agendaPersonalBreak->end_time = Input::get('break1_end_th'); 
+        $agendaPersonalBreak->save();
+
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break2_start_th');
+        $agendaPersonalBreak->end_time = Input::get('break2_end_th'); 
+        $agendaPersonalBreak->save();
 
         //FRIDAY
         $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
@@ -93,6 +147,19 @@ class AgendaPersonalPeriodFormController extends Controller
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
 
+        //Friday breaks
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break1_start_fr');
+        $agendaPersonalBreak->end_time = Input::get('break1_end_fr'); 
+        $agendaPersonalBreak->save();
+
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break2_start_fr');
+        $agendaPersonalBreak->end_time = Input::get('break2_end_fr'); 
+        $agendaPersonalBreak->save();
+
         //SATURDAY
         $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
         $start_time = Input::get('start_time_sa');
@@ -105,6 +172,19 @@ class AgendaPersonalPeriodFormController extends Controller
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
 
+        //Saturday breaks
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break1_start_sa');
+        $agendaPersonalBreak->end_time = Input::get('break1_end_sa'); 
+        $agendaPersonalBreak->save();
+
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break2_start_sa');
+        $agendaPersonalBreak->end_time = Input::get('break2_end_sa'); 
+        $agendaPersonalBreak->save();
+
         //SUNDAY
         $agendaPersonalPeriodWeekdays = new AgendaPersonalWeekdaysModel();
         $start_time = Input::get('start_time_su');
@@ -116,6 +196,19 @@ class AgendaPersonalPeriodFormController extends Controller
         $agendaPersonalPeriodWeekdays->end_time = $end_time;
         $agendaPersonalPeriodWeekdays->day = $day;
         $agendaPersonalPeriodWeekdays->save();
+
+        //Sunday breaks
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break1_start_su');
+        $agendaPersonalBreak->end_time = Input::get('break1_end_su'); 
+        $agendaPersonalBreak->save();
+
+        $agendaPersonalBreak = new AgendaPersonalBreakModel();
+        $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
+        $agendaPersonalBreak->start_time = Input::get('break2_start_su');
+        $agendaPersonalBreak->end_time = Input::get('break2_end_su'); 
+        $agendaPersonalBreak->save();
 
         echo '<pre>';
         var_dump(Request::all());

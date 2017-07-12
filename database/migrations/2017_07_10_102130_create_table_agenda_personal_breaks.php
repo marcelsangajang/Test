@@ -16,7 +16,7 @@ class CreateTableAgendaPersonalBreaks extends Migration
         Schema::create('agenda_personal_breaks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('weekday_id');
-            $table->time('begin_time');
+            $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
         });
