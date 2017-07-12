@@ -11,25 +11,30 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use App\models\AgendaPersonalSuperModel;
 use App\Http\Controllers\Controller;
+
+use DB;
 use Input;
+use View;
 
 class AgendaPersonalOverviewController {
     
             
     public function test() {
+             
+         $allAgendas = DB::table('agenda_personal')
+                                ->get();
         
-        $full = new AgendaPersonalSuperModel(1);
+         $allAgendas = $allAgendas->toArray();
+
         
-        $test = array('test1', 'test2');
-     
-        return view('AgendaPersonalOverview')->with(['data'=>$test]); 
+        return View::make('AgendaPersonalOverview', compact('allAgendas'));
         
-        // $full->periodWeekdaysBreaksObjArray[0]
+        // $full->periodWeekdaysBreaksObjArray[0]  AgendaPersonalOverview
     
         
-    //    echo '<pre>';
+    //    echo '<pre>'; $full = new AgendaPersonalSuperModel(1);
     //    var_dump($full->periodWeekdaysBreaksObjArray[0]);
-    //    echo '</pre>'; 
+    //    echo '</pre>'; $full = new AgendaPersonalSuperModel(1);
         
         
         

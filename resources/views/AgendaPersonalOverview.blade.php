@@ -6,20 +6,16 @@
 </head>    
     
 <body>
-
-    {{ Form::select('Select Agenda', array(
-       'Tandarts' => 'Tandarts',
-       'Mondhygieste' => 'Mondhygieste',
-       'prevassistent' => 'Prev. assistente'                         
-    )) }}    
+ 
+ {{ Form::open(array('url' => '')) }}   
     
-   @if ($test)
-   @foreach($test as $test2)
-      {{ $test2 }}
-   @endforeach
-@endif 
+  <select class="form-control" name="agenaSelect">
+    @foreach($allAgendas as $agenda)
+      <option value="{{$agenda->id}}">{{$agenda->description_intern}}</option>
+    @endforeach
+  </select>
     
-    
+  {{ Form::submit('Submit') }} 
     
 </body>    
     
