@@ -25,7 +25,7 @@ class AgendaPersonalFormController extends Controller {
         
         if ($dataVal->fails()) {
             
-            return redirect()->route('agendaPersonalForm')->with([$inputForm])->withErrors($dataVal);
+            return redirect()->route('agendaPersonalFormView')->with([$inputForm])->withErrors($dataVal);
             
         }
          
