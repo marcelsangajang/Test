@@ -28,7 +28,7 @@ Route::get('AgendaPersonalPeriodFormView', ['as' => 'AgendaPersonalPeriodFormVie
 Route::post('postPeriod', 'AgendaPersonalPeriodFormController@funcpostPeriod');
 
 
-Route::get('fullagenda', ['as' => 'fullagenda', 'uses' => 'fullAgenda@test']);
+Route::get('fullagenda', ['as' => 'fullagenda', 'uses' => 'AgendaPersonalOverviewController@test']);
 
 
 //Route::get('/public/test', 'TestController@doTheTest');

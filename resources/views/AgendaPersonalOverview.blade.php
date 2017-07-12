@@ -1,8 +1,33 @@
-<?php
+<html>
+    
+<head>
+        
+        
+</head>    
+    
+<body>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+    {{ Form::select('Select Agenda', array(
+       'Tandarts' => 'Tandarts',
+       'Mondhygieste' => 'Mondhygieste',
+       'prevassistent' => 'Prev. assistente'                         
+    )) }}    
+    
+   @if ($test)
+   @foreach($test as $test2)
+      {{ $test2 }}
+   @endforeach
+@endif 
+    
+    
+    
+</body>    
+    
+    
+    
+    
+    
+    
+    
+    
+</html>

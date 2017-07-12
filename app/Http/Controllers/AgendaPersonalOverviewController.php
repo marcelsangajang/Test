@@ -20,9 +20,16 @@ class AgendaPersonalOverviewController {
         
         $full = new AgendaPersonalSuperModel(1);
         
-        echo '<pre>';
-        var_dump($full->periodWeekdaysBreaksObjArray[0]);
-        echo '</pre>'; 
+        $test = array('test1', 'test2');
+     
+        return view('AgendaPersonalOverview')->with(['data'=>$test]); 
+        
+        // $full->periodWeekdaysBreaksObjArray[0]
+    
+        
+    //    echo '<pre>';
+    //    var_dump($full->periodWeekdaysBreaksObjArray[0]);
+    //    echo '</pre>'; 
         
         
         
