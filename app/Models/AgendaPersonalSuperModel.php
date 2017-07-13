@@ -14,27 +14,46 @@ use AgendaPersonalPeriodModel;
 use AgendaPersonalBreakModel;
 use AgendaPersonalWeekdaysModel;
 
+
 class PeriodWeekdaysBreaks {
     
-    public $periodID;
-    public $agendaInterval;
+    public    $periodID;
+    private   $periodDescription;
+    private   $periodStart;
+    private   $periodEnd;
+    public    $periodInterval;
     protected $weekdaysObjArray;
-    protected $breaksObjArray;
-    public $weekdaysBreaksObjArray;
+    public    $weekdaysBreaksObjArray;
     
     public function __construct($inputPeriodID) {
         
         $this->periodID = $inputPeriodID;
+        $this->get_period_info();
         $this->get_weekdays();
         $this->add_breaks_to_weekdays_OBJ_ARRAY();
     }
+    
+    private function get_period_info() {
+        
+        $periodInfo = DB::table('agenda_personal_period')
+                                    ->where('agenda_personal_period.id', '=',  $this->periodID)
+                                    ->get(); 
+        
+        $this->periodDescription = $periodInfo[0]->description;
+        $this->periodStart       = $periodInfo[0]->start_date;
+        $this->periodEnd         = $periodInfo[0]->end_date;
+        
+    }
+          
+        
     
     public function get_weekdays() {
         
         $this->weekdaysObjArray = DB::table('agenda_personal_period')
                                     ->join('agenda_personal_weekdays', 'agenda_personal_period.id', '=', 'agenda_personal_weekdays.period_id')
                                     ->where('agenda_personal_period.id', '=',  $this->periodID)
-                                    ->get();        
+                                    ->get();    
+        
     }
 
     public function add_breaks_to_weekdays_OBJ_ARRAY() {
@@ -51,7 +70,7 @@ class PeriodWeekdaysBreaks {
                         ->get();
             
                     
-            $this->weekdaysBreaksObjArray[$periodName][] = array('weekDay' => $weekdayObj, 'breaks' =>  $break);
+            $this->weekdaysBreaksObjArray[] = array('weekDay' => $weekdayObj, 'breaks' =>  $break);
             
         }
         
@@ -67,11 +86,15 @@ class AgendaPersonalSuperModel extends PeriodWeekdaysBreaks {
     public $PeriodObjArray;
     public $periodWeekdaysBreaksObjArray;
     
+    public $allPeriodWorkDates;
+    public $workDayNamesArray;
+    
     public function __construct($inputAgendaID) {
         
         $this->agendaID = $inputAgendaID;
         $this->get_periods();
         $this->get_period_weekdays_breaks_Obj();
+        $this->get_workday_names();
     }
     
     public function get_periods() {
@@ -88,16 +111,14 @@ class AgendaPersonalSuperModel extends PeriodWeekdaysBreaks {
         foreach ($this->PeriodObjArray as $periodObj) {
             
             $periodID = $periodObj->id;
-           
-            $periodWeekdaysBreaksObj = new PeriodWeekdaysBreaks($periodID);
-            $this->periodWeekdaysBreaksObjArray[] = $periodWeekdaysBreaksObj->weekdaysBreaksObjArray;
+          
+            $this->periodWeekdaysBreaksObjArray[] = new PeriodWeekdaysBreaks($periodID);
             
         }
         
     }
-     
+    
 }
-
 
 
 

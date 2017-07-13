@@ -28,16 +28,21 @@ class AgendaPersonalOverviewController {
 
         
         return View::make('AgendaPersonalOverview', compact('allAgendas'));
-        
-        // $full->periodWeekdaysBreaksObjArray[0]  AgendaPersonalOverview
+
+    }
     
+    public function agenda_overview_output() {
         
-    //    echo '<pre>'; $full = new AgendaPersonalSuperModel(1);
-    //    var_dump($full->periodWeekdaysBreaksObjArray[0]);
-    //    echo '</pre>'; $full = new AgendaPersonalSuperModel(1);
+
+    
+        if (Input::all()){   
+            $inputForm = Input::all();
         
-        
-        
+            $agendaObj = new AgendaPersonalSuperModel($inputForm['agendaSelect']);
+            
+            echo '<pre>';
+            var_dump($agendaObj);
+        }
     }
     
     

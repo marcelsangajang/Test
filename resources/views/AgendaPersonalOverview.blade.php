@@ -1,3 +1,5 @@
+<?php if (!isset($agendaObj)) { $agendaObj = ''; } ?>
+
 <html>
     
 <head>
@@ -7,15 +9,18 @@
     
 <body>
  
- {{ Form::open(array('url' => '')) }}   
+<form action="agendaOverviewpost" method="post">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     
-  <select class="form-control" name="agenaSelect">
-    @foreach($allAgendas as $agenda)
-      <option value="{{$agenda->id}}">{{$agenda->description_intern}}</option>
-    @endforeach
+    <select class="form-control" name="agendaSelect">
+        @foreach($allAgendas as $agenda)
+        <option value="{{$agenda->id}}">{{$agenda->description_intern}}</option>
+        @endforeach
   </select>
     
-  {{ Form::submit('Submit') }} 
+  <input type="submit" value="Submit"> 
+  
+</form>
     
 </body>    
     
