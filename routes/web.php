@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 // Create personal agenda FORM
 Route::get('AgendaPersonalFormView', ['as' => 'AgendaPersonalFormView', 'uses' => 'AgendaPersonalFormController@funcformview']);
+
 //POST personal agenda 
 Route::post('post', 'AgendaPersonalFormController@funcpost');
 
