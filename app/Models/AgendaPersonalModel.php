@@ -10,11 +10,12 @@ class AgendaPersonalModel extends Model
 {
     protected $table = 'agenda_personal';
     
-    public function period() {
+    public function periods() {
         
-        return $this->hasMany(agendaPersonalPeriod::class, 'agenda_personal_id');
+        return $this->hasMany(AgendaPersonalPeriodModel::class, 'agenda_id');
         
     }
+    
 
 
     public static $rules = array(
@@ -27,6 +28,7 @@ class AgendaPersonalModel extends Model
     
     }
 }
+
 
 
 ?>

@@ -11,7 +11,7 @@ class AgendaPersonalPeriodModel extends Model
     
         public function weekdays() {
         
-        return $this->hasMany(AgendaPersonalPeriodWeekdays::class, 'agenda_id');
+        return $this->hasMany(AgendaPersonalWeekdaysModel::class, 'period_id');
         
     }
     
