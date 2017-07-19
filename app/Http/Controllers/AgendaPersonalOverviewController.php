@@ -37,6 +37,7 @@ class AgendaPersonalOverviewController {
          
          $agendaTest = new AgendaPersonalSuperModel(1);
          
+         
           $agendaTest->get_work_day('24-07-2017');
          
         //$agendaTest = AgendaPersonalModel::with(['periods', 'periods.weekdays' => function ($q) {

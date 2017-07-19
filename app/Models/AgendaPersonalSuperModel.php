@@ -27,13 +27,24 @@ class AgendaPersonalSuperModel {
     public function get_full_agenda_obj() {
     
         if ($this->agendaId) {
+            
         $this->fullAgendaObj = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->where('id', $this->agendaId)->first();
-        }
         
+        } 
+            
     }
+        
+         
     
     
     public function get_work_day($dateInput) {
+    
+        if ($this->fullAgendaObj) {
+            //continue
+        } else {
+            return false;
+        }
+        
         
         foreach ($this->fullAgendaObj['periods'] as $agendaPeriod) {
             
@@ -43,7 +54,7 @@ class AgendaPersonalSuperModel {
             $weekdayBreaksArray = $this->combine_weekday_breaks__array($agendaPeriod['weekdays']);
             $weekDaysArray      = $this->make_weekday_array($agendaPeriod['weekdays']);
             $breaksArray        = array();
-            $agendaInterval           = $agendaPeriod['original']['interval'];
+            $agendaInterval     = $agendaPeriod['original']['interval'];
                         
             if ($date > $startDate && $date < $endDate ) {
                 
@@ -54,13 +65,13 @@ class AgendaPersonalSuperModel {
                 return false;
             }
             
-            $dateDayFormat = $this->formatSpec($date);
+            $dateDayFormat = formatS($date);
             
             if (in_array($dateDayFormat, $weekDaysArray)) {
                 
                 $workday = $weekdayBreaksArray[$dateDayFormat];
                 $timeBlocks = $this->make_workday_time_blocks_array($workday, $agendaInterval);
-                $this->var_dump($timeBlocks);
+                var_dumpS($timeBlocks);
                 
             } else {
                 
@@ -68,6 +79,10 @@ class AgendaPersonalSuperModel {
             }          
         }
     }
+
+        
+    //Make "final" workday array. Inclusive: breaks 
+    //Not added yet: Appointments, blocked time blocks
     
     private function make_workday_time_blocks_array($workDayArray, $interval) {
         
@@ -158,23 +173,9 @@ class AgendaPersonalSuperModel {
         return $breaksArray;
         
     }
+    
        
-    private function formatSpec($obj) {
-        
-                $format = $obj->format('l');
-		$format = strtolower($format);
-		$format = substr($format, 0, 3);
-		
-		return $format;
-    }
-    
-    
-    public function var_dump($dump) {
-        
-        echo '<pre>';
-        var_dump($dump);
-        echo '</pre>';
-    }
+
 }
 
 
