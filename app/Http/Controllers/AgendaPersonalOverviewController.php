@@ -18,6 +18,7 @@ use DB;
 use Input;
 use View;
 
+
 class AgendaPersonalOverviewController {
     
             
@@ -32,10 +33,19 @@ class AgendaPersonalOverviewController {
          
          $agendaPeriods = $agenda->periods;
          
-         $agendaTest = AgendaPersonalModel::with(array('periods', 'periods.weekdays'))->where('id', 2)->first();
+         //$agendaTest = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->where('id', 2)->first();
+         
+         $agendaTest = new AgendaPersonalSuperModel(1);
+         
+          $agendaTest->get_work_day('24-07-2017');
+         
+        //$agendaTest = AgendaPersonalModel::with(['periods', 'periods.weekdays' => function ($q) {
+        //$q->with('breaks');
+        //}])->find(1);
          
             echo '<pre>';
-            var_dump($agendaTest['periods'][0]['weekdays'][0]['original']);
+           // var_dump($agendaTest);
+            //var_dump($agendaTest['periods'][0]['weekdays'][0]['original']);
          // var_dump($agendaTest['periods'][0]->interval);
             echo '</pre>';
             
