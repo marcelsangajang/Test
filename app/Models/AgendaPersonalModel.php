@@ -16,6 +16,12 @@ class AgendaPersonalModel extends Model
         
     }
     
+    public function appointments() {
+        
+        return $this->hasMany(PatientAppointmentsModel::class, 'agenda_id');
+        
+    }
+    
 
 
     public static $rules = array(

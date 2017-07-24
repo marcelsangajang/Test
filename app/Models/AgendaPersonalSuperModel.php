@@ -32,6 +32,7 @@ class AgendaPersonalSuperModel {
         $this->date    = $date;  
         
         $this->workday_by_date();
+        $this->get_appointments(); 
         
     }
     
@@ -40,9 +41,8 @@ class AgendaPersonalSuperModel {
         $date = new \DateTime($this->date);
         
         //Check if date is in one of the periods and if so, get workday schedule data
-        $periodsObjArray = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->where('id', $this->agendaId)->get();
+        $periodsObjArray = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks', 'appointments'))->where('id', $this->agendaId)->get();
         $periods = $periodsObjArray[0]->periods;
-        
         
         
         foreach ($periods as $period) {
@@ -126,6 +126,13 @@ class AgendaPersonalSuperModel {
                 
             }
         }
+    }
+    
+    private function get_appointments() {
+        
+        $appointments = AgendaPersonalModel::with(array('appointments'))->where('id', $this->agendaId)->first();
+        $appointments = $appointments['appointments'];     
+        var_dumpS($appointments);
     }
     
     public function free_time_statistic() {

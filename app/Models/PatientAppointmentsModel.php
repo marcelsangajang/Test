@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PatientAppointmentsGroupModel extends Model
+class PatientAppointmentsModel extends Model
 {
-    protected $table = 'patient_appointments_group';
+    protected $table = 'patient_appointments';
     
     
 }
