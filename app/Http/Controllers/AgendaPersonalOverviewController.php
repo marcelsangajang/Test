@@ -23,49 +23,33 @@ class AgendaPersonalOverviewController {
     
             
     public function test() {
-             
-         $allAgendas = DB::table('agenda_personal')
-                                ->get();
         
-         $allAgendas = $allAgendas->toArray();
-         
-         $agenda = AgendaPersonalModel::find(1);
-         
-         $agendaPeriods = $agenda->periods;
-         
-         //$agendaTest = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->where('id', 2)->first();
-         
-         $agendaTest = new AgendaPersonalSuperModel(1);
-         
-         
-          $agendaTest->get_work_day('24-07-2017');
-         
-        //$agendaTest = AgendaPersonalModel::with(['periods', 'periods.weekdays' => function ($q) {
-        //$q->with('breaks');
-        //}])->find(1);
-         
-            echo '<pre>';
-           // var_dump($agendaTest);
-            //var_dump($agendaTest['periods'][0]['weekdays'][0]['original']);
-         // var_dump($agendaTest['periods'][0]->interval);
-            echo '</pre>';
-            
-       // return View::make('AgendaPersonalOverview', compact('allAgendas'));
+        
+   $allAgendas = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->get();
+   
+   foreach ($allAgendas as $agenda) {
+       
+       $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern']);
+       
+   }
+   
+        
+    return View::make('AgendaPersonalOverview', compact('allAgendasArray'));
 
     }
     
-    public function agenda_overview_output() {
+    public function OverviewPost() {
         
 
-    
-        if (Input::all()){   
+       //   if (Input::all()){   
             $inputForm = Input::all();
         
-            $agendaObj = new AgendaPersonalSuperModel($inputForm['agendaSelect']);
+            $agendaObj = new AgendaPersonalSuperModel($inputForm['agendaSelect'], $inputForm['date']);
+            $workday = $agendaObj->workdaySchedule;
             
-            echo '<pre>';
-            var_dump($agendaObj);
-        }
+            $agendaObj->free_time_statistic(); 
+          //  var_dumpS($workday);
+      //  }
     }
     
     

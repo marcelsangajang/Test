@@ -10,98 +10,94 @@ namespace App\Models;
 
 use DB;
 use AgendaPersonal;
+use Illuminate\Support\Collection;
 
 
 class AgendaPersonalSuperModel {
+   
+    private $agendaId;
+    private $periodInterval;
+    private $date;
+    private $daySchedule;
+    private $breaks;
     
-    public $agendaId;
-    public $fullAgendaObj;
+    public $inPeriod = false;
+    public $workdaySchedule;
+    public $periodDescription;
     
-    function __construct($agendaIdInput) {
+    function __construct($agendaId, $date) {
         
-        $this->agendaId = $agendaIdInput;
-        $this->get_full_agenda_obj();
+        $this->agendaId = $agendaId;
+        $this->date    = $date;  
+        
+        $this->workday_by_date();
         
     }
     
-    public function get_full_agenda_obj() {
-    
-        if ($this->agendaId) {
+    private function workday_by_date() {
+        
+        $date = new \DateTime($this->date);
+        
+        //Check if date is in one of the periods and if so, get workday schedule data
+        $periodsObjArray = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->where('id', $this->agendaId)->get();
+        $periods = $periodsObjArray[0]->periods;
+        
+        foreach ($periods as $period) {
+           
+            $periodStart = new \DateTime($period['start_date']);
+            $periodEnd   = new \DateTime($period['end_date']);
             
-        $this->fullAgendaObj = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->where('id', $this->agendaId)->first();
-        
-        } 
-            
-    }
-        
-         
-    
-    
-    public function get_work_day($dateInput) {
-    
-        if ($this->fullAgendaObj) {
-            //continue
-        } else {
-            return false;
-        }
-        
-        
-        foreach ($this->fullAgendaObj['periods'] as $agendaPeriod) {
-            
-            $date               = new \DateTime($dateInput);
-            $startDate          = new \DateTime($agendaPeriod['original']['start_date']);
-            $endDate            = new \DateTime($agendaPeriod['original']['end_date']);
-            $weekdayBreaksArray = $this->combine_weekday_breaks__array($agendaPeriod['weekdays']);
-            $weekDaysArray      = $this->make_weekday_array($agendaPeriod['weekdays']);
-            $breaksArray        = array();
-            $agendaInterval     = $agendaPeriod['original']['interval'];
-                        
-            if ($date > $startDate && $date < $endDate ) {
+            if ($date >= $periodStart && $date <= $periodEnd) {
                 
-                // Continue             
+                $this->periodStart       = $periodStart;
+                $this->periodEnd         = $periodEnd;
+                $this->periodInterval    = $period->interval;
+                $this->periodDescription = $period->description;
+                $this->daySchedule       = $period['weekdays']->where('day', formatS($date))->first();
+                $dayBreaks               = $this->daySchedule['breaks'];
                 
-            } else {
+                //Make and declare 1 dimensional array from with all breaks
+                $this->breaks            = $this->make_break_array($dayBreaks);
                 
-                return false;
+                $this->inPeriod          = true;                
+                
             }
-            
-            $dateDayFormat = formatS($date);
-            
-            if (in_array($dateDayFormat, $weekDaysArray)) {
-                
-                $workday = $weekdayBreaksArray[$dateDayFormat];
-                $timeBlocks = $this->make_workday_time_blocks_array($workday, $agendaInterval);
-                var_dumpS($timeBlocks);
-                
-            } else {
-                
-                return false;
-            }          
         }
-    }
-
         
-    //Make "final" workday array. Inclusive: breaks 
-    //Not added yet: Appointments, blocked time blocks
+        $this->workdaySchedule = $this->make_timeblocks();
+    }  
     
-    private function make_workday_time_blocks_array($workDayArray, $interval) {
+    private function make_break_array($dayBreaks) {
         
-        $startTime      = new \DateTime($workDayArray['start_time']);
-        $endTime        = new \DateTime($workDayArray['end_time']);
-        $breaksArray    = $this->make_break_time_blocks_array($workDayArray['breaks'], $interval);
-        $interval       = new \DateInterval('PT' . $interval . 'M');
-              
+        foreach ($dayBreaks as $break) {
+            
+            $breakArray[] = array('start' => $break['start_time'], 'end' => $break['end_time']);
+            
+        } 
+        return $breakArray;
+    }
+    
+    
+    //Make workday time array
+    //This function can only be called after the 'workday_by_date' function
+    private function make_timeblocks() {
+        
+        $startTime      = new \DateTime($this->daySchedule['start_time']);
+        $endTime        = new \DateTime($this->daySchedule['end_time']);
+        $interval       = new \DateInterval('PT' . $this->periodInterval . 'M');
+        $breaksArray    = $this->breaks;
+                
         $startWhile = clone $startTime;
         
         while ($startWhile <= $endTime) {
             
-            if (in_array($startWhile->format('H:i'), $breaksArray)) {
+            if ($this->between_time($startWhile->format('H:i:s'), $breaksArray)) {
                 
                 $timeBlocksArray[] = array('status' => 'break', 'time' => $startWhile->format('H:i'));
                 $startWhile->add($interval);
-            
+          
             } else {
-                
+
                 $timeBlocksArray[] =  array('status' => 'open', 'time' => $startWhile->format('H:i'));
                 $startWhile->add($interval);
                 
@@ -110,72 +106,38 @@ class AgendaPersonalSuperModel {
         
         return $timeBlocksArray;
         
-    }    
+    }   
     
-    private function make_break_time_blocks_array($breaksArray, $interval) {
+    private function between_time($timeNeedle, $timeHaystackArray) {
         
-       $interval       = new \DateInterval('PT' . $interval . 'M');
-        
-        foreach ($breaksArray as $break) {
-
-            $breakStartTime = new \DateTime($break['start_time']);
-            $breakEndTime   = new \DateTime($break['end_time']);
-            $breakEndTime   = $breakEndTime->sub($interval);
+        foreach ($timeHaystackArray as $beginEnd) {
             
-            $breakStartWhile = clone $breakStartTime;
-        
-            while ($breakStartWhile <= $breakEndTime) {
-
-            $breakTimeBlocksArray[] = $breakStartWhile->format('H:i');
-            $breakStartWhile->add($interval);
-		
+            if ($timeNeedle > $beginEnd['start'] && $timeNeedle < $beginEnd['end'] OR $timeNeedle == $beginEnd['start'] OR $timeNeedle == $beginEnd['end']) {
+                
+                return True;
+                
+            } else {
+                
+                return False;
+                
             }
         }
-        return $breakTimeBlocksArray;
-        
-    }     
-    
-    private function make_weekday_array($weekdaysObjArray) {
-        
-        foreach ($weekdaysObjArray as $weekdayObj) {
-            
-            $weekdaysArray[] = $weekdayObj->day;
-            
-        }
-        
-        return $weekdaysArray;
-        
     }
     
-    private function combine_weekday_breaks__array($weekdaysObjArray) {
+    public function free_time_statistic() {
         
-        foreach ($weekdaysObjArray as $weekdayObj) {
-            
-            $breaks = $this->make_breaks_array($weekdayObj['breaks']);
-            $weekdayBreaksArray[$weekdayObj->day] = array('start_time' => $weekdayObj->start_time, 'end_time' => $weekdayObj->end_time, 'breaks' => $breaks);
-            
-        }
+        $timeBlocks = $this->workdaySchedule;
+        $timeBlocksTotal = count($timeBlocks);
         
-        return $weekdayBreaksArray;
-        
-    }
-    
-    private function make_breaks_array($breaksObjArray) {
-        
-        $breaksArray = array();
-        
-        foreach ($breaksObjArray as $breakObj) {
-            
-            $breaksArray[] = array('start_time' => $breakObj->start_time, 'end_time' => $breakObj->end_time);
-            
-        }
-        
-        return $breaksArray;
-        
-    }
-    
-       
+        $timeBlocksColl = new Collection($timeBlocks);
 
+       $timeBlocksColl = $timeBlocksColl->where('status', 'open');;
+        
+        var_dumpS($timeBlocksColl);
+        
+    }
+    
+    
 }
 
 

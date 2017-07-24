@@ -14,7 +14,6 @@ class AgendaPersonalPeriodModel extends Model
         return $this->hasMany(AgendaPersonalWeekdaysModel::class, 'period_id');
         
     }
-    
-    
-    
+
+
 }

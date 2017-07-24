@@ -16,12 +16,14 @@
 		return $format;
     }
     
-    //PHP standard var_dump function + html <pre> tags, easy for testing objects, arrays etc.
-    
+    //PHP standard var_dump function + html <pre> tags, easy for testing objects, arrays etc.   
     function var_dumpS($dump) {
         
         echo '<pre>';
         var_dump($dump);
         echo '</pre>';
+        
     }
+    
+    
 

@@ -33,7 +33,7 @@ Route::post('postPeriod', 'AgendaPersonalPeriodFormController@funcpostPeriod');
 Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' => 'AgendaPersonalOverviewController@test']);
 
 //POST Agenda overview
-Route::post('agendaOverviewpost', 'AgendaPersonalOverviewController@agenda_overview_output');
+Route::post('agendaOverviewpost', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalOverviewController@OverviewPost']);
 
 
 //Route::get('/public/test', 'TestController@doTheTest');
