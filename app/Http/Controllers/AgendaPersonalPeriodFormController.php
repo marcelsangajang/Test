@@ -44,7 +44,7 @@ class AgendaPersonalPeriodFormController extends Controller
             $start_time = Input::get('start_time_'.$myList[$x]);
             $end_time = Input::get('end_time_'.$myList[$x]);
             $day = $myList[$x];
-
+            
             //Update weekday table in DB
             $agendaPersonalPeriodWeekdays->period_id =$period_id;
             $agendaPersonalPeriodWeekdays->start_time = $start_time;
@@ -54,11 +54,11 @@ class AgendaPersonalPeriodFormController extends Controller
 
             //Create the breaks for each weekday
             $max_breaks = 2;
-            for ($i = 0; $i < $max_breaks; $i++) {
+            for ($i = 1; $i < $max_breaks + 1; $i++) {
                 $agendaPersonalBreak = new AgendaPersonalBreakModel();
                 $agendaPersonalBreak->weekday_id = $agendaPersonalPeriodWeekdays->id;
-                $agendaPersonalBreak->start_time = Input::get('break1_start_'.$myList[$x]);
-                $agendaPersonalBreak->end_time = Input::get('break1_end_'.$myList[$x]); 
+                $agendaPersonalBreak->start_time = Input::get('break'.$i.'_start_'.$myList[$x]);
+                $agendaPersonalBreak->end_time = Input::get('break'.$i.'_end_'.$myList[$x]); 
                 $agendaPersonalBreak->save();
             }
         } 
