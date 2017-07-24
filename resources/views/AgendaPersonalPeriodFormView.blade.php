@@ -18,10 +18,12 @@
 
    
 
-    {{ Form::label('agenda_personal_id', 'Agenda ID') }}
-    <br>
-    {{ Form::number('agenda_personal_id', 'Agenda ID') }}
-    <br>
+    <select class="form-control" name="agendaSelect">
+        @foreach($allAgendasArray as $agenda)
+        <option value="{{$agenda['id']}}">{{$agenda['description_intern']}}</option>
+        @endforeach
+    </select>
+    
     {{ Form::label('description', 'Description') }}
     <br>
     {{ Form::text('description', Input::old('description')) }}

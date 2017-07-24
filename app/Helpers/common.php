@@ -9,7 +9,7 @@
 
     function formatS($obj) {
         
-                $format = $obj->format('l');
+        $format = $obj->format('l');
 		$format = strtolower($format);
 		$format = substr($format, 0, 3);
 		

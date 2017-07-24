@@ -11,17 +11,34 @@ use App\models\AgendaPersonalBreakModel;
 use App\Http\Controllers\Controller;
 use Input;
 
+use App\models\AgendaPersonalSuperModel;
+
+
+use App\Models\AgendaPersonalModel;
+
+use DB;
+use View;
+
 class AgendaPersonalPeriodFormController extends Controller
 {
+
+
     public function period() {
-        return view('AgendaPersonalPeriodFormView');
-    }
+        $allAgendas = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->get();
+   
+        foreach ($allAgendas as $agenda) {
+            $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern']);
+        }
+        
+        return view('AgendaPersonalPeriodFormView', compact('allAgendasArray'));       
+        }
 
     //Creates periods, the corresponding weekdays (work hours) and breaks
     public function funcpostPeriod() {
         //Create a period for a personal agenda
+        $inputForm = Input::all();
         $agendaPersonalPeriod = new AgendaPersonalPeriodModel();
-        $agenda_personal_id = Input::get('agenda_personal_id');
+        $agenda_personal_id = $inputForm['agendaSelect'];
         $description = Input::get('description');
         $start_date = Input::get('start_date');
         $end_date = Input::get('end_date');

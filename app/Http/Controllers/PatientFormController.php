@@ -10,6 +10,7 @@ use Input;
 class PatientFormController extends Controller
 {
     public function view() {
+    	
         return view('PatientFormView');        
     }
 
