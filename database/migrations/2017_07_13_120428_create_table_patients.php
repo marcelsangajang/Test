@@ -18,8 +18,10 @@ class CreateTablePatients extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->date('date_of_birth');
-            $table->string('adress');
+            $table->string('address');
             $table->string('zipcode');
+            $table->integer('house_number');
+            $table->string('city');
             $table->integer('phone_number_1');
             $table->integer('phone_number_2');
             $table->string('email');

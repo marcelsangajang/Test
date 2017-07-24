@@ -36,6 +36,10 @@ Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' =
 Route::post('agendaOverviewpost', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalOverviewController@OverviewPost']);
 
 
+Route::get('PatientFormView', ['as' => 'PatientFormView', 'uses' => 'PatientFormController@view']);
+Route::post('postPatient', 'PatientFormController@post');
+
+
 //Route::get('/public/test', 'TestController@doTheTest');
 Route::get('/test', 'TestController@doTheTest');
 

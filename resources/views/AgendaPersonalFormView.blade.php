@@ -5,7 +5,7 @@
 
 <body>
     
-<p> Dit is de template </p>
+<p> Create Persoons agenda </p>
 
 <ul>
     @if ($errors->any())
