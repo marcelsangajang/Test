@@ -20,6 +20,7 @@ class AgendaPersonalSuperModel {
     private $date;
     private $daySchedule;
     private $breaks;
+    private $appointments;
     
     public $inPeriod = false;
     public $workdaySchedule;
@@ -42,6 +43,8 @@ class AgendaPersonalSuperModel {
         $periodsObjArray = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->where('id', $this->agendaId)->get();
         $periods = $periodsObjArray[0]->periods;
         
+        
+        
         foreach ($periods as $period) {
            
             $periodStart = new \DateTime($period['start_date']);
@@ -56,7 +59,7 @@ class AgendaPersonalSuperModel {
                 $this->daySchedule       = $period['weekdays']->where('day', formatS($date))->first();
                 $dayBreaks               = $this->daySchedule['breaks'];
                 
-                //Make and declare 1 dimensional array from with all breaks
+                //Make and declare 1 dimensional array containing all breaks
                 $this->breaks            = $this->make_break_array($dayBreaks);
                 
                 $this->inPeriod          = true;                
@@ -66,6 +69,7 @@ class AgendaPersonalSuperModel {
         
         $this->workdaySchedule = $this->make_timeblocks();
     }  
+    
     
     private function make_break_array($dayBreaks) {
         
@@ -130,9 +134,6 @@ class AgendaPersonalSuperModel {
         $timeBlocksTotal = count($timeBlocks);
         
         $timeBlocksColl = new Collection($timeBlocks);
-
-       $timeBlocksColl = $timeBlocksColl->where('status', 'open');;
-        
         var_dumpS($timeBlocksColl);
         
     }
