@@ -24,6 +24,15 @@
   
 </form>
     
+    @if ($workday)
+    
+    <pre>
+    <?php 
+    var_dump($workday);
+    ?>
+    </pre>
+    @endif
+    
 </body>    
     
     

@@ -86,6 +86,7 @@
                     <a href="/AgendaPersonalFormView">Create personal agenda</a>
                     <a href="/AgendaPersonalPeriodFormView">Create period</a>
                     <a href="/PatientFormView">Create patient</a>
+                    <a href="/AgendaPersonalOverview">Get workday schedule</a>
 
                 </div>
             </div>

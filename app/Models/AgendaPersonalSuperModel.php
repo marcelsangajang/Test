@@ -137,7 +137,6 @@ class AgendaPersonalSuperModel {
                             ->where('date', $this->date)
                             ->get();
          
-        var_dumpS($appointments);
     }
     
     //Calculate percentages - UNDER CONSTRUCTION
@@ -147,7 +146,6 @@ class AgendaPersonalSuperModel {
         $timeBlocksTotal = count($timeBlocks);
         
         $timeBlocksColl = new Collection($timeBlocks);
-        var_dumpS($timeBlocksColl);
         
     }
     

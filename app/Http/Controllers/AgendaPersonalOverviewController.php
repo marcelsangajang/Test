@@ -42,12 +42,21 @@ class AgendaPersonalOverviewController {
         
        //   if (Input::all()){   
             $inputForm = Input::all();
+            
+            $allAgendas = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->get();
+   
+            foreach ($allAgendas as $agenda) {
+       
+                $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern']);
+       
+            }
+   
         
             $agendaObj = new AgendaPersonalSuperModel($inputForm['agendaSelect'], $inputForm['date']);
             $workday = $agendaObj->workdaySchedule;
             
-            $agendaObj->free_time_statistic(); 
-          //  var_dumpS($workday);
+             return view('AgendaPersonalOverview')->with(['workday'=>$workday])->with(['allAgendasArray' => $allAgendasArray]);
+            
       //  }
     }
     
