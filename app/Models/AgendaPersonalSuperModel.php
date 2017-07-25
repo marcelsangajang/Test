@@ -10,6 +10,7 @@ namespace App\Models;
 
 use DB;
 use AgendaPersonal;
+use PatientAppointmentsModel;
 use Illuminate\Support\Collection;
 
 
@@ -61,7 +62,6 @@ class AgendaPersonalSuperModel {
                 
                 //Make and declare 1 dimensional array containing all breaks
                 $this->breaks            = $this->make_break_array($dayBreaks);
-                
                 $this->inPeriod          = true;                
                 
             }
@@ -95,7 +95,7 @@ class AgendaPersonalSuperModel {
         
         while ($startWhile <= $endTime) {
             
-            if ($this->between_time($startWhile->format('H:i:s'), $breaksArray)) {
+            if ($this->between_time($startWhile->format('H:i:s'), $breaksArray, 'start', 'end')) {
                 
                 $timeBlocksArray[] = array('status' => 'break', 'time' => $startWhile->format('H:i'));
                 $startWhile->add($interval);
@@ -112,11 +112,11 @@ class AgendaPersonalSuperModel {
         
     }   
     
-    private function between_time($timeNeedle, $timeHaystackArray) {
+    private function between_time($timeNeedle, $timeHaystackArray, $indexStart, $indexEnd) {
         
-        foreach ($timeHaystackArray as $beginEnd) {
+        foreach ($timeHaystackArray as $startEnd) {
             
-            if ($timeNeedle > $beginEnd['start'] && $timeNeedle < $beginEnd['end'] OR $timeNeedle == $beginEnd['start'] OR $timeNeedle == $beginEnd['end']) {
+            if ($timeNeedle > $startEnd[$indexStart] && $timeNeedle < $startEnd[$indexEnd] OR $timeNeedle == $startEnd[$indexStart] OR $timeNeedle == $startEnd[$indexEnd]) {
                 
                 return True;
                 
@@ -128,10 +128,17 @@ class AgendaPersonalSuperModel {
         }
     }
     
+    //Get all of the appointmensts for given 'agendaId' and 'date'
     private function get_appointments() {
         
-        $appointments = AgendaPersonalModel::with(array('appointments'))->where('id', $this->agendaId)->first();
-        $appointments = $appointments['appointments'];     
+        $appointments = DB::table('patient_appointments')
+                            ->select()
+                            ->where('agenda_id', $this->agendaId)
+                            ->where('date', $this->date)
+                            ->get();
+        
+
+        //$appointments = $appointments['appointments'];     
         var_dumpS($appointments);
     }
     
