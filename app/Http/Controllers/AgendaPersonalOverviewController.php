@@ -33,8 +33,8 @@ class AgendaPersonalOverviewController {
        
             }
    
-        
-        return View::make('AgendaPersonalOverview', compact('allAgendasArray'));
+        $workday = '';
+        return View::make('AgendaPersonalOverview', compact('allAgendasArray'))->with(['workday' => $workday]);
 
     }
     
