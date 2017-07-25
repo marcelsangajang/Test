@@ -38,6 +38,7 @@ class AgendaPersonalFormController extends Controller {
         $agendaPersonal->description_extern = $decriptionExtern;
         $agendaPersonal->type = $type;
         $agendaPersonal->save();      
+        return view('welcome');
     }
 
 
