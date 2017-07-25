@@ -21,8 +21,6 @@ Route::get('AgendaPersonalFormView', ['as' => 'AgendaPersonalFormView', 'uses' =
 //POST personal agenda 
 Route::post('post', 'AgendaPersonalFormController@funcpost');
 
-
-
 // Create period and workdays
 Route::get('AgendaPersonalPeriodFormView', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalPeriodFormController@period']);
 
@@ -35,26 +33,11 @@ Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' =
 //POST Agenda overview
 Route::post('agendaOverviewpost', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalOverviewController@OverviewPost']);
 
+//Create and post patient
+Route::get('PatientAppointmentsFormView', ['as' => 'PatientAppointmentsFormView', 'uses' => 'PatientAppointmentsController@view']);
+Route::post('postAppointment', 'PatientAppointmentsController@post');
 
+//Make appointment
 Route::get('PatientFormView', ['as' => 'PatientFormView', 'uses' => 'PatientFormController@view']);
 Route::post('postPatient', 'PatientFormController@post');
 
-//Route::get('/public/test', function() {
-//	return view('test');
-//});
-
-/*Route::get('/test', function() {
-	
-	$temp = DB::table('personal_agenda')->latest()->get();//find($id);
-
-	return view('test', compact('temp'));
-});
-
-Route::get('/{about}', function($id) {
-
-	$temp = DB::table('personal_agenda')->find($id);
-	
-	return view('test', compact('temp'));
-
-	
-});*/
