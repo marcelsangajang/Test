@@ -142,6 +142,7 @@ class AgendaPersonalSuperModel {
         var_dumpS($appointments);
     }
     
+    //Calculate percentages - UNDER CONSTRUCTION
     public function free_time_statistic() {
         
         $timeBlocks = $this->workdaySchedule;
