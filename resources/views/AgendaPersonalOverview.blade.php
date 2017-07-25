@@ -25,6 +25,24 @@
 </form>
     
     @if ($workday)
+        @foreach ($workday as $workdayTime)
+    <table border="1">
+        <tr>
+            <td width="50px"><b>{{ $workdayTime['time'] }}</b></td>
+            <td width="50px">{{ $workdayTime['status'] }}</td>
+            <td width="400px"></td>
+        </tr>
+        @endforeach
+        
+    </table>
+    
+    @endif
+    
+    
+    
+    
+    
+    @if ($workday)
     
     <pre>
     <?php 
