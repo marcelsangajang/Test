@@ -42,7 +42,7 @@ class AgendaPersonalSuperModel {
         $date = new \DateTime($this->date);
         
         //Check if date is in one of the periods and if so, get workday schedule data
-        $periodsObjArray = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks', 'appointments'))->where('id', $this->agendaId)->get();
+        $periodsObjArray = AgendaPersonalModel::with(array('periods.weekdays.breaks', 'appointments'))->where('id', $this->agendaId)->get();
         $periods = $periodsObjArray[0]->periods;
         
         

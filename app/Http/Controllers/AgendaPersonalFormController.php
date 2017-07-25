@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\Request;
 
 class AgendaPersonalFormController extends Controller {
     
-    public function funcformview() {
-        
+    public function funcformview() {       
         return view('agendaPersonalFormView');        
     }
       

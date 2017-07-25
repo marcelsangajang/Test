@@ -9,29 +9,22 @@ use App\models\AgendaPersonalPeriodModel;
 use App\models\AgendaPersonalWeekdaysModel;
 use App\models\AgendaPersonalBreakModel;
 use App\Http\Controllers\Controller;
-use Input;
-
 use App\models\AgendaPersonalSuperModel;
-
-
 use App\Models\AgendaPersonalModel;
-
+use Input;
 use DB;
 use View;
 
-class AgendaPersonalPeriodFormController extends Controller
-{
-
-
+class AgendaPersonalPeriodFormController extends Controller{
     public function period() {
-        $allAgendas = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->get();
+        $allAgendas = AgendaPersonalModel::with(array('periods.weekdays.breaks'))->get();
    
         foreach ($allAgendas as $agenda) {
             $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern']);
         }
         
         return view('AgendaPersonalPeriodFormView', compact('allAgendasArray'));       
-        }
+    }
 
     //Creates periods, the corresponding weekdays (work hours) and breaks
     public function funcpostPeriod() {
