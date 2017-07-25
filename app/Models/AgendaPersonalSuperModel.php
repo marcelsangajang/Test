@@ -136,9 +136,7 @@ class AgendaPersonalSuperModel {
                             ->where('agenda_id', $this->agendaId)
                             ->where('date', $this->date)
                             ->get();
-        
-
-        //$appointments = $appointments['appointments'];     
+         
         var_dumpS($appointments);
     }
     
