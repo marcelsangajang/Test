@@ -27,5 +27,6 @@ class PatientFormController extends Controller
         $patient->phone_number_2 = 12345;
         $patient->email = Input::get('email');
         $patient->save();
+        return view('welcome');
     }
 }

@@ -9,7 +9,7 @@ class AgendaPersonalPeriodModel extends Model
     protected $table = 'agenda_personal_period';
     
     
-        public function weekdays() {
+    public function weekdays() {
         
         return $this->hasMany(AgendaPersonalWeekdaysModel::class, 'period_id');
         

@@ -33,11 +33,11 @@ Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' =
 //POST Agenda overview
 Route::post('agendaOverviewpost', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalOverviewController@OverviewPost']);
 
-//Create and post patient
+//Make Appointment
 Route::get('PatientAppointmentsFormView', ['as' => 'PatientAppointmentsFormView', 'uses' => 'PatientAppointmentsController@view']);
 Route::post('postAppointment', 'PatientAppointmentsController@post');
 
-//Make appointment
+//Create and post patient
 Route::get('PatientFormView', ['as' => 'PatientFormView', 'uses' => 'PatientFormController@view']);
 Route::post('postPatient', 'PatientFormController@post');
 

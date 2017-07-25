@@ -15,10 +15,11 @@ use Input;
 use DB;
 use View;
 
-class AgendaPersonalPeriodFormController extends Controller{
+class AgendaPersonalPeriodFormController extends Controller
+{
     public function period() {
-        $allAgendas = AgendaPersonalModel::with(array('periods.weekdays.breaks'))->get();
-   
+        $allAgendas = AgendaPersonalModel::get()->toArray();
+  
         foreach ($allAgendas as $agenda) {
             $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern']);
         }
@@ -72,12 +73,7 @@ class AgendaPersonalPeriodFormController extends Controller{
                 $agendaPersonalBreak->save();
             }
         } 
-
-        echo '<pre>';
-        var_dump(Request::all());
-        echo '</pre>';
-        
-      
+        return view('welcome')    ;
     }
  
 }
