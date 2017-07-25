@@ -25,22 +25,21 @@ class AgendaPersonalOverviewController {
     public function test() {
         
         
-   $allAgendas = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->get();
+       $allAgendas = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->get();
    
-   foreach ($allAgendas as $agenda) {
+            foreach ($allAgendas as $agenda) {
        
-       $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern']);
+                $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern']);
        
-   }
+            }
    
         
-    return View::make('AgendaPersonalOverview', compact('allAgendasArray'));
+        return View::make('AgendaPersonalOverview', compact('allAgendasArray'));
 
     }
     
     public function OverviewPost() {
         
-
        //   if (Input::all()){   
             $inputForm = Input::all();
         
