@@ -23,18 +23,22 @@
   <input type="submit" value="Submit"> 
   
 </form>
-    
     @if ($workday)
+        <table border="1">
+            <tr>
+                <th colspan="2">test</th>
+            </tr>
         @foreach ($workday as $workdayTime)
-    <table border="1">
-        <tr>
-            <td width="50px"><b>{{ $workdayTime['time'] }}</b></td>
-            <td width="50px">{{ $workdayTime['status'] }}</td>
-            <td width="400px"></td>
-        </tr>
+            <tr>
+                <td width="50px"><b>{{ $workdayTime['time'] }}</b></td>
+            @if ($workdayTime['status'] == 'break')
+                <td width="400px">------------------------------ {{ $workdayTime['status'] }} ------------------------------</td>
+            @else
+                <td width="400px">{{ $workdayTime['status'] }}</td>
+            @endif
+            </tr>
         @endforeach
-        
-    </table>
+        </table>
     
     @endif
     
