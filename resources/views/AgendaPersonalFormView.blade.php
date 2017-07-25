@@ -5,7 +5,7 @@
 
 <body>
     
-<p> Create Persoons agenda </p>
+<h1> Create personal agenda </h1>
 
 <ul>
     @if ($errors->any())

@@ -39,10 +39,6 @@ Route::post('agendaOverviewpost', ['as' => 'AgendaPersonalPeriodFormView', 'uses
 Route::get('PatientFormView', ['as' => 'PatientFormView', 'uses' => 'PatientFormController@view']);
 Route::post('postPatient', 'PatientFormController@post');
 
-
-//Route::get('/public/test', 'TestController@doTheTest');
-Route::get('/test', 'TestController@doTheTest');
-
 //Route::get('/public/test', function() {
 //	return view('test');
 //});

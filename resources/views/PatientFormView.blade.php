@@ -5,7 +5,7 @@
 
 <body>
     
-<p> Create patient </p>
+<h1> Create patient </h1>
 
 <ul>
     @if ($errors->any())

@@ -38,15 +38,7 @@ class AgendaPersonalFormController extends Controller {
         $agendaPersonal->description_intern = $decriptionIntern;
         $agendaPersonal->description_extern = $decriptionExtern;
         $agendaPersonal->type = $type;
-        $agendaPersonal->save();
-        
-        echo 'Gelukt';
-        
-        echo '<pre>';
-        var_dump(Request::all());
-        echo '</pre>';
-        
-      
+        $agendaPersonal->save();      
     }
 
 
