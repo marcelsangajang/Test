@@ -83,8 +83,10 @@
                 </div>
 
                 <div class="links">
-                    <a href="/AgendaPersonalFormView">Create personal agenda</a>
-                    <a href="/AgendaPersonalPeriodFormView">Create period</a>
+                    <a href="/EmployeeView">Create Employee</a>
+                    <a href="/EmployeePeriodView">Create employee period</a>
+                    <a href="/ChairView">Create chair</a>
+                    <a href="/ChairPeriodView">Create chair period</a>
                     <a href="/PatientFormView">Create patient</a>
                     <a href="/PatientAppointmentsFormView">Create Appointment</a>
                     <a href="/AgendaPersonalOverview">Get workday schedule</a>

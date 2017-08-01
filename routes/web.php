@@ -15,17 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Create personal agenda FORM
-Route::get('AgendaPersonalFormView', ['as' => 'AgendaPersonalFormView', 'uses' => 'AgendaPersonalFormController@funcformview']);
+// Create and post EMPLOYEE
+Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']); 
+Route::post('EmployeePost', 'EmployeeController@post');
 
-//POST personal agenda 
-Route::post('post', 'AgendaPersonalFormController@funcpost');
+// Create and post EMPLOYEE PERIOD and WORKDAYS
+Route::get('EmployeePeriodView', ['as' => 'EmployeePeriodView', 'uses' => 'EmployeePeriodController@view']);
+Route::post('EmployeePeriodPost', 'EmployeePeriodController@post');
 
-// Create period and workdays
-Route::get('AgendaPersonalPeriodFormView', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalPeriodFormController@period']);
+//Create and post CHAIR
+Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']); 
+Route::post('ChairPost', 'ChairController@post');
 
-//POST period (from personal agenda)
-Route::post('postPeriod', 'AgendaPersonalPeriodFormController@funcpostPeriod');
+//Create and post CHAIR PERIOD AND WORKDAYS
+Route::get('ChairPeriodView', ['as' => 'ChairPeriodView', 'uses' => 'ChairPeriodController@view']); 
+Route::post('ChairPeriodPost', 'ChairPeriodController@post');
 
 //Agenda overview
 Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' => 'AgendaPersonalOverviewController@test']);

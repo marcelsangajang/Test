@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Request;
 use App\models\AgendaPersonalSuperModel;
 use App\Http\Controllers\Controller;
 
-use App\Models\AgendaPersonalModel;
+use App\Models\EmployeeModel;
 
 use DB;
 use Input;
@@ -25,7 +25,7 @@ class AgendaPersonalOverviewController {
     public function test() {
         
         
-       $allAgendas = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->get();
+       $allAgendas = EmployeeModel::with(array('periods', 'periods.weekdays.breaks'))->get();
    
             foreach ($allAgendas as $agenda) {
        
@@ -33,8 +33,8 @@ class AgendaPersonalOverviewController {
        
             }
    
-        $workday = '';
-        return View::make('AgendaPersonalOverview', compact('allAgendasArray'))->with(['workday' => $workday]);
+        
+        return View::make('AgendaPersonalOverview', compact('allAgendasArray'));
 
     }
     
@@ -43,7 +43,7 @@ class AgendaPersonalOverviewController {
        //   if (Input::all()){   
             $inputForm = Input::all();
             
-            $allAgendas = AgendaPersonalModel::with(array('periods', 'periods.weekdays.breaks'))->get();
+            $allAgendas = EmployeeModel::with(array('periods', 'periods.weekdays.breaks'))->get();
    
             foreach ($allAgendas as $agenda) {
        
@@ -58,6 +58,7 @@ class AgendaPersonalOverviewController {
              return view('AgendaPersonalOverview')->with(['workday'=>$workday])->with(['allAgendasArray' => $allAgendasArray]);
             
       //  }
+             
     }
     
     

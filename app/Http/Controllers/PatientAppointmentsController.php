@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //use App\models\AgendaPersonalSuperModel;
 use App\Models\PatientModel;
-use App\Models\AgendaPersonalModel;
+use App\Models\EmployeeModel;
 use App\Models\PatientAppointmentsModel;
 
 use Input;
@@ -21,10 +21,10 @@ class PatientAppointmentsController extends Controller {
             	$patient['last_name'], 'date_of_birth' => $patient['date_of_birth'], 'address' => $patient['address'], 'house_number' => $patient['house_number']);
         }
 
-        $allAgendas = AgendaPersonalModel::get()->toArray();
+        $allAgendas = EmployeeModel::get()->toArray();
   
         foreach ($allAgendas as $agenda) {
-            $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern'], 'description_extern' => $agenda['description_extern'], 'type' => $agenda['type']);
+            $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern'], 'type' => $agenda['type']);
         }
      
         return view('PatientAppointmentsFormView')->with(['allPatientsArray'=>$allPatientsArray])->with(['allAgendasArray' => $allAgendasArray]); 

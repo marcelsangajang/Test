@@ -13,14 +13,14 @@
     @endif
 </ul>
 
-{{ Form::open(array('url' => '/postPeriod')) }}
+{{ Form::open(array('url' => '/EmployeePeriodPost')) }}
 
 
    
     Employee
-    <select class="form-control" name="agendaSelect">
-        @foreach($allAgendasArray as $agenda)
-        <option value="{{$agenda['id']}}">{{$agenda['description_intern']}}</option>
+    <select class="form-control" name="employeeSelect">
+        @foreach($allEmployeesArray as $employee)
+        <option value="{{$employee['id']}}">{{$employee['description_intern']}}</option>
         @endforeach
     </select>
     <br>

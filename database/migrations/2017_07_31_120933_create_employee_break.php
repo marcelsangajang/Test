@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableAgendaChair extends Migration
+class CreateEmployeeBreak extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTableAgendaChair extends Migration
      */
     public function up()
     {
-        Schema::create('agenda_chair', function (Blueprint $table) {
+        Schema::create('employee_break', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description_intern', 40);
-            $table->string('description_extern', 40);
+            $table->integer('weekday_id');
+            $table->time('start_time');
+            $table->time('end_time');         
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateTableAgendaChair extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agenda_chair');
+        Schema::dropIfExists('employee_break');
     }
 }

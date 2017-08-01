@@ -48,7 +48,7 @@
     	<td>
 	    	<select class="form-control" name="agendaSelect">
 	        @foreach($allAgendasArray as $agenda)
-	        <option value="{{$agenda['id']}}">{{$agenda['description_extern']}} ({{$agenda['description_intern']}}), {{$agenda['type']}}  </option>
+	        <option value="{{$agenda['id']}}">({{$agenda['description_intern']}}), {{$agenda['type']}}  </option>
 	        @endforeach
     		</select>
     	</td>
