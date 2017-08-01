@@ -31,17 +31,19 @@ Route::post('ChairPost', 'ChairController@post');
 Route::get('ChairPeriodView', ['as' => 'ChairPeriodView', 'uses' => 'ChairPeriodController@view']); 
 Route::post('ChairPeriodPost', 'ChairPeriodController@post');
 
+//Make Appointment
+Route::get('PatientAppointmentView', ['as' => 'PatientAppointmentView', 'uses' => 'PatientAppointmentController@view']);
+Route::post('postAppointment', 'PatientAppointmentController@post');
+
+//Create and post patient
+Route::get('PatientView', ['as' => 'PatientView', 'uses' => 'PatientController@view']);
+Route::post('postPatient', 'PatientController@post');
+
+//Create and post patient GROUP
+Route::get('PatientGroupView', ['as' => 'PatientGroupView', 'uses' => 'PatientGroupController@view']);
+Route::post('postPatientGroup', 'PatientGroupController@post');
+
 //Agenda overview
 Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' => 'AgendaPersonalOverviewController@test']);
 
-//POST Agenda overview
 Route::post('agendaOverviewpost', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalOverviewController@OverviewPost']);
-
-//Make Appointment
-Route::get('PatientAppointmentsFormView', ['as' => 'PatientAppointmentsFormView', 'uses' => 'PatientAppointmentsController@view']);
-Route::post('postAppointment', 'PatientAppointmentsController@post');
-
-//Create and post patient
-Route::get('PatientFormView', ['as' => 'PatientFormView', 'uses' => 'PatientFormController@view']);
-Route::post('postPatient', 'PatientFormController@post');
-

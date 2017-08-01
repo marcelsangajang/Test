@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChairs extends Migration
+class CreatePatientGroup extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class CreateChairs extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('chairs', function (Blueprint $table) {
+    {     
+        Schema::create('patient_group', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description', 40);
-            $table->timestamps();
+            $table->string('description');
+            $table->integer('duration');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateChairs extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chairs');
+        Schema::dropIfExists('patient_group');
     }
 }

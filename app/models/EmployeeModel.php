@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 class EmployeeModel extends Model
 {
-    protected $table = 'employees';
+    protected $table = 'employee';
     
     public function periods() {       
         return $this->hasMany(EmployeePeriodModel::class, 'employee_id');      

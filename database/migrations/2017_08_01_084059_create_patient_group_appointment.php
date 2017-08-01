@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeesWeekdays extends Migration
+class CreatePatientGroupAppointment extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateEmployeesWeekdays extends Migration
      */
     public function up()
     {
-        Schema::create('employees_weekdays', function (Blueprint $table) {
+        Schema::create('patient_group_appointment', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('period_id');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->string('day', 3);
-            $table->timestamps();
+            $table->integer('appointment_id');
+            $table->integer('group_id');
         });
     }
 
@@ -30,6 +27,6 @@ class CreateEmployeesWeekdays extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees_weekdays');
+        Schema::dropIfExists('patient_group_appointment');
     }
 }

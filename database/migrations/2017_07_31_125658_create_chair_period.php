@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePatientAppointmentsGroup extends Migration
+class CreateChairPeriod extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateTablePatientAppointmentsGroup extends Migration
      */
     public function up()
     {
-        Schema::create('patient_appointments_group', function (Blueprint $table) {
+        Schema::create('chair_period', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('appointment_id');
-            $table->integer('group_id');
+            $table->integer('chair_id');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('description', 40);
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ class CreateTablePatientAppointmentsGroup extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_appointments_group');
+        Schema::dropIfExists('chair_period');
     }
 }

@@ -87,8 +87,9 @@
                     <a href="/EmployeePeriodView">Create employee period</a>
                     <a href="/ChairView">Create chair</a>
                     <a href="/ChairPeriodView">Create chair period</a>
-                    <a href="/PatientFormView">Create patient</a>
-                    <a href="/PatientAppointmentsFormView">Create Appointment</a>
+                    <a href="/PatientView">Create patient</a>
+                    <a href="/PatientAppointmentsView">Create Appointment</a>
+                    <a href="/PatientGroupView">Create Patient Group</a>
                     <a href="/AgendaPersonalOverview">Get workday schedule</a>
                 </div>
             </div>

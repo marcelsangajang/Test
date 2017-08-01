@@ -7,11 +7,10 @@ use App\models\PatientModel;
 use App\Http\Controllers\Controller;
 use Input;
 
-class PatientFormController extends Controller
+class PatientController extends Controller
 {
     public function view() {
-    	
-        return view('PatientFormView');        
+        return view('PatientView');        
     }
 
     public function post() {

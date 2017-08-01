@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChairWeekdayModel extends Model
 {
-    protected $table = 'chairs_weekdays';
+    protected $table = 'chair_weekday';
 }

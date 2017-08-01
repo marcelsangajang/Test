@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeePeriodModel extends Model
 {
-    protected $table = 'employees_periods';
+    protected $table = 'employee_period';
       
     public function weekdays() {        
         return $this->hasMany(EmployeeWeekdayModel::class, 'period_id');    
