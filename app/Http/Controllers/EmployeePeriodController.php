@@ -12,8 +12,6 @@ use App\Http\Controllers\Controller;
 use App\models\AgendaPersonalSuperModel;
 use App\Models\EmployeeModel;
 use Input;
-use DB;
-use View;
 
 class EmployeePeriodController extends Controller
 {

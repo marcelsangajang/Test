@@ -43,6 +43,14 @@ Route::post('postPatient', 'PatientController@post');
 Route::get('PatientGroupView', ['as' => 'PatientGroupView', 'uses' => 'PatientGroupController@view']);
 Route::post('postPatientGroup', 'PatientGroupController@post');
 
+//Create and post SCHEDULE
+Route::get('ScheduleView', ['as' => 'ScheduleView', 'uses' => 'ScheduleController@view']);
+Route::post('postSchedule', 'ScheduleController@post');
+
+//Create and post SCHEDULE PERIOD
+Route::get('SchedulePeriodView', ['as' => 'SchedulePeriodView', 'uses' => 'SchedulePeriodController@view']);
+Route::post('postSchedulePeriod', 'SchedulePeriodController@post');
+
 //Agenda overview
 Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' => 'AgendaPersonalOverviewController@test']);
 

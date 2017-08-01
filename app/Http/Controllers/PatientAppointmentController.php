@@ -27,7 +27,7 @@ class PatientAppointmentController extends Controller {
             $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern'], 'type' => $agenda['type']);
         }
      
-        return view('PatientAppointmentsView')->with(['allPatientsArray'=>$allPatientsArray])->with(['allAgendasArray' => $allAgendasArray]); 
+        return view('PatientAppointmentView')->with(['allPatientsArray'=>$allPatientsArray])->with(['allAgendasArray' => $allAgendasArray]); 
     }
     
     public function post() {
