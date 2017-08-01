@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeeBreakModel extends Model
 {
-    protected $table = 'employee_break';
+    protected $table = 'employees_breaks';
 }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ChairModel extends Model
 {
-    protected $table = 'chair';
+    protected $table = 'chairs';
     
     public function periods() {       
         return $this->hasMany(ChairPeriodModel::class, 'chair_id');      

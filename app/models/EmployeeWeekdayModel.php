@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeeWeekdayModel extends Model
 {
-    protected $table = 'employee_weekday';
+    protected $table = 'employees_weekdays';
      
     public function breaks() {      
         return $this->hasMany(EmployeeBreakModel::class, 'weekday_id');     

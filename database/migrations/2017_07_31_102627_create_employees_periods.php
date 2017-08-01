@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeeBreak extends Migration
+class CreateEmployeesPeriods extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateEmployeeBreak extends Migration
      */
     public function up()
     {
-        Schema::create('employee_break', function (Blueprint $table) {
+        Schema::create('employees_periods', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('weekday_id');
-            $table->time('start_time');
-            $table->time('end_time');         
+            $table->integer('agenda_id');
+            $table->integer('interval');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('description', 40);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateEmployeeBreak extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_break');
+        Schema::dropIfExists('employees_periods');
     }
 }
