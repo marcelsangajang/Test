@@ -26,6 +26,9 @@
 		<th>
 			Patient 3
 		</th>
+		<th>
+			Description
+		</th>
 	</tr>
 
 	<tr>

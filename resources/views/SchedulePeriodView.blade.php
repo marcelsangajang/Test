@@ -39,51 +39,78 @@
 
     <br>
 
- 
-    
     <h3>Monday</h3>
-    <input name="start_time_mon" type="time" value="09:00:00" step="1">
+    <select class="form-control" name="repeat_number_mon">
+        @for($i = 0; $i < 5; $i++)
+        <option value="{{$i}}"> {{$i}} </option>
+        @endfor
+    </select>
 
-
-    <input name="end_time_mon" type="time" value="17:00:00" step="1">
- 
-    
-    <h3>Tuesday</h3>
-        <input name="start_time_tue" type="time" value="09:00:00" step="1">
-
-    <input name="end_time_tue" type="time" value="17:00:00" step="1">
+    <input name="start_time_mon_0" type="time" value="09:00:00" step="1">
+    <input name="end_time_mon_0" type="time" value="12:00:00" step="1">
+    {{Form::date('date_0', \Carbon\Carbon::now())}}
+    -
+    <input name="start_time_mon_1" type="time" value="12:00:00" step="1">
+    <input name="end_time_mon_1" type="time" value="17:00:00" step="1">
+    {{Form::date('date_1', \Carbon\Carbon::now())}}
   
+    <h3>Tuesday</h3>
+    <select class="form-control" name="repeat_number_tue">
+        @for($i = 0; $i < 5; $i++)
+        <option value="{{$i}}"> {{$i}} </option>
+        @endfor
+    </select>
+    <input name="start_time_tue_0" type="time" value="09:00:00" step="1">
+    <input name="end_time_tue_0" type="time" value="17:00:00" step="1">
 
     <h3>Wednesday</h3>
-    <input name="start_time_wed" type="time" value="09:00:00" step="1">
-    
-    <input name="end_time_wed" type="time" value="17:00:00" step="1">
+    <select class="form-control" name="repeat_number_wed">
+        @for($i = 0; $i < 5; $i++)
+        <option value="{{$i}}"> {{$i}} </option>
+        @endfor
+    </select>
+    <input name="start_time_wed_0" type="time" value="09:00:00" step="1">
+    <input name="end_time_wed_0" type="time" value="17:00:00" step="1">
    
-
     <h3>Thursday</h3>
-    <input name="start_time_thu" type="time" value="09:00:00" step="1">
+    <select class="form-control" name="repeat_number_thu">
+        @for($i = 0; $i < 5; $i++)
+        <option value="{{$i}}"> {{$i}} </option>
+        @endfor
+    </select>
+    <input name="start_time_thu_0" type="time" value="09:00:00" step="1">
+    <input name="end_time_thu_0" type="time" value="17:00:00" step="1">
     
-    <input name="end_time_thu" type="time" value="17:00:00" step="1">
-    
-
     <h3>Friday</h3>
-    <input name="start_time_fri" type="time" value="09:00:00" step="1">
-    
-    
-    <input name="end_time_fri" type="time" value="17:00:00" step="1">
+    <select class="form-control" name="repeat_number_fri">
+        @for($i = 0; $i < 5; $i++)
+        <option value="{{$i}}"> {{$i}} </option>
+        @endfor
+    </select>
+    <input name="start_time_fri_0" type="time" value="09:00:00" step="1">
+    <input name="end_time_fri_0" type="time" value="17:00:00" step="1">
     
     <h3>Saturday</h3>
-    <input name="start_time_sat" type="time" value="09:00:00" step="1">
+    <select class="form-control" name="repeat_number_sat">
+        @for($i = 0; $i < 5; $i++)
+        <option value="{{$i}}"> {{$i}} </option>
+        @endfor
+    </select>
+    <input name="start_time_sat_0" type="time" value="09:00:00" step="1">
+    <input name="end_time_sat_0" type="time" value="17:00:00" step="1">
     
-    <input name="end_time_sat" type="time" value="17:00:00" step="1">
-    
-
     <h3>Sunday</h3>
-    <input name="start_time_sun" type="time" value="09:00:00" step="1">
-   
-    
-    <input name="end_time_sun" type="time" value="17:00:00" step="1">
+    <select class="form-control" name="repeat_number_sun">
+        @for($i = 0; $i < 5; $i++)
+        <option value="{{$i}}"> {{$i}} </option>
+        @endfor
+    </select>
+    <input name="start_time_sun_0" type="time" value="09:00:00" step="1">
+    <input name="end_time_sun_0" type="time" value="17:00:00" step="1">
    <br>
+
+
+
     {{ Form::submit('Submit') }}
 
 {{ Form::close() }}

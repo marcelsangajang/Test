@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateScheduleWeekday extends Migration
+class CreateScheduleRepeat extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateScheduleWeekday extends Migration
      */
     public function up()
     {
-        Schema::create('schedule_weekday', function (Blueprint $table) {
+        Schema::create('schedule_repeat', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('period_id');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->integer('repeat');
-            $table->string('day', 3);
+            $table->integer('weekday_id');
+            $table->date('start_date');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateScheduleWeekday extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedule_weekday');
+        Schema::dropIfExists('schedule_repeat');
     }
 }
