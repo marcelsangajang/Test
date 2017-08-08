@@ -13,21 +13,22 @@
     @endif
 </ul>
 
-{{ Form::open(array('url' => '/PatientGroupPost')) }}
+{{ Form::open(array('url' => '/PatientGroupAppointmentPost')) }}
 	
 <table>
 	<tr>
 		<th>
-			Patient 1
+			Patient Group
 		</th>
 	</tr>
 	<tr>
 		<td>
-			<select class="form-control" name="patientSelect">
+			<div name="patientGroup">
 	        @foreach($allPatientsArray as $patient)
-	        <option value="{{$patient['id']}}">{{$patient['first_name']}} {{$patient['last_name']}}, {{$patient['date_of_birth']}}, {{$patient['address']}} {{$patient['house_number']}} </option>
+	        <option value="{{$patient['id']}}">{{$patient['first_name']}} {{$patient['last_name']}} </option>
 	        @endforeach
-	        </select>
+	        </div>
+	        
     	</td>
 	</tr>
 
