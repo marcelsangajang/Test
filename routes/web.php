@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 // Create and post EMPLOYEE
-Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']); 
+Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']);
 Route::post('EmployeePost', 'EmployeeController@post');
 
 // Create and post EMPLOYEE PERIOD and WORKDAYS
@@ -24,11 +24,11 @@ Route::get('EmployeePeriodView', ['as' => 'EmployeePeriodView', 'uses' => 'Emplo
 Route::post('EmployeePeriodPost', 'EmployeePeriodController@post');
 
 //Create and post CHAIR
-Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']); 
+Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']);
 Route::post('ChairPost', 'ChairController@post');
 
 //Create and post CHAIR PERIOD AND WORKDAYS
-Route::get('ChairPeriodView', ['as' => 'ChairPeriodView', 'uses' => 'ChairPeriodController@view']); 
+Route::get('ChairPeriodView', ['as' => 'ChairPeriodView', 'uses' => 'ChairPeriodController@view']);
 Route::post('ChairPeriodPost', 'ChairPeriodController@post');
 
 //Make Appointment
@@ -56,6 +56,4 @@ Route::get('SchedulePeriodView', ['as' => 'SchedulePeriodView', 'uses' => 'Sched
 Route::post('postSchedulePeriod', 'SchedulePeriodController@post');
 
 //Agenda overview
-Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' => 'AgendaPersonalOverviewController@test']);
-
-Route::post('agendaOverviewpost', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalOverviewController@OverviewPost']);
+Route::get('AgendaTimeBlocks', ['as' => 'AgendaTimeBlocks', 'uses' => 'EmployeeTimeBlocksController@test']);
