@@ -15,11 +15,8 @@ class CreateEmployeePeriod extends Migration
     {
         Schema::create('employee_period', function (Blueprint $table) {
             $table->increments('id');
-<<<<<<< HEAD
             $table->integer('employee_id')->unsigned();
-=======
             $table->integer('employee_id');
->>>>>>> 7b00d724bb5600743aade44a9d9beaa3e45bcbaa
             $table->integer('interval');
             $table->date('start_date');
             $table->date('end_date');
