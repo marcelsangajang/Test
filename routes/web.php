@@ -19,14 +19,8 @@ Route::get('/', function () {
 Route::get('Test', ['as' => 'Test', 'uses' => 'TestController@view']);
 Route::post('TestPost', 'TestController@post');
 
-<<<<<<< HEAD
-
-=======
 // Create and post EMPLOYEE
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> c37d36d635fa8fe2f773c47f6fc5e9977016d2b2
+
 Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']); 
 Route::post('EmployeePost', 'EmployeeController@createEmployee');
 Route::post('EmployeePeriodPost', 'EmployeeController@createPeriod');
@@ -37,11 +31,7 @@ Route::post('ChairPost', 'ChairController@createChair');
 
 //Create and post CHAIR PERIOD AND WORKDAYS
 Route::post('ChairPeriodPost', 'ChairController@createPeriod');
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 2180f39d75792417585263317c3e50bc82b30afe
->>>>>>> c37d36d635fa8fe2f773c47f6fc5e9977016d2b2
+
 Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']);
 Route::post('EmployeePost', 'EmployeeController@post');
 
