@@ -15,7 +15,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//TEST
+Route::get('Test', ['as' => 'Test', 'uses' => 'TestController@view']);
+Route::post('TestPost', 'TestController@post');
+
 // Create and post EMPLOYEE
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']); 
+Route::post('EmployeePost', 'EmployeeController@createEmployee');
+Route::post('EmployeePeriodPost', 'EmployeeController@createPeriod');
+
+//Create and post CHAIR
+Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']); 
+Route::post('ChairPost', 'ChairController@createChair');
+
+//Create and post CHAIR PERIOD AND WORKDAYS
+Route::post('ChairPeriodPost', 'ChairController@createPeriod');
+=======
+>>>>>>> 2180f39d75792417585263317c3e50bc82b30afe
 Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']);
 Route::post('EmployeePost', 'EmployeeController@post');
 
@@ -30,6 +49,7 @@ Route::post('ChairPost', 'ChairController@post');
 //Create and post CHAIR PERIOD AND WORKDAYS
 Route::get('ChairPeriodView', ['as' => 'ChairPeriodView', 'uses' => 'ChairPeriodController@view']);
 Route::post('ChairPeriodPost', 'ChairPeriodController@post');
+>>>>>>> 7b00d724bb5600743aade44a9d9beaa3e45bcbaa
 
 //Make Appointment
 Route::get('PatientAppointmentView', ['as' => 'PatientAppointmentView', 'uses' => 'PatientAppointmentController@view']);
@@ -49,11 +69,8 @@ Route::post('PatientGroupAppointmentPost', 'PatientGroupAppointmentController@po
 
 //Create and post SCHEDULE
 Route::get('ScheduleView', ['as' => 'ScheduleView', 'uses' => 'ScheduleController@view']);
-Route::post('postSchedule', 'ScheduleController@post');
-
-//Create and post SCHEDULE PERIOD
-Route::get('SchedulePeriodView', ['as' => 'SchedulePeriodView', 'uses' => 'SchedulePeriodController@view']);
-Route::post('postSchedulePeriod', 'SchedulePeriodController@post');
+Route::post('postSchedule', 'ScheduleController@createSchedule');
+Route::post('postSchedulePeriod', 'ScheduleController@createPeriod');
 
 //Agenda overview
 Route::get('AgendaTimeBlocks', ['as' => 'AgendaTimeBlocks', 'uses' => 'EmployeeTimeBlocksController@test']);

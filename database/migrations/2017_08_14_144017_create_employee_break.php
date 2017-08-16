@@ -15,10 +15,14 @@ class CreateEmployeeBreak extends Migration
     {
         Schema::create('employee_break', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('weekday_id');
+            $table->integer('weekday_id')->unsigned();
             $table->time('start_time');
             $table->time('end_time');         
             $table->timestamps();
+        });
+
+        Schema::table('employee_break', function($table) {
+           $table->foreign('weekday_id')->references('id')->on('employee_weekday')->onDelete('cascade')->onUpdate('no action');
         });
     }
 

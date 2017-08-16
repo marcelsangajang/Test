@@ -15,11 +15,15 @@ class CreateSchedulePeriod extends Migration
     {
         Schema::create('schedule_period', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('schedule_id');
+            $table->integer('schedule_id')->unsigned();
             $table->string('description');
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();
+        });
+
+        Schema::table('schedule_period', function($table) {
+           $table->foreign('schedule_id')->references('id')->on('schedule')->onDelete('cascade')->onUpdate('no action');
         });
     }
 

@@ -15,12 +15,16 @@ class CreateChairDayOff extends Migration
     {
         Schema::create('chair_day_off', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('chair_id');
+            $table->integer('chair_id')->unsigned();
             $table->date('start_date');
             $table->date('end_date');
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
+        });
+
+        Schema::table('chair_day_off', function($table) {
+           $table->foreign('chair_id')->references('id')->on('chair')->onDelete('cascade')->onUpdate('no action');
         });
     }
 
