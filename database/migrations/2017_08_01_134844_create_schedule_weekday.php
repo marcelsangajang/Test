@@ -15,12 +15,16 @@ class CreateScheduleWeekday extends Migration
     {
         Schema::create('schedule_weekday', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('period_id');
+            $table->integer('period_id')->unsigned();
             $table->time('start_time');
             $table->time('end_time');
             $table->integer('repeat');
             $table->string('day', 3);
             $table->timestamps();
+        });
+
+        Schema::table('schedule_weekday', function($table) {
+           $table->foreign('period_id')->references('id')->on('schedule_period')->onDelete('cascade')->onUpdate('no action');
         });
     }
 

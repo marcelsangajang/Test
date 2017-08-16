@@ -15,11 +15,15 @@ class CreateEmployeeWeekday extends Migration
     {
         Schema::create('employee_weekday', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('period_id');
+            $table->integer('period_id')->unsigned();
             $table->time('start_time');
             $table->time('end_time');
             $table->string('day', 3);
             $table->timestamps();
+        });
+
+        Schema::table('employee_weekday', function($table) {
+           $table->foreign('period_id')->references('id')->on('employee_period')->onDelete('cascade')->onUpdate('no action');
         });
     }
 

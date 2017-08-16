@@ -15,12 +15,16 @@ class CreateEmployeePeriod extends Migration
     {
         Schema::create('employee_period', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('agenda_id');
+            $table->integer('employee_id')->unsigned();
             $table->integer('interval');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('description', 40);
             $table->timestamps();
+        });
+
+        Schema::table('employee_period', function($table) {
+           $table->foreign('employee_id')->references('id')->on('employee')->onDelete('cascade')->onUpdate('no action');
         });
     }
 

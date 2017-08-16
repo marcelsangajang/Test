@@ -81,18 +81,21 @@
                 <div class="title m-b-md">
                     Webagenda 2.0
                 </div>
+                
+                <h1>INITIALIZATION</h1>
+                <div class="links">
+                    <a href="/Test">Setup initial data</a>
+                </div>
 
                 <h1>EMPLOYEES</h1>
                 <div class="links">
                 
                     <a href="/EmployeeView">Create Employee</a>
-                    <a href="/EmployeePeriodView">Create employee period</a>
                 </div>
                 <br>
                 <h1>CHAIRS</h1>
                 <div class="links">
                     <a href="/ChairView">Create chair</a>
-                    <a href="/ChairPeriodView">Create chair period</a>
                 </div>
                 
                 <h1>PATIENTS</h1>
@@ -107,7 +110,6 @@
                 <h1>SCHEDULES</h1>
                 <div class="links">
                     <a href="/ScheduleView">Create Schedule</a>
-                    <a href="/SchedulePeriodView">Create Schedule Period</a>
                     <a href="/AgendaPersonalOverview">Get workday schedule</a>
                 </div>
             </div>

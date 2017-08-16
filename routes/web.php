@@ -15,21 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//TEST
+Route::get('Test', ['as' => 'Test', 'uses' => 'TestController@view']);
+Route::post('TestPost', 'TestController@post');
+
 // Create and post EMPLOYEE
 Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']); 
-Route::post('EmployeePost', 'EmployeeController@post');
-
-// Create and post EMPLOYEE PERIOD and WORKDAYS
-Route::get('EmployeePeriodView', ['as' => 'EmployeePeriodView', 'uses' => 'EmployeePeriodController@view']);
-Route::post('EmployeePeriodPost', 'EmployeePeriodController@post');
+Route::post('EmployeePost', 'EmployeeController@createEmployee');
+Route::post('EmployeePeriodPost', 'EmployeeController@createPeriod');
 
 //Create and post CHAIR
 Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']); 
-Route::post('ChairPost', 'ChairController@post');
+Route::post('ChairPost', 'ChairController@createChair');
 
 //Create and post CHAIR PERIOD AND WORKDAYS
-Route::get('ChairPeriodView', ['as' => 'ChairPeriodView', 'uses' => 'ChairPeriodController@view']); 
-Route::post('ChairPeriodPost', 'ChairPeriodController@post');
+Route::post('ChairPeriodPost', 'ChairController@createPeriod');
 
 //Make Appointment
 Route::get('PatientAppointmentView', ['as' => 'PatientAppointmentView', 'uses' => 'PatientAppointmentController@view']);
@@ -49,11 +49,8 @@ Route::post('PatientGroupAppointmentPost', 'PatientGroupAppointmentController@po
 
 //Create and post SCHEDULE
 Route::get('ScheduleView', ['as' => 'ScheduleView', 'uses' => 'ScheduleController@view']);
-Route::post('postSchedule', 'ScheduleController@post');
-
-//Create and post SCHEDULE PERIOD
-Route::get('SchedulePeriodView', ['as' => 'SchedulePeriodView', 'uses' => 'SchedulePeriodController@view']);
-Route::post('postSchedulePeriod', 'SchedulePeriodController@post');
+Route::post('postSchedule', 'ScheduleController@createSchedule');
+Route::post('postSchedulePeriod', 'ScheduleController@createPeriod');
 
 //Agenda overview
 Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' => 'AgendaPersonalOverviewController@test']);

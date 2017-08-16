@@ -15,9 +15,13 @@ class CreateScheduleRepeat extends Migration
     {
         Schema::create('schedule_repeat', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('weekday_id');
+            $table->integer('weekday_id')->unsigned();
             $table->date('start_date');
             $table->timestamps();
+        });
+
+        Schema::table('schedule_repeat', function($table) {
+           $table->foreign('weekday_id')->references('id')->on('schedule_weekday')->onDelete('cascade')->onUpdate('no action');
         });
     }
 
