@@ -28,24 +28,7 @@ Route::post('EmployeePeriodPost', 'EmployeeController@createPeriod');
 //Create and post CHAIR
 Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']); 
 Route::post('ChairPost', 'ChairController@createChair');
-
-//Create and post CHAIR PERIOD AND WORKDAYS
 Route::post('ChairPeriodPost', 'ChairController@createPeriod');
-
-Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']);
-Route::post('EmployeePost', 'EmployeeController@post');
-
-// Create and post EMPLOYEE PERIOD and WORKDAYS
-Route::get('EmployeePeriodView', ['as' => 'EmployeePeriodView', 'uses' => 'EmployeePeriodController@view']);
-Route::post('EmployeePeriodPost', 'EmployeePeriodController@post');
-
-//Create and post CHAIR
-Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']);
-Route::post('ChairPost', 'ChairController@post');
-
-//Create and post CHAIR PERIOD AND WORKDAYS
-Route::get('ChairPeriodView', ['as' => 'ChairPeriodView', 'uses' => 'ChairPeriodController@view']);
-Route::post('ChairPeriodPost', 'ChairPeriodController@post');
 
 //Make Appointment
 Route::get('PatientAppointmentView', ['as' => 'PatientAppointmentView', 'uses' => 'PatientAppointmentController@view']);

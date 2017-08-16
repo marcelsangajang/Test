@@ -22,27 +22,27 @@ class EmployeeController extends Controller {
     }
       
     public function CreateEmployee() {   
-        $inputForm = Input::all();
+        $input = Input::all();
         
-        $dataVal = EmployeeModel::validate($inputForm);
+        $dataVal = EmployeeModel::validate($input);
         
         if ($dataVal->fails()) {        
-            return redirect()->route('EmployeeView')->with([$inputForm])->withErrors($dataVal);    
+            return redirect()->route('EmployeeView')->with([$input])->withErrors($dataVal);    
         }
          
         $employee = new EmployeeModel();
-        $employee->description_intern = Input::get('description_intern');
-        $employee->first_name = Input::get('first_name');
-        $employee->last_name = Input::get('last_name');
-        $employee->date_of_birth = Input::get('date_of_birth');
-        $employee->address = Input::get('address');
-        $employee->zipcode = Input::get('zipcode');
-        $employee->house_number = Input::get('house_number');
-        $employee->city = Input::get('city');
-        $employee->phone_number_1 = Input::get('phone_number');
+        $employee->description_intern = $input['description_intern'];
+        $employee->first_name = $input['first_name'];
+        $employee->last_name = $input['last_name'];
+        $employee->date_of_birth = $input['date_of_birth'];
+        $employee->address = $input['address'];
+        $employee->zipcode = $input['zipcode'];
+        $employee->house_number = $input['house_number'];
+        $employee->city = $input['city'];
+        $employee->phone_number_1 = $input['phone_number'];
         $employee->phone_number_2 = 12345;
-        $employee->email = Input::get('email');
-        $employee->type = Input::get('type');
+        $employee->email = $input['email'];
+        $employee->type = $input['type'];
                   
         $employee->save();      
         return view('welcome');
@@ -52,10 +52,10 @@ class EmployeeController extends Controller {
 
         $inputForm = Input::all();
         $employee_period = new EmployeePeriodModel();
-        $employee_period->employee_id = $inputForm['employeeSelect'];
-        $employee_period->description = Input::get('description');
-        $employee_period->start_date = Input::get('start_date');
-        $employee_period->end_date = Input::get('end_date');
+        $employee_period->employee_id = $input['employeeSelect'];
+        $employee_period->description = $input['description'];
+        $employee_period->start_date = $input['start_date'];
+        $employee_period->end_date = $input['end_date'];
         $employee_period->interval = 2;
 
         $employee_period->save();
@@ -70,8 +70,8 @@ class EmployeeController extends Controller {
             //Create weekday
             $employee_weekdays = new EmployeeWeekdayModel();
             $employee_weekdays->period_id = $period_id;
-            $employee_weekdays->start_time = Input::get('start_time_'.$myList[$x]);
-            $employee_weekdays->end_time = Input::get('end_time_'.$myList[$x]);
+            $employee_weekdays->start_time = $input['start_time_'.$myList[$x]];
+            $employee_weekdays->end_time = $input['end_time_'.$myList[$x]];
             $employee_weekdays->day = $myList[$x];
             $employee_weekdays->save();
 
@@ -80,8 +80,8 @@ class EmployeeController extends Controller {
             for ($i = 1; $i < $max_breaks + 1; $i++) {
                 $employee_break = new EmployeeBreakModel();
                 $employee_break->weekday_id = $employee_weekdays->id;
-                $employee_break->start_time = Input::get('break'.$i.'_start_'.$myList[$x]);
-                $employee_break->end_time = Input::get('break'.$i.'_end_'.$myList[$x]); 
+                $employee_break->start_time = $input['break'.$i.'_start_'.$myList[$x]];
+                $employee_break->end_time = $input['break'.$i.'_end_'.$myList[$x]]; 
                 $employee_break->save();
             }
         } 
