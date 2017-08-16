@@ -20,6 +20,7 @@ Route::get('Test', ['as' => 'Test', 'uses' => 'TestController@view']);
 Route::post('TestPost', 'TestController@post');
 
 // Create and post EMPLOYEE
+<<<<<<< HEAD
 Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']); 
 Route::post('EmployeePost', 'EmployeeController@createEmployee');
 Route::post('EmployeePeriodPost', 'EmployeeController@createPeriod');
@@ -30,6 +31,22 @@ Route::post('ChairPost', 'ChairController@createChair');
 
 //Create and post CHAIR PERIOD AND WORKDAYS
 Route::post('ChairPeriodPost', 'ChairController@createPeriod');
+=======
+Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']);
+Route::post('EmployeePost', 'EmployeeController@post');
+
+// Create and post EMPLOYEE PERIOD and WORKDAYS
+Route::get('EmployeePeriodView', ['as' => 'EmployeePeriodView', 'uses' => 'EmployeePeriodController@view']);
+Route::post('EmployeePeriodPost', 'EmployeePeriodController@post');
+
+//Create and post CHAIR
+Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']);
+Route::post('ChairPost', 'ChairController@post');
+
+//Create and post CHAIR PERIOD AND WORKDAYS
+Route::get('ChairPeriodView', ['as' => 'ChairPeriodView', 'uses' => 'ChairPeriodController@view']);
+Route::post('ChairPeriodPost', 'ChairPeriodController@post');
+>>>>>>> 7b00d724bb5600743aade44a9d9beaa3e45bcbaa
 
 //Make Appointment
 Route::get('PatientAppointmentView', ['as' => 'PatientAppointmentView', 'uses' => 'PatientAppointmentController@view']);
@@ -53,6 +70,4 @@ Route::post('postSchedule', 'ScheduleController@createSchedule');
 Route::post('postSchedulePeriod', 'ScheduleController@createPeriod');
 
 //Agenda overview
-Route::get('AgendaPersonalOverview', ['as' => 'AgendaPersonalOverview', 'uses' => 'AgendaPersonalOverviewController@test']);
-
-Route::post('agendaOverviewpost', ['as' => 'AgendaPersonalPeriodFormView', 'uses' => 'AgendaPersonalOverviewController@OverviewPost']);
+Route::get('AgendaTimeBlocks', ['as' => 'AgendaTimeBlocks', 'uses' => 'EmployeeTimeBlocksController@test']);

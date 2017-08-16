@@ -89,7 +89,7 @@
 
                 <h1>EMPLOYEES</h1>
                 <div class="links">
-                
+
                     <a href="/EmployeeView">Create Employee</a>
                 </div>
                 <br>
@@ -97,7 +97,7 @@
                 <div class="links">
                     <a href="/ChairView">Create chair</a>
                 </div>
-                
+
                 <h1>PATIENTS</h1>
                 <br>
 
@@ -111,6 +111,11 @@
                 <div class="links">
                     <a href="/ScheduleView">Create Schedule</a>
                     <a href="/AgendaPersonalOverview">Get workday schedule</a>
+                </div>
+                <br>
+                <h1>Agenda</h1>
+                <div class="links">
+                    <a href="/AgendaTimeBlocks">Time blocks</a>
                 </div>
             </div>
         </div>

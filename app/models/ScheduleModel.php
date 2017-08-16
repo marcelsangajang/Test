@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class ScheduleModel extends Model
 {
     protected $table = 'schedule';
-    
-    public function periods() {       
-        return $this->hasMany(ChairPeriodModel::class, 'schedule_id');      
+
+    public function periods() {
+        return $this->hasMany(SchedulePeriodModel::class, 'schedule_id');      
     }
-    
+
    // public static $rules = array(
     //    'description' => 'required|min:2'
     //);
 
-    //public static function validate($data) {   
-    //    return Validator::make($data, static::$rules);   
+    //public static function validate($data) {
+    //    return Validator::make($data, static::$rules);
    // }
 }
 
