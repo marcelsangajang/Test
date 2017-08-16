@@ -164,6 +164,7 @@ class EmployeeTimeBlocksModel {
                 $chairDescription = DB::select('SELECT `description` FROM `chair` WHERE `id` = "' . $chairID .'"');
                 $chairDescription = $chairDescription[0]->description;
 
+
                 $timeBlocksArray[] = array('status' => 'Ingeroosterd: ' . $chairDescription, 'time' => $startWhile->format('H:i'));
                 $startWhile->add($interval);
                 break;
