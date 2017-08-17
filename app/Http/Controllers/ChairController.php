@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 use App\models\ChairModel;
+use App\models\ChairPeriodModel;
+use App\models\ChairWeekdayModel;
 use Illuminate\Http\Request;
 use Input;
 
@@ -23,15 +25,17 @@ class ChairController extends Controller
      
     //Creates chair and stores in db 
     public function createChair() {   
-        $inputForm = Input::all();
-        $dataVal = ChairModel::validate($inputForm);
+        $input = Input::all();
+
+        //Data validation
+        $dataVal = ChairModel::validate($input);
         
         if ($dataVal->fails()) {        
-            return redirect()->route('ChairView')->with([$inputForm])->withErrors($dataVal);    
+            return redirect()->route('ChairView')->with([$input])->withErrors($dataVal);    
         }
          
         $chair = new ChairModel();
-        $chair->description = Input::get('description');     
+        $chair->description = $input['description'];     
         $chair->save();     
 
         return view('welcome');
@@ -40,32 +44,26 @@ class ChairController extends Controller
     //Creates chair periods (and weekdays), link to chair id, and store in db
     public function createPeriod() {
         //Create period model and store in db
-        $inputForm = Input::all();
-        $chair_period = new ChairPeriodModel();
-        $chair_period->chair_id = $inputForm['ChairSelect']; //Link to chair id
-        $chair_period->description = Input::get('description');
-        $chair_period->start_date = Input::get('start_date');
-        $chair_period->end_date = Input::get('end_date');
-        $chair_period->save();
-
-        $period_id = $chair_period->id;
+        $input = Input::all();
+        $chairPeriod = new ChairPeriodModel();
+        $chairPeriod->chair_id = $input['ChairSelect']; //Link to chair id
+        $chairPeriod->description = $input['description'];
+        $chairPeriod->start_date = $input['start_date'];
+        $chairPeriod->end_date = $input['end_date'];
+        $chairPeriod->save();
         
+        //Hardcoded list of weekday abbreviations used in html form
         $myList = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
      
         //Create 7 weekdays per period
         for ($x = 0; $x < 7; $x++) {
-            //Create weekday
-            $agendaPersonalPeriodWeekdays = new ChairWeekdayModel();
-            $start_time = Input::get('start_time_'.$myList[$x]);
-            $end_time = Input::get('end_time_'.$myList[$x]);
-            $day = $myList[$x];
-            
-            //Update weekday table in DB
-            $agendaPersonalPeriodWeekdays->period_id =$period_id;
-            $agendaPersonalPeriodWeekdays->start_time = $start_time;
-            $agendaPersonalPeriodWeekdays->end_time = $end_time;
-            $agendaPersonalPeriodWeekdays->day = $day;
-            $agendaPersonalPeriodWeekdays->save();
+            //Create chair weekdays and store in db
+            $chairWeekday = new ChairWeekdayModel();
+            $chairWeekday->period_id = $chairPeriod->id;
+            $chairWeekday->start_time = $input['start_time_'.$myList[$x]];
+            $chairWeekday->end_time = $input['end_time_'.$myList[$x]];
+            $chairWeekday->day = $myList[$x];
+            $chairWeekday->save();
 
         } 
         return view('welcome');

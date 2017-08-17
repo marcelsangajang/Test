@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\models\ChairWeekdayModel;
 
 class ChairPeriodModel extends Model
 {

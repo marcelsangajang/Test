@@ -94,5 +94,4 @@ class EmployeeController extends Controller {
         } 
         return view('welcome');
     }
-    
 }

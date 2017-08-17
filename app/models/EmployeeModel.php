@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
-use App\models\EmployeePeriodModel;
 
 class EmployeeModel extends Model
 {
