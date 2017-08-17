@@ -17,6 +17,7 @@ class CreateEmployeePeriod extends Migration
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
             $table->integer('interval');
+            $table->integer('interval_lines')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->string('description', 40);

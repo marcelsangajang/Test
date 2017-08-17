@@ -21,42 +21,33 @@ use View;
 
 class EmployeeTimeBlocksController {
 
-
-    // public function test() {
-    //
-    //   $timeBlocksObj = new EmployeeTimeBlocksModel(1, '10-05-2017');
-    //   $test = $timeBlocksObj->workdaySchedule;
-    //
-    //   var_dumpS($test);
-    //
-    //
-    // }
+    public function test() {
 
 
+      echo '<form method="GET">
+            <label>ChairID/EmployeeID</label>
+            <input name="chair">
+            <label>Date</label>
+            <input name="date" type="date">
+            <select name="option">
+            <option name="chair">chair</option>
+            <option name="employee">employee</option>
+            </select>
+            <input type="submit" value="submit"></form>';
 
-
-        public function test() {
+    if (!empty($_GET) && $_GET['option'] == 'chair') {
 
           $timeBlocksObj = new ChairTimeBlocksModel($_GET['chair'], $_GET['date']);
           $test = $timeBlocksObj->workdaySchedule;
-
           var_dumpS($test);
+    }
 
 
-        }
+    if (!empty($_GET) && $_GET['option'] == 'employee') {
 
-        // public function test() {
-        //
-        //   $timeBlocksObj = new ChairTimeBlocksModel($_GET['chair'], $_GET['date']);
-        //   $test = $timeBlocksObj->workdaySchedule;
-        //
-        //   echo json_encode($test, true);
-        //
-        //   //var_dumpS($test);
-        //
-        //
-        // }
-
-
-
+          $timeBlocksObj = new EmployeeTimeBlocksModel($_GET['chair'], $_GET['date']);
+          $test = $timeBlocksObj->workdaySchedule;
+          var_dumpS($test);
+    }
+  }
 }

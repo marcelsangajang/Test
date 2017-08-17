@@ -16,6 +16,8 @@ class CreateChairPeriod extends Migration
         Schema::create('chair_period', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('chair_id')->unsigned();
+            $table->integer('interval');
+            $table->integer('interval_lines')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->string('description', 40);

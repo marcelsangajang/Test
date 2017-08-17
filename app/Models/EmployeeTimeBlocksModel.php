@@ -110,6 +110,7 @@ class EmployeeTimeBlocksModel {
                   $this->periodStart       = $periodStart;
                   $this->periodEnd         = $periodEnd;
                   $this->periodInterval    = $period->interval;
+                  $this->intervalLines     = $period->interval_lines;
                   $this->periodDescription = $period->description;
                   $this->daySchedule       = $period['weekdays']->where('day', formatS($date))->first();
                   $dayBreaks               = $this->daySchedule['breaks'];
@@ -147,10 +148,15 @@ class EmployeeTimeBlocksModel {
         $interval           = new \DateInterval('PT' . $this->periodInterval . 'M');
         $breaksArray        = $this->breaksArray;
         $chairScheduleArray = $this->dayScheduleArray;
+        $intervalLines      = $this->calc_interval($this->periodInterval, $this->intervalLines);
+        $arrayCount         = count($intervalLines);
 
         $startWhile = clone $startTime;
+        $countLoop  = 0;
 
         while ($startWhile <= $endTime) {
+
+          $interval = new \DateInterval('PT' .  $intervalLines[$countLoop] . 'M');
 
           switch($startWhile->format('H:i:s')) {
 
@@ -163,8 +169,6 @@ class EmployeeTimeBlocksModel {
 
                 $chairDescription = DB::select('SELECT `description` FROM `chair` WHERE `id` = "' . $chairID .'"');
                 $chairDescription = $chairDescription[0]->description;
-
-
                 $timeBlocksArray[] = array('status' => 'Ingeroosterd: ' . $chairDescription, 'time' => $startWhile->format('H:i'));
                 $startWhile->add($interval);
                 break;
@@ -180,6 +184,12 @@ class EmployeeTimeBlocksModel {
               $startWhile->add($interval);
 
           }
+
+            if ($countLoop == $arrayCount - 1) {
+              $countLoop = 0;
+            } else {
+              $countLoop++;
+            }
         }
 
         $this->workdaySchedule = $timeBlocksArray;
@@ -217,8 +227,32 @@ class EmployeeTimeBlocksModel {
         }
       }
     }
+
+    private function calc_interval($interval, $multipleNumber) {
+
+      if (!empty($multipleNumber)) {
+
+        $divide      = floor(($interval / $multipleNumber));
+        $divideCount = floor(($interval / $divide));
+        $count       = $divide * $multipleNumber;
+        $rest        = floor(($interval - $count));
+
+        for ($i = 0 ; $i < $divideCount; $i++) {
+          $intervalArray[] = $divide;
+      }
+
+      if ($rest > 0) {
+        array_push($intervalArray, $rest);
+      }
+
+      return $intervalArray;
+
+    } else {
+
+      return array($interval);
+
+    }
+  }
 }
-
-
 
 ?>

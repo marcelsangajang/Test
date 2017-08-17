@@ -103,6 +103,7 @@ class ChairTimeBlocksModel {
                   $this->periodStart       = $periodStart;
                   $this->periodEnd         = $periodEnd;
                   $this->periodInterval    = $period->interval;
+                  $this->intervalLines     = $period->interval_lines;
                   $this->periodDescription = $period->description;
                   $this->daySchedule       = $period['weekdays']->where('day', formatS($date))->first();
 
@@ -120,12 +121,17 @@ class ChairTimeBlocksModel {
 
           $startTime          = new \DateTime($this->daySchedule['start_time']);
           $endTime            = new \DateTime($this->daySchedule['end_time']);
-          $interval           = new \DateInterval('PT30M');
           $chairScheduleArray = $this->dayScheduleArray;
+          $intervalLines      = $this->calc_interval($this->periodInterval, $this->intervalLines);
+          $arrayCount         = count($intervalLines);
+
 
           $startWhile = clone $startTime;
+          $countLoop  = 0;
 
           while ($startWhile <= $endTime) {
+
+            $interval = new \DateInterval('PT' .  $intervalLines[$countLoop] . 'M');
 
             switch($startWhile->format('H:i:s')) {
 
@@ -149,7 +155,13 @@ class ChairTimeBlocksModel {
                 $startWhile->add($interval);
 
             }
-          }
+
+              if ($countLoop == $arrayCount - 1) {
+                $countLoop = 0;
+              } else {
+                $countLoop++;
+              }
+        }
 
           $this->workdaySchedule = $timeBlocksArray;
 
@@ -169,7 +181,31 @@ class ChairTimeBlocksModel {
         }
       }
 
+      private function calc_interval($interval, $multipleNumber) {
 
+        if (!empty($multipleNumber)) {
+
+          $divide      = floor(($interval / $multipleNumber));
+          $divideCount = floor(($interval / $divide));
+          $count       = $divide * $multipleNumber;
+          $rest        = floor(($interval - $count));
+
+          for ($i = 0 ; $i < $divideCount; $i++) {
+            $intervalArray[] = $divide;
+          }
+
+          if ($rest > 0) {
+            array_push($intervalArray, $rest);
+          }
+
+          return $intervalArray;
+
+      } else {
+
+        return array($interval);
+
+      }
+    }
 
 }
 
