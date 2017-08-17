@@ -1,25 +1,27 @@
 <?php
-
+//Author: Marcel Sang-Ajang
+//This file controls the chair section of the program. It controls the db section responsible for chair availability
 namespace App\Http\Controllers;
 
 use App\models\ChairModel;
-use App\models\ChairPeriodModel;
-use App\models\ChairWeekdayModel;
 use Illuminate\Http\Request;
 use Input;
 
 class ChairController extends Controller
 {
+    //Load all variables used in view, then return view
     public function view() {
         $allChairs = ChairModel::get()->toArray();
   
+        //Create array of all chairs in db, then pass to form
         foreach ($allChairs as $Chair) {
             $allChairsArray[] = array('id' => $Chair['id'], 'description' => $Chair['description']);
         }
         
         return view('ChairView', compact('allChairsArray'));       
     }
-      
+     
+    //Creates chair and stores in db 
     public function createChair() {   
         $inputForm = Input::all();
         $dataVal = ChairModel::validate($inputForm);
@@ -29,21 +31,21 @@ class ChairController extends Controller
         }
          
         $chair = new ChairModel();
-        $chair->description = Input::get('description');
-                  
-        $chair->save();      
+        $chair->description = Input::get('description');     
+        $chair->save();     
+
         return view('welcome');
     }
 
+    //Creates chair periods (and weekdays), link to chair id, and store in db
     public function createPeriod() {
-        //Create a period for a personal agenda
+        //Create period model and store in db
         $inputForm = Input::all();
         $chair_period = new ChairPeriodModel();
-        $chair_period->chair_id = $inputForm['ChairSelect'];
+        $chair_period->chair_id = $inputForm['ChairSelect']; //Link to chair id
         $chair_period->description = Input::get('description');
         $chair_period->start_date = Input::get('start_date');
         $chair_period->end_date = Input::get('end_date');
-
         $chair_period->save();
 
         $period_id = $chair_period->id;
