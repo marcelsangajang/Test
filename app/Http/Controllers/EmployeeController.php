@@ -85,11 +85,11 @@ class EmployeeController extends Controller {
             $max_breaks = 2;
             //Create at most 2 breaks per weekday
             for ($i = 1; $i < $max_breaks + 1; $i++) {
-                $EmployeeBreak = new EmployeeBreakModel();
-                $EmployeeBreak->weekday_id = $employeeWeekday->id;
-                $EmployeeBreak->start_time = $input['break'.$i.'_start_'.$myList[$x]];
-                $EmployeeBreak->end_time = $input['break'.$i.'_end_'.$myList[$x]]; 
-                $EmployeeBreak->save();
+                $employeeBreak = new EmployeeBreakModel();
+                $employeeBreak->weekday_id = $employeeWeekday->id;
+                $employeeBreak->start_time = $input['break'.$i.'_start_'.$myList[$x]];
+                $employeeBreak->end_time = $input['break'.$i.'_end_'.$myList[$x]]; 
+                $employeeBreak->save();
             }
         } 
         return view('welcome');
