@@ -1,3 +1,4 @@
 patient db relaties controleren (onupdate:cascade? of iets anders?)
 straatnaam/postcode/huisnummer tabel in 3e normaalvorm
 Data validation
+Duration en interval van afspraken correct implementeren

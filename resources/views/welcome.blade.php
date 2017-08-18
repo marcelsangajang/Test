@@ -104,7 +104,8 @@
                 <div class="links">
                     <a href="/PatientView">Create patient</a>
                     <a href="/PatientAppointmentView">Create Appointment</a>
-                    <a href="/PatientGroupView">Create Patient Group</a>
+                    <a href="/PatientList">Show Patient List</a>
+
                 </div>
                 <br>
                 <h1>SCHEDULES</h1>

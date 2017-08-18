@@ -5,7 +5,7 @@
 
 <body>
     
-<h1> Create appointment </h1>
+<h1> Group appointment </h1>
 
 <ul>
     @if ($errors->any())
@@ -13,12 +13,11 @@
     @endif
 </ul>
 
-{{ Form::open(array('url' => '/PatientGroupAppointmentPost')) }}
-	
+
 <table>
 	<tr>
 		<th>
-			Patient Group
+			Patients:
 		</th>
 	</tr>
 	<tr>
@@ -37,9 +36,6 @@
 
 
 
-
-{{ Form::submit('Submit') }}
-{{ Form::close() }}
 
 
 

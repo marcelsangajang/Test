@@ -30,7 +30,7 @@
 			Time
 		</th>
 		<th>
-			Duration
+			Duration (for groups this is total duration)
 		</th>
 		<th>
 			Treatment Type
@@ -55,7 +55,7 @@
     	<td> {{ Form::date('date', \Carbon\Carbon::now()) }}</td>
     	<td><input type="time" step="1" name="time" value="09:00:00"></td>
     	<td><input type="number" value="10" name="duration"> </td>
-    	<td><input type="text" value="Tandarts" name="treatment_type"></td>
+    	<td><input type="text" value="Controle" name="treatment_type"></td>
 
 	</tr>
 
@@ -63,7 +63,11 @@
 </table>
 
 
-
+<select class="form-control" name="appointmentSelect">
+<option value="single">Single Appointment</option>
+<option value="group">Group Appointment</option>
+</select>
+<input type="text" name="description">Description (only for group appointments)</input>
 
 {{ Form::submit('Submit') }}
 {{ Form::close() }}
