@@ -1,7 +1,8 @@
 <?php
 
 /*
- *@Toine
+ *Author: Toine
+ *
  *
  *
  */
@@ -21,7 +22,6 @@ class ChairTimeBlocksModel {
     private $daySchedule;
     private $dayScheduleArray = array();
 
-    public $inEmplPeriod  = false;
     public $inChairPeriod = false;
     public $workdaySchedule;
 
@@ -57,9 +57,7 @@ class ChairTimeBlocksModel {
 
                   $this->inChairPeriod = true;
               }
-
             }
-
           }
 
           if (isset($dayScheduleColl)) {
@@ -82,7 +80,7 @@ class ChairTimeBlocksModel {
 
         }
       }
-  }
+   }
 
     private function get_chair_availability() {
 
@@ -113,7 +111,7 @@ class ChairTimeBlocksModel {
               }
           }
         }
-      }
+    }
 
       //Make workday time array
       //Inclusive: breaks, chair (if scheduled)
@@ -125,7 +123,6 @@ class ChairTimeBlocksModel {
           $intervalLines      = $this->calc_interval($this->periodInterval, $this->intervalLines);
           $arrayCount         = count($intervalLines);
 
-
           $startWhile = clone $startTime;
           $countLoop  = 0;
 
@@ -135,7 +132,7 @@ class ChairTimeBlocksModel {
 
             switch($startWhile->format('H:i:s')) {
 
-              case !empty($employeeID = $this->inside_schedule_time($startWhile->format('H:i:s'), $chairScheduleArray)) :
+              case !empty($employeeID = $this->check_schedule_time($startWhile->format('H:i:s'), $chairScheduleArray)) :
 
                   $chairDescription = DB::select('SELECT `description_intern` FROM `employee` WHERE `id` = "' . $employeeID .'"');
                   $chairDescription = $chairDescription[0]->description_intern;
@@ -169,13 +166,13 @@ class ChairTimeBlocksModel {
 
       //Function to check if time inside a chair schedule period
       //This fuction belongs too 'make_timeblocks()'
-      private function inside_schedule_time($timeNeedle, $timeHaystackArray) {
+      private function check_schedule_time($timeNeedle, $timeHaystackArray) {
 
         foreach ($timeHaystackArray as $timeHaystack) {
 
           if ($timeNeedle >= $timeHaystack['start'] && $timeNeedle < $timeHaystack['end']) {
 
-           return $timeHaystack['employeeID'];
+            return $timeHaystack['employeeID'];
 
           }
         }
@@ -206,9 +203,7 @@ class ChairTimeBlocksModel {
 
       }
     }
-
 }
-
 
 
 ?>

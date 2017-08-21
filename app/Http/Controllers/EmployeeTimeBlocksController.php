@@ -1,9 +1,9 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+*
+*Author: Toine
+*
  */
 
 namespace App\Http\Controllers;
@@ -23,7 +23,6 @@ class EmployeeTimeBlocksController {
 
     public function test() {
 
-
       echo '<form method="GET">
             <label>ChairID/EmployeeID</label>
             <input name="chair">
@@ -39,6 +38,7 @@ class EmployeeTimeBlocksController {
 
           $timeBlocksObj = new ChairTimeBlocksModel($_GET['chair'], $_GET['date']);
           $test = $timeBlocksObj->workdaySchedule;
+
           var_dumpS($test);
     }
 
