@@ -48,6 +48,14 @@
 
     <br>
 
+    {{ Form::label('interval', 'Interval') }}
+    {{ Form::number('interval', 15) }}
+
+    {{ Form::label('interval_lines', 'Regels per interval') }}
+    {{ Form::number('interval_lines', 3) }}
+
+    <br>
+
     <h1> Workdays </h1>
     
     <h3>Monday</h3>

@@ -50,6 +50,8 @@ class ChairController extends Controller
         $chairPeriod->description = $input['description'];
         $chairPeriod->start_date = $input['start_date'];
         $chairPeriod->end_date = $input['end_date'];
+        $chairPeriod->interval = $input['interval'];
+        $chairPeriod->interval_lines = $input['interval_lines'];
         $chairPeriod->save();
         
         //Hardcoded list of weekday abbreviations used in html form

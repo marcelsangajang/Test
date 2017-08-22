@@ -75,17 +75,21 @@
     <br>
 
     <h3>Monday</h3>
-    Om de X weken:
+    Om de X weken (0 en 1 werkt nu alleen):
     <select class="form-control" name="repeat_number_mon">
         @for($i = 0; $i < 5; $i++)
         <option value="{{$i}}"> {{$i}} </option>
         @endfor
     </select>
 
+    <br>
+    Week 1:
     <input name="start_time_mon_0" type="time" value="09:00:00" step="1">
     <input name="end_time_mon_0" type="time" value="12:00:00" step="1">
     {{Form::date('date_0', \Carbon\Carbon::now())}}
-    -
+
+    <br>
+    Week 2:
     <input name="start_time_mon_1" type="time" value="12:00:00" step="1">
     <input name="end_time_mon_1" type="time" value="17:00:00" step="1">
     {{Form::date('date_1', \Carbon\Carbon::now())}}

@@ -20,6 +20,10 @@ class TestController extends Controller
     	return view('testview');
     }
 
+    public function vue() {
+        return view('vue');
+    }
+
     //Create first employee, chair and patient for testing purposes
     public function post() {
     	//Create employee

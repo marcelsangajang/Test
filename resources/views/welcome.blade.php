@@ -118,6 +118,11 @@
                 <div class="links">
                     <a href="/AgendaTimeBlocks">Time blocks</a>
                 </div>
+
+                <h1>Vue</h1>
+                <div class="links">
+                    <a href="/Vue">Vue</a>
+                </div>
             </div>
         </div>
     </body>

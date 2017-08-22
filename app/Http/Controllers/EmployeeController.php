@@ -94,4 +94,10 @@ class EmployeeController extends Controller {
         } 
         return view('welcome');
     }
+
+    //Permanently deletes employee from db
+    public function deleteEmployee($id) {
+        //App\Models\EmployeeModel::destroy($id);
+        echo $id;
+    }
 }

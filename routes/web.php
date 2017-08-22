@@ -15,26 +15,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//TEST
+//Initialization of a few data objects in db (needed to prevent errors, because of no frontend)
 Route::get('Test', ['as' => 'Test', 'uses' => 'TestController@view']);
+Route::get('Vue',  ['as' => 'Vue', 'uses' => 'TestController@vue']);
 Route::post('TestPost', 'TestController@post');
 
-// Create and post EMPLOYEE
-
+// Employee functionality
 Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']); 
 Route::post('EmployeePost', 'EmployeeController@createEmployee');
 Route::post('EmployeePeriodPost', 'EmployeeController@createPeriod');
 
-//Create and post CHAIR
+// Chair functionality
 Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']); 
 Route::post('ChairPost', 'ChairController@createChair');
 Route::post('ChairPeriodPost', 'ChairController@createPeriod');
 
-//Make Appointment
+// Appointment functionality
 Route::get('PatientAppointmentView', ['as' => 'PatientAppointmentView', 'uses' => 'PatientController@appointmentView']);
 Route::post('postAppointment', 'PatientController@findAppointmentType');
 
-//Create and post patient
+// Patient functionality
 Route::get('PatientView', ['as' => 'PatientView', 'uses' => 'PatientController@patientView']);
 Route::get('PatientList', ['as' => 'PatientList', 'uses' => 'PatientController@patientList']);
 Route::post('postPatient', 'PatientController@createPatient');

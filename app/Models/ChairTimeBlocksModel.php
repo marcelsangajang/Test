@@ -17,6 +17,7 @@ class ChairTimeBlocksModel {
 
     private $chairID;
     private $periodInterval;
+    private $intervalLines;
     private $date;
     private $daySchedule;
     private $dayScheduleArray = array();
