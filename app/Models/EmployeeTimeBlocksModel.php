@@ -24,7 +24,7 @@ class EmployeeTimeBlocksModel {
 
     public $inEmplPeriod  = false;
     public $inChairPeriod = false;
-    public $workdaySchedule;
+    public $workdaySchedule = array();
 
     //Constructer will assign necessary variables and will call functions to return the time blocks array
     function __construct($employeeId, $date) {
@@ -34,7 +34,10 @@ class EmployeeTimeBlocksModel {
 
         $this->get_employee_schedule();
         $this->get_employee_availability();
+
+        if (isset($this->daySchedule)) {
         $this->make_timeblocks();
+        }
     }
 
     //Check if given date is in one or multiple chair schedule for the given employee
@@ -90,15 +93,17 @@ class EmployeeTimeBlocksModel {
     }
 
     //Check if date is in one of the periods and if so, get workday schedule data
-    //NOTE: if the date is found in multiple periods the last period will overwrite pervious
+    //NOTE: if the date is found in multiple periods the last period will overwrite previous
     private function get_employee_availability() {
 
         $date = new \DateTime($this->date);
 
         $periodsObjArray = EmployeeModel::with(array('periods.weekdays.breaks'))->where('id', $this->employeeId)->get();
-        $periods = $periodsObjArray[0]->periods;
 
-        if ($periods->isNotEmpty()) {
+
+        if ($periodsObjArray->isNotEmpty()) {
+
+          $periods = $periodsObjArray[0]->periods;
 
           foreach ($periods as $period) {
 

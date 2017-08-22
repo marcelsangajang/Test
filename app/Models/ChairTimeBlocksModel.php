@@ -24,7 +24,7 @@ class ChairTimeBlocksModel {
     private $dayScheduleArray = array();
 
     public $inChairPeriod = false;
-    public $workdaySchedule;
+    public $workdaySchedule = array();
 
     //Constructer will assign variables and will call functions to return the time blocks array
     function __construct($chairID, $date) {
@@ -34,7 +34,10 @@ class ChairTimeBlocksModel {
 
         $this->get_chair_schedule();
         $this->get_chair_availability();
+
+        if (isset($this->daySchedule)) {
         $this->make_timeblocks();
+        }
     }
 
     private function get_chair_schedule() {
@@ -42,30 +45,34 @@ class ChairTimeBlocksModel {
           $date = new \DateTime($this->date);
           $employeeSchedule = ScheduleModel::with(array('periods.weekdays'))->where('chair_id', $this->chairID)->get();
 
-          foreach ($employeeSchedule as $schedule) {
+          if ($employeeSchedule->isNotEmpty()) {
 
-            $employeeID = $schedule['employee_id'];
+            foreach ($employeeSchedule as $schedule) {
 
-            foreach ($schedule['periods'] as $period) {
 
-              $periodStart = new \DateTime($period['start_date']);
-              $periodEnd   = new \DateTime($period['end_date']);
+              $employeeID = $schedule['employee_id'];
 
-              if ($date >= $periodStart && $date <= $periodEnd) {
+              foreach ($schedule['periods'] as $period) {
 
-                  $day = $period['weekdays']->where('day', formatS($date));
-                  $dayScheduleColl[] = array('employeeID' => $employeeID, 'dayArray' => $day);
+                $periodStart = new \DateTime($period['start_date']);
+                $periodEnd   = new \DateTime($period['end_date']);
 
-                  $this->inChairPeriod = true;
+                if ($date >= $periodStart && $date <= $periodEnd) {
+
+                    $day = $period['weekdays']->where('day', formatS($date));
+                    $dayScheduleColl[] = array('employeeID' => $employeeID, 'dayArray' => $day);
+
+                    $this->inChairPeriod = true;
+                }
               }
             }
-          }
 
-          if (isset($dayScheduleColl)) {
+            if (isset($dayScheduleColl)) {
 
-            $this->make_day_schedule_array($dayScheduleColl);
+              $this->make_day_schedule_array($dayScheduleColl);
 
-          }
+            }
+        }
     }
 
     private function make_day_schedule_array($daySchedule) {
@@ -88,9 +95,10 @@ class ChairTimeBlocksModel {
         $date = new \DateTime($this->date);
 
         $periodsObjArray = ChairModel::with(array('periods.weekdays'))->where('id', $this->chairID)->get();
-        $periods = $periodsObjArray[0]->periods;
 
-        if ($periods->isNotEmpty()) {
+        if ($periodsObjArray->isNotEmpty()) {
+
+          $periods = $periodsObjArray[0]->periods;
 
           foreach ($periods as $period) {
 
