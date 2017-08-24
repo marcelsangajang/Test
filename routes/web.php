@@ -48,9 +48,6 @@ Route::get('ScheduleView', ['as' => 'ScheduleView', 'uses' => 'ScheduleControlle
 Route::post('postSchedule', 'ScheduleController@createSchedule');
 Route::post('postSchedulePeriod', 'ScheduleController@createPeriod');
 
-//Agenda Timeblocks with interface (test)
-Route::get('AgendaTimeBlocks', ['as' => 'AgendaTimeBlocks', 'uses' => 'EmployeeTimeBlocksController@test']);
-
 //Agenda Timeblocks API (test)
 Route::get('AgendaTimeBlocksSHOW', ['as' => 'AgendaTimeBlocksSHOW', 'uses' => 'AgendaTimeBlocksAPI@show']);
 Route::any('AgendaTimeBlocksAPI', ['as' => 'AgendaTimeBlocksAPI', 'uses' => 'AgendaTimeBlocksAPI@api']);

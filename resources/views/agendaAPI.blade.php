@@ -10,10 +10,10 @@
 <body>
 
 <div id="app">
-<label>ID</label>
-<input type="text" placeholder="ID" v-model="ID"><br>
 <label>Date</label>
 <input type="date" placeholder="Date" v-model="date"><br>
+<label>ID</label>
+<input type="text" placeholder="ID" v-model="ID"><br>
 <label>option</label>
 <select v-model="option">
   <option name="chair">chair</option>
@@ -35,12 +35,11 @@
      },
      watch: {
        option: function() {
-         if (this.option.length > 0) {
+         if (this.option.length > 0 & this.ID != '' &  this.date != '') {
            this.getAgendaData()
          }
        }
     },
-
      methods: {
        getAgendaData: _.debounce(function() {
          var app = this
@@ -56,7 +55,7 @@
                  app.responseAPI = response.data
                })
                .catch(function (error) {
-                 app.responseAPI = "Agenda is leeg"
+                 app.responseAPI = "ERROR" + error
                })
        }, 500)
      }

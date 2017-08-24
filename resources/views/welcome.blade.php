@@ -81,7 +81,7 @@
                 <div class="title m-b-md">
                     Webagenda 2.0
                 </div>
-                
+
                 <h1>INITIALIZATION</h1>
                 <div class="links">
                     <a href="/Test">Setup initial data</a>
@@ -116,7 +116,7 @@
                 <br>
                 <h1>Agenda</h1>
                 <div class="links">
-                    <a href="/AgendaTimeBlocks">Time blocks</a>
+                    <a href="/AgendaTimeBlocksSHOW">Time blocks</a>
                 </div>
 
                 <h1>Vue</h1>

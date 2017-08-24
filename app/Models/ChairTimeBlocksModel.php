@@ -83,7 +83,8 @@ class ChairTimeBlocksModel {
         foreach ($schedule['dayArray'] as $dayArray) {
 
           $dayName = $dayArray['day'];
-          $this->dayScheduleArray[] = array('employeeID' => $employeeID,'day_name' => $dayName,
+          $this->dayScheduleArray[] = array('employeeID' => $employeeID,
+                                            'day_name' => $dayName,
                                             'start' => $dayArray['start_time'],
                                             'end' => $dayArray['end_time']);
 
@@ -114,9 +115,6 @@ class ChairTimeBlocksModel {
                   $this->intervalLines     = $period->interval_lines;
                   $this->periodDescription = $period->description;
                   $this->daySchedule       = $period['weekdays']->where('day', formatS($date))->first();
-
-                  //set inperiod boolean    --NOG EVEN OVER NADENKEN AANGEZIEN LAATSTE PERIODE OVERSCHRIJFT
-                  $this->inEmplPeriod      = true;
 
               }
           }
