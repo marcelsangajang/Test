@@ -21,12 +21,12 @@ Route::get('Vue',  ['as' => 'Vue', 'uses' => 'TestController@vue']);
 Route::post('TestPost', 'TestController@post');
 
 // Employee functionality
-Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']); 
+Route::get('EmployeeView', ['as' => 'EmployeeView', 'uses' => 'EmployeeController@view']);
 Route::post('EmployeePost', 'EmployeeController@createEmployee');
 Route::post('EmployeePeriodPost', 'EmployeeController@createPeriod');
 
 // Chair functionality
-Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']); 
+Route::get('ChairView', ['as' => 'ChairView', 'uses' => 'ChairController@view']);
 Route::post('ChairPost', 'ChairController@createChair');
 Route::post('ChairPeriodPost', 'ChairController@createPeriod');
 
@@ -48,5 +48,9 @@ Route::get('ScheduleView', ['as' => 'ScheduleView', 'uses' => 'ScheduleControlle
 Route::post('postSchedule', 'ScheduleController@createSchedule');
 Route::post('postSchedulePeriod', 'ScheduleController@createPeriod');
 
-//Agenda overview
+//Agenda Timeblocks with interface (test)
 Route::get('AgendaTimeBlocks', ['as' => 'AgendaTimeBlocks', 'uses' => 'EmployeeTimeBlocksController@test']);
+
+//Agenda Timeblocks API (test)
+Route::get('AgendaTimeBlocksSHOW', ['as' => 'AgendaTimeBlocksSHOW', 'uses' => 'AgendaTimeBlocksAPI@show']);
+Route::any('AgendaTimeBlocksAPI', ['as' => 'AgendaTimeBlocksAPI', 'uses' => 'AgendaTimeBlocksAPI@api']);

@@ -23,7 +23,6 @@ class ChairTimeBlocksModel {
     private $daySchedule;
     private $dayScheduleArray = array();
 
-    public $inChairPeriod = false;
     public $workdaySchedule = array();
 
     //Constructer will assign variables and will call functions to return the time blocks array
@@ -60,9 +59,9 @@ class ChairTimeBlocksModel {
                 if ($date >= $periodStart && $date <= $periodEnd) {
 
                     $day = $period['weekdays']->where('day', formatS($date));
-                    $dayScheduleColl[] = array('employeeID' => $employeeID, 'dayArray' => $day);
+                    $dayScheduleColl[] = array('employeeID' => $employeeID,
+                                               'dayArray' => $day);
 
-                    $this->inChairPeriod = true;
                 }
               }
             }
@@ -84,7 +83,9 @@ class ChairTimeBlocksModel {
         foreach ($schedule['dayArray'] as $dayArray) {
 
           $dayName = $dayArray['day'];
-          $this->dayScheduleArray[] = array('employeeID' => $employeeID,'day_name' => $dayName, 'start' => $dayArray['start_time'], 'end' => $dayArray['end_time']);
+          $this->dayScheduleArray[] = array('employeeID' => $employeeID,'day_name' => $dayName,
+                                            'start' => $dayArray['start_time'],
+                                            'end' => $dayArray['end_time']);
 
         }
       }

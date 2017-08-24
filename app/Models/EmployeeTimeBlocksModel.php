@@ -22,8 +22,6 @@ class EmployeeTimeBlocksModel {
     private $breaksArray      = array();
     private $dayScheduleArray = array();
 
-    public $inEmplPeriod  = false;
-    public $inChairPeriod = false;
     public $workdaySchedule = array();
 
     //Constructer will assign necessary variables and will call functions to return the time blocks array
@@ -61,7 +59,6 @@ class EmployeeTimeBlocksModel {
                   $day = $period['weekdays']->where('day', formatS($date));
                   $dayScheduleColl[] = array('chairID' => $chairID, 'dayArray' => $day);
 
-                  $this->inChairPeriod = true;
               }
 
             }
@@ -122,9 +119,6 @@ class EmployeeTimeBlocksModel {
 
                   //Make and assign 1 dimensional array containing all breaks
                   $this->breaksArray       = $this->make_break_array($dayBreaks);
-                  //set inperiod boolean    --NOG EVEN OVER NADENKEN AANGEZIEN LAATSTE PERIODE OVERSCHRIJFT
-                  $this->inEmplPeriod      = true;
-
               }
           }
         }
