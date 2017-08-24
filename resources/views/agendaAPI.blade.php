@@ -44,7 +44,7 @@
      methods: {
        getAgendaData: _.debounce(function() {
          var app = this
-         app.startingCity = "Searching..."
+         app.responseAPI = "Searching..."
          axios.get('/AgendaTimeBlocksAPI', {
                   params: {
                   chair:  this.ID,
@@ -56,7 +56,7 @@
                  app.responseAPI = response.data
                })
                .catch(function (error) {
-                 app.startingCity = "Invalid Zipcode"
+                 app.responseAPI = "Agenda is leeg"
                })
        }, 500)
      }
