@@ -51,7 +51,7 @@ class PatientController extends Controller
 
     //------------------ APPOINTMENT SECTION -----------------------------------------------
 
-   /* public function appointmentView() {
+    public function appointmentView() {
         //return view('PatientAppointmentsFormView');
 
         $allPatients = PatientModel::get()->toArray();
@@ -68,7 +68,7 @@ class PatientController extends Controller
         }
      
         return view('PatientAppointmentView')->with(['allPatientsArray'=>$allPatientsArray])->with(['allAgendasArray' => $allAgendasArray]); 
-    }*/
+    }
 
     public function findAppointmentType() {
         $inputForm = Input::all();
