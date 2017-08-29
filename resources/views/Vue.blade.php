@@ -1,6 +1,9 @@
 <html>
-<script src="https://unpkg.com/vue"></script>
+<!--<script src="https://unpkg.com/vue"></script>-->
 <head>
+
+<script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
+
 </head>
 
 <body>
@@ -33,9 +36,11 @@
 <span>Checked names: @{{ checkedNames }}</span>
 </div>
 
+
 </body>
 
 <script>
+
 	var app = new Vue({
 	  	el: '#app',
 	  	data: {
@@ -43,18 +48,56 @@
 		  	}
 		})
 
-		var app2 = new Vue({
-	  el: '#app-2',
-	  data: {
-	    message: 'You loaded this page on ' + new Date().toLocaleString()
-	  }
-})
+	var app2 = new Vue({
+		el: '#app-2',
+		data: {
+		    message: 'You loaded this page on ' + new Date().toLocaleString()
+		}
+	})
 
-		new Vue({
-  el: '#app-3',
-  data: {
-    checkedNames: []
-  }
-})
+	var app3 = new Vue({
+  		el: '#app-3',
+  		data: {
+    			checkedNames: []
+  		},
+  		forms: {
+	        userRegistrationForm: {
+	            name: '',
+	            email: '',
+	            password: '',
+	            password_confirmation: ''
+	        }
+	    }
+	})
+
+	/**Vue.component('user-registration-form', {
+		template: '<form>@{{forms}}</form>',
+	    forms: {
+	        userRegistrationForm: {
+	            name: '',
+	            email: '',
+	            password: '',
+	            password_confirmation: ''
+	        }
+	    }
+	});
+
+	// register
+	Vue.component('my-component', {
+	  template: '<div>A custom component!</div>'
+	});
+
+	
+	// create a root instance
+	new Vue({
+	  el: '#example'
+	});**/
+
+
+
+
+
+
+
 </script>
 </html>

@@ -18,7 +18,7 @@ class CreateScheduleWeekday extends Migration
             $table->integer('period_id')->unsigned();
             $table->time('start_time');
             $table->time('end_time');
-            $table->integer('repeat');
+            $table->integer('repeat_interval');
             $table->string('day', 3);
             $table->timestamps();
         });
