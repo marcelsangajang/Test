@@ -1,19 +1,19 @@
 <html>
 <!--<script src="https://unpkg.com/vue"></script>-->
 <head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
-<script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
-
+<link href="/css/app.css" rel="stylesheet"/>
 </head>
 
 <body>
-    
+
 <h1> Testing Vue </h1>
 
 
 
 
-<div id="app">
+<div id="hello">
 <input type="text" v-model="message">
   @{{ message }}
 </div>
@@ -36,13 +36,19 @@
 <span>Checked names: @{{ checkedNames }}</span>
 </div>
 
+<div id="app">
+  <example></example>
+</div>
 
-</body>
+<div id="validate">
+  <veeValidate></veeValidate>
+</div>
 
+<script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
 <script>
 
-	var app = new Vue({
-	  	el: '#app',
+	var hello = new Vue({
+	  	el: '#hello',
 	  	data: {
 	    	message: 'Hello Vue!'
 		  	}
@@ -87,7 +93,7 @@
 	  template: '<div>A custom component!</div>'
 	});
 
-	
+
 	// create a root instance
 	new Vue({
 	  el: '#example'
@@ -100,4 +106,7 @@
 
 
 </script>
+
+</body>
+
 </html>

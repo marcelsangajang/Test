@@ -5,15 +5,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import Vue from 'vue'
-import { FormHelpers } from 'vue-laravel-forms'
- 
-Vue.use(FormHelpers);
-
 require('./bootstrap');
 
 window.Vue = require('vue');
-require('vue-laravel-forms');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -22,9 +16,8 @@ require('vue-laravel-forms');
  */
 
 Vue.component('example', require('./components/Example.vue'));
-
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+    }
 });
-
-
