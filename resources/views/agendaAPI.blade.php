@@ -1,32 +1,41 @@
-<html>
+@extends('layouts.app')
 
-<head>
-  <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
-  <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
-  <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
-</head>
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Agenda</div>
+                <div class="panel-body">
 
+                  <div id="agenda">
+                  <label>Date</label>
+                  <input type="date" placeholder="Date" v-model="date"><br>
+                  <label>ID</label>
+                  <input type="text" placeholder="ID" v-model="ID"><br>
+                  <label>option</label>
+                  <select v-model="option">
+                    <option name="chair">chair</option>
+                    <option name="employee">employee</option>
+                  </select>
 
-<body>
+                  <!-- Respons API -->
+                  <span><pre>@{{responseAPI}}</pre></span>
+                  </div>
 
-<div id="app">
-<label>Date</label>
-<input type="date" placeholder="Date" v-model="date"><br>
-<label>ID</label>
-<input type="text" placeholder="ID" v-model="ID"><br>
-<label>option</label>
-<select v-model="option">
-  <option name="chair">chair</option>
-  <option name="employee">employee</option>
-</select>
+                  <div id="app">
+                    <example></example>
+                  </div>
 
-<!-- Respons API -->
-<span><pre>@{{responseAPI}}</pre></span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
    var app = new Vue({
-     el: '#app',
+     el: '#agenda',
      data: {
        ID: '',
        date: '',
@@ -60,10 +69,8 @@
        }, 500)
      }
    })
+
+
+
  </script>
-
-</body>
-
-
-
-</html>
+@endsection

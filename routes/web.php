@@ -51,3 +51,7 @@ Route::post('postSchedulePeriod', 'ScheduleController@createPeriod');
 //Agenda Timeblocks API (test)
 Route::get('AgendaTimeBlocksSHOW', ['as' => 'AgendaTimeBlocksSHOW', 'uses' => 'AgendaTimeBlocksAPI@show']);
 Route::any('AgendaTimeBlocksAPI', ['as' => 'AgendaTimeBlocksAPI', 'uses' => 'AgendaTimeBlocksAPI@api']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

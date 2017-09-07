@@ -1,112 +1,39 @@
-<html>
-<!--<script src="https://unpkg.com/vue"></script>-->
-<head>
-<meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('layouts.app')
 
-<link href="/css/app.css" rel="stylesheet"/>
-</head>
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Agenda</div>
+                <div class="panel-body">
 
-<body>
+                  <div id="app-4">
+                    <ol>
+                      <li v-for="todo in todos">
+                        @{{ todo.text }}
+                      </li>
+                    </ol>
+                  </div>
 
-<h1> Testing Vue </h1>
-
-
-
-
-<div id="hello">
-<input type="text" v-model="message">
-  @{{ message }}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="app-2">
-  <span v-bind:title="message">
-    Hover your mouse over me for a few seconds
-    to see my dynamically bound title!
-  </span>
-</div>
-
-<div id="app-3">
-<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
-<label for="jack">Jack</label>
-<input type="checkbox" id="john" value="John" v-model="checkedNames">
-<label for="john">John</label>
-<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-<label for="mike">Mike</label>
-<br>
-<span>Checked names: @{{ checkedNames }}</span>
-</div>
-
-<div id="app">
-  <example></example>
-</div>
-
-<div id="validate">
-  <veeValidate></veeValidate>
-</div>
-
-<script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
 <script>
 
-	var hello = new Vue({
-	  	el: '#hello',
-	  	data: {
-	    	message: 'Hello Vue!'
-		  	}
-		})
+var app4 = new Vue({
+  el: '#app-4',
+  data: {
+    todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+    ]
+  }
+})
 
-	var app2 = new Vue({
-		el: '#app-2',
-		data: {
-		    message: 'You loaded this page on ' + new Date().toLocaleString()
-		}
-	})
-
-	var app3 = new Vue({
-  		el: '#app-3',
-  		data: {
-    			checkedNames: []
-  		},
-  		forms: {
-	        userRegistrationForm: {
-	            name: '',
-	            email: '',
-	            password: '',
-	            password_confirmation: ''
-	        }
-	    }
-	})
-
-	/**Vue.component('user-registration-form', {
-		template: '<form>@{{forms}}</form>',
-	    forms: {
-	        userRegistrationForm: {
-	            name: '',
-	            email: '',
-	            password: '',
-	            password_confirmation: ''
-	        }
-	    }
-	});
-
-	// register
-	Vue.component('my-component', {
-	  template: '<div>A custom component!</div>'
-	});
-
-
-	// create a root instance
-	new Vue({
-	  el: '#example'
-	});**/
-
-
-
-
-
-
-
-</script>
-
-</body>
-
-</html>
+ </script>
+@endsection
