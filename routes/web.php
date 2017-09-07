@@ -11,6 +11,9 @@
 |
 */
 
+//Laravel standard routes
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -56,6 +59,5 @@ Route::post('postSchedulePeriod', 'ScheduleController@createPeriod');
 Route::get('AgendaTimeBlocksSHOW', ['as' => 'AgendaTimeBlocksSHOW', 'uses' => 'AgendaTimeBlocksAPI@show']);
 Route::any('AgendaTimeBlocksAPI', ['as' => 'AgendaTimeBlocksAPI', 'uses' => 'AgendaTimeBlocksAPI@api']);
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//Patientlist API (test)
+Route::get('patientlistAPI', ['as' => 'patientlistAPI', 'uses' => 'PatientListAPI@get_all_patients']);
