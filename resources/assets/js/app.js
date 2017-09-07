@@ -16,8 +16,19 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+//Vue.component('example2', require('./components/Example2.vue'));
 const app = new Vue({
     el: '#app',
     data: {
     }
 });
+
+
+/*
+Vue.component('multiselect', require('./components/multiselect.vue'));
+const abc = new Vue({
+    el: '#test',
+    data: {
+    }
+});
+*/

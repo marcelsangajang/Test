@@ -97,7 +97,6 @@ class EmployeeTimeBlocksModel {
 
         $periodsObjArray = EmployeeModel::with(array('periods.weekdays.breaks'))->where('id', $this->employeeId)->get();
 
-
         if ($periodsObjArray->isNotEmpty()) {
 
           $periods = $periodsObjArray[0]->periods;

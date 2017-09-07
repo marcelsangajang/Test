@@ -1,110 +1,53 @@
+
 <html>
-<!--<script src="https://unpkg.com/vue"></script>-->
+<!-- component data passing: https://stackoverflow.com/questions/34534151/passing-data-to-components-in-vue-js-->
 <head>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
-<link href="/css/app.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 
 <body>
 
-<h1> Testing Vue </h1>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://cdn.rawgit.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e/raw/974aa47f8f9c5361c5233bd56be37db8ed765a09/currency-validator.js"></script>
 
-
-
-
-<div id="hello">
-<input type="text" v-model="message">
-  @{{ message }}
+<div id="counter-event-example">
+  <p>@{{ total }}</p>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
 </div>
 
-<div id="app-2">
-  <span v-bind:title="message">
-    Hover your mouse over me for a few seconds
-    to see my dynamically bound title!
-  </span>
-</div>
-
-<div id="app-3">
-<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
-<label for="jack">Jack</label>
-<input type="checkbox" id="john" value="John" v-model="checkedNames">
-<label for="john">John</label>
-<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-<label for="mike">Mike</label>
-<br>
-<span>Checked names: @{{ checkedNames }}</span>
-</div>
-
-<div id="app">
-  <example></example>
-</div>
-
-<div id="validate">
-  <veeValidate></veeValidate>
-</div>
-
-<script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
 <script>
 
-	var hello = new Vue({
-	  	el: '#hello',
-	  	data: {
-	    	message: 'Hello Vue!'
-		  	}
-		})
-
-	var app2 = new Vue({
-		el: '#app-2',
-		data: {
-		    message: 'You loaded this page on ' + new Date().toLocaleString()
-		}
-	})
-
-	var app3 = new Vue({
-  		el: '#app-3',
-  		data: {
-    			checkedNames: []
-  		},
-  		forms: {
-	        userRegistrationForm: {
-	            name: '',
-	            email: '',
-	            password: '',
-	            password_confirmation: ''
-	        }
-	    }
-	})
-
-	/**Vue.component('user-registration-form', {
-		template: '<form>@{{forms}}</form>',
-	    forms: {
-	        userRegistrationForm: {
-	            name: '',
-	            email: '',
-	            password: '',
-	            password_confirmation: ''
-	        }
-	    }
-	});
-
-	// register
-	Vue.component('my-component', {
-	  template: '<div>A custom component!</div>'
-	});
-
-
-	// create a root instance
-	new Vue({
-	  el: '#example'
-	});**/
-
-
-
-
-
-
-
+Vue.component('button-counter', {
+  template: '<button v-on:click="incrementCounter">@{{ counter }}</button>',
+  data: function () {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    incrementCounter: function () {
+      this.counter += 1
+      this.$emit('increment')
+    }
+  },
+})
+new Vue({
+  el: '#counter-event-example',
+  data: {
+    total: 0
+  },
+  methods: {
+    incrementTotal: function () {
+      this.total += 1
+    }
+  }
+})
 </script>
 
 </body>

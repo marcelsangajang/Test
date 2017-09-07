@@ -24,6 +24,21 @@ class TestController extends Controller
         return view('vue');
     }
 
+    public function marcel1() {
+        return view('marcel1');
+    }
+
+    public function toine1() {
+        return view('toine1');
+    }
+    public function marcel2() {
+        return view('marcel2');
+    }
+
+    public function toine2() {
+        return view('toine2');
+    }
+
     //Create first employee, chair and patient for testing purposes
     public function post() {
     	//Create employee

@@ -119,9 +119,13 @@
                     <a href="/AgendaTimeBlocksSHOW">Time blocks</a>
                 </div>
 
-                <h1>Vue</h1>
+                <h1>Vue Testomgeving</h1>
                 <div class="links">
                     <a href="/Vue">Vue</a>
+                    <a href="/Marcel1">Marcel 1</a>
+                    <a href="/Toine1">Toine 1</a>
+                    <a href="/Marcel2">Marcel 2</a>
+                    <a href="/Toine2">Toine 2</a>
                 </div>
             </div>
         </div>

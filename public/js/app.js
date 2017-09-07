@@ -778,8 +778,9 @@ module.exports = __webpack_require__(40);
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -802,6 +803,14 @@ var app = new Vue({
   el: '#app',
   data: {}
 });
+/*
+Vue.component('multiselect', require('./components/multiselect.vue'));
+const abc = new Vue({
+    el: '#test',
+    data: {
+    }
+});
+*/
 
 /***/ }),
 /* 10 */
