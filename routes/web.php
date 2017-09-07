@@ -18,6 +18,10 @@ Route::get('/', function () {
 //Initialization of a few data objects in db (needed to prevent errors, because of no frontend)
 Route::get('Test', ['as' => 'Test', 'uses' => 'TestController@view']);
 Route::get('Vue',  ['as' => 'Vue', 'uses' => 'TestController@vue']);
+Route::get('Marcel1',  ['as' => 'Vue', 'uses' => 'TestController@marcel1']);
+Route::get('Toine1',  ['as' => 'Vue', 'uses' => 'TestController@toine1']);
+Route::get('Marcel2',  ['as' => 'Vue', 'uses' => 'TestController@marcel2']);
+Route::get('Toine2',  ['as' => 'Vue', 'uses' => 'TestController@toine2']);
 Route::post('TestPost', 'TestController@post');
 
 // Employee functionality
