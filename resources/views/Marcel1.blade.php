@@ -1,4 +1,6 @@
+@extends('layouts.app')
 
+@section('content')
 <html>
 
 <head>
@@ -14,101 +16,163 @@
 
 <body>
 
-<!-- Contains four container boxes for now -->
 <div id="root" class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Parkeer panel</div>
+                <div class="panel-body">
 
-  <!-- container 1
-  <div class="container">
-    <div v-if="!container1">
-      <label>id:</label>
-      <input type="number" v-model.number="container1">
-      </div>
-
-    <schedule v-if="container1" :id="container1"></schedule>
-  </div>
--->
-
-
-  <!-- container 3-->
-  <div class="container">
-    <buttonpanel></buttonpanel>
-  </div>
-
-
-  <!-- container 4-->
-  <div class="container">
-    
-  </div>
-
+        
+                      <parkingpanel v-bind:patient="patient"></parkingpanel>
+                      <br>Testcomponent hieronder <br>
+                      <testcomponent v-on:add-patient="addPatient"></testcomponent>
+                </div>
+            </div>
+        </div>
+    </div>
+    @{{$data}}
 </div>
 
-</body>
-
 <script>
-Vue.component('buttonpanel', {
+
+Vue.component('parkingpanel', {
   template: '\
   <div>\
-    <button v-for="buttonn in buttonnList">\
-    @{{buttonn.text}}\
-    </button>\
-  </div>',
+    <div>\
+        <button v-on:click=addPatient(1)>Add Marcel</button>\
+        <button v-on:click=addPatient(2)>Add Toine</button>\
+    \
+    </div>\
+    \
+    <div>\
+      <br>\
+      <div v-for="(patient, index) in parkingList">\
+          @{{patient}}\
+          <button v-on:click="createNextAppointment(patient.id)" title="Vervolg afspraak">V</button>\
+          <button v-on:click="remove(index)" title="Verwijder uit parkeerpanel">X</button>\
+      </div>\
+    </div>\
+  </div>\
+  ',
+
+   props: {
+     patient: ''
+   },
 
   data: function() {
     return {
-      button1: {
-        text: 'button1',
-        action: 'func1'
+      patient1: {
+        id: '1',
+        firstName: 'Marcel',
+        lastName: 'Sang-Ajang'
       },
-      button2: {
-        text: 'button2',
-        action: 'func2'
+      patient2: {
+        id: '2',
+        name: 'Toine',
+        lastName: 'Koene'
       },
-      buttonnList: [this.button1, this.button2]
-    }
-  }
-})
-//Vue.component('container', {
-//  template: '<div class="container"> @{{input}} </div>',
-
-//  props: ['input']
-
-//})
-
-/*Vue.component('schedule', {
-  template: '\
-  <div>\
-    Schedule:<br>\
-    <button v-on:click="showId">show ID</button>\
-  </div>\
-  ',
-  props: {
-    id: {
-      type: Number,
-      default: 0
+      parkingList: []
     }
   },
-  mounted: function () {
-    console.log("Component created")
+
+   watch: {
+     patient: function() {
+       this.addPatient(this.patient);
+     }
+   },
+
+      
+  mounted(){// in component B's created hook
+  
+      this.$on('add-patient', function () {
+
+          console.log('parkingpanel mounted function');
+      });
+      
+    },
+
+  methods: {
+    addPatient: function(patient){
+   
+      this.parkingList.push(patient);
+
+
+    },
+    createNextAppointment: function(patientId){
+      console.log(patientId);
+    },
+    remove: function(index){
+      this.parkingList.splice(index, 1);
+    }
+  }
+
+
+});                                                                                                                                                                                                                                                                                                                  
+
+Vue.component('testcomponent', {
+  template: '\
+    <div>\
+    <input type="number" v-model="patient1.id" placeholder="id">\
+    <input type="text" v-model="patient1.firstName" placeholder="First name">\
+    <input type="text" v-model="patient1.lastName" placeholder="Last name">\
+    <button v-on:click=addPatient>Add patient</button>\
+    </div>\
+  ',
+
+  data: function() {
+    return {
+      patient1: {
+        firstName: '',
+        lastName: '',
+        id: '',
+      }
+    }
   },
   methods: {
-    showId: function() {
-      console.log(this.id)
+    addPatient: function() {
+      this.$emit('add-patient', this.patient1);
     }
-    
-
   }
-})*/
+});
 
 var vm = new Vue({
   el: '#root',
 
-  data: {
-    container1: null
+   data: {
+     patient: {
+      firstName: '',
+      lastName: '',
+      id: ''
+     }
+   },
+
+  methods: {
+    addPatient: function(patient) {
+      console.log('this.patient = ' + this.patient.firstName);
+      console.log('patient = ' + patient.firstName);
+
+      this.patient = patient;
+      // this.patient.firstName = patient.firstName;
+      // this.patient.lastName = patient.lastName;
+      // this.patient.id = patient.id;
+      
+      // this.patient.firstName = '';
+      // this.patient.lastName = '';
+      // this.patient.id = '';
+      
+
+    }
   }
-})
 
-
-
+});
 </script>
 
+
+
+</body>
 </html>
+
+
+
+@endsection
