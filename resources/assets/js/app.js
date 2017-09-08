@@ -34,6 +34,7 @@ window.Vue = require('vue');
 
 // Vue.use('Vuex');
 
+<<<<<<< HEAD
 Vue.component('example', require('./components/Example.vue'));
 
 
@@ -44,3 +45,14 @@ Vue.component('example', require('./components/Example.vue'));
 //    render: h => h(App), 
 // }).$mount('#app');
 
+=======
+
+
+import Vue from 'vue';
+import Profile from './components/Profile.vue';
+
+new Vue({
+  el: '#test',
+  components: { Profile }
+});
+>>>>>>> 4b487473556c88b938e7079969dc9e636cbdbcd9

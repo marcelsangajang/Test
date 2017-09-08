@@ -23,9 +23,16 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+<<<<<<< HEAD
     "vue-multiselect": "^2.0.2",
     "vue-router": "^2.7.0",
     "vuex": "^2.4.0",
     "vuex-router-sync": "^4.3.1"
+=======
+    "vue-date-picker": "^1.0.2",
+    "vue-multiselect": "^2.0.2",
+    "vue-search-select": "^2.3.11",
+    "vuejs-datepicker": "^0.9.11"
+>>>>>>> 4b487473556c88b938e7079969dc9e636cbdbcd9
   }
 }
