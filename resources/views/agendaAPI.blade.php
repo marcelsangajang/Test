@@ -8,7 +8,7 @@
                 <div class="panel-heading">Agenda</div>
                 <div class="panel-body">
 
-                  <div id="agenda">
+                  <div id="app">
                   <label>Date</label>
                   <input type="date" placeholder="Date" v-model="date"><br>
                   <label>ID</label>
@@ -23,9 +23,6 @@
                   <span><pre>@{{responseAPI}}</pre></span>
                   </div>
 
-                  <div id="app">
-                    <example></example>
-                  </div>
 
                 </div>
             </div>
@@ -35,7 +32,7 @@
 
 <script>
    var app = new Vue({
-     el: '#agenda',
+     el: '#app',
      data: {
        ID: '',
        date: '',

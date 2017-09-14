@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <!-- Tijdelijke CDN's (TOINE) -->
+    <!-- Tijdelijke CDN's (TOINE)
     <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script> -->
     <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -22,7 +22,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div id="layout">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -78,9 +78,10 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
     </div>
-    <script src="{{ asset('js/app.js') }}"></script>
+        @yield('content')
+
+        <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>

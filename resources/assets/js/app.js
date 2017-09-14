@@ -15,12 +15,17 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+ Vue.component('agendasearch', require('./components/AgendaPatientSearch.vue'));
+ Vue.component('agendatimeblocks', require('./components/AgendaTimeblocks.vue'));
+
+ const app = new Vue({
+     el: '#app'
+ });
 
 
-import Vue from 'vue';
-import Profile from './components/Profile.vue';
-
-new Vue({
-  el: '#test',
-  components: { Profile }
-});
+// import Vue from 'vue';
+// import AgendaPatientSearch from './components/AgendaPatientSearch.vue';
+// new Vue({
+//   el: '#app',
+//   components: { AgendaPatientSearch }
+// });
