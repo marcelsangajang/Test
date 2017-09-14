@@ -13,71 +13,8 @@
 
 <body>
     
-<h1> Create Employee </h1>
-
-<ul>
-    @if ($errors->any())
-    {!! implode('', $errors->all('<li><b>:message</b></li>')) !!}
-    @endif
-</ul>
-
-<div id="root">
-<createEmployeeForm></createEmployeeForm>
-
-</div>
+</body>
 <script>
- Vue.component('createEmployeeForm', {
-    template: '<div></div>',
-
-    data: function() {
-        return {
-            firstName: '',
-            lastName: '',
-            dateOfBirth: '',
-            zipcode: '',
-            houseNumber: '',
-            address: '',
-            city: '',
-            email: '',
-            phoneNumber1: '',
-            phoneNumber2: '',
-            descriptionIntern: '',
-            type: ''
-        }
-    },
-
-    methods: {
-        //Ajax call to create employee
-        createEmployee: function() {
-            axios.post('/EmployeePost', {
-                firstName: this.firstName,
-                lastName: this.lastName,
-                dateOfBirth: this.dateOfBirth,
-                zipcode: this.zipcode,
-                houseNumber: this.houseNumber,
-                address: this.address,
-                city: this.city,
-                email: this.email,
-                phoneNumber1: this.phoneNumber1,
-                phoneNumber2: this.phoneNumber2,
-                descriptionIntern: this.descriptionIntern,
-                type: this.type
-              })
-              .then(function (response) {
-                console.log(response);
-                alert('Employee created');
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-        }
-    }
-})
-
- new Vue({
-    el: '#root'
- })
-    
 </script>
 
 </html>
