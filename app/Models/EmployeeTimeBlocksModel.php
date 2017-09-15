@@ -22,7 +22,7 @@ class EmployeeTimeBlocksModel {
     private $breaksArray      = array();
     private $dayScheduleArray = array();
 
-    public $workdaySchedule = array();
+    public $timeBlocksArray = array();
 
     //Constructer will assign necessary variables and will call functions to return the time blocks array
     function __construct($employeeId, $date) {
@@ -136,6 +136,50 @@ class EmployeeTimeBlocksModel {
         return $breakArray;
     }
 
+    private function get_appointment($time, $chairID) {
+
+        $date = $this->date;
+
+        //Query appointment based on time, chair-id and date
+        $appointm = DB::table('patient_appointment')->where('chair_id' , $chairID)
+                                                    ->where('date' , $date)
+                                                    ->where('time' , $time)->get();
+
+
+        if ($appointm->isNotEmpty()) {
+
+            //Query patient-data and add to appointment-collection
+            $appointmID    = $appointm[0]->id;
+            $appointmPatID = $appointm[0]->patient_id;
+
+            $patientData = DB::table('patient')->where('id', $appointmPatID)->first();
+
+            //filter patient data
+            $patientData = array('id'            => $patientData->id,
+                                 'name'          => $patientData->first_name . ' ' . $patientData->last_name,
+                                 'date_of_birth' => $patientData->date_of_birth);
+
+            $appointm->put('patient', $patientData);
+
+            //Query to check if appointment is part of group-appointment, and if so get the group-ID
+            $groupID = DB::table('connect_group_appointment')->where('patient_appointment_id', $appointmID)->first();
+
+            if ($groupID) {
+
+                $appointm->put('group_id', $groupID->group_appointment_id);
+
+            }
+
+            return $appointm;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
 
     //Make workday time array
     //Inclusive: breaks, chair (if scheduled)
@@ -148,51 +192,66 @@ class EmployeeTimeBlocksModel {
         $chairScheduleArray = $this->dayScheduleArray;
         $intervalLines      = $this->calc_interval($this->periodInterval, $this->intervalLines);
         $arrayCount         = count($intervalLines);
+        //$chairID            = '';
 
         $startWhile = clone $startTime;
         $countLoop  = 0;
 
         while ($startWhile <= $endTime) {
 
-          $interval = new \DateInterval('PT' .  $intervalLines[$countLoop] . 'M');
+            $interval = new \DateInterval('PT' .  $intervalLines[$countLoop] . 'M');
 
-          switch($startWhile->format('H:i:s')) {
 
-            case $this->inside_break_time($startWhile->format('H:i:s'), $breaksArray) :
-              $timeBlocksArray[] = array('status' => 'break', 'time' => $startWhile->format('H:i'));
+            $timeblockColl = collect(array('time'        => $startWhile->format('H:i'),
+                                           'break'       => NULL,
+                                           'scheduled'   => NULL,
+                                           'text'        => NULL,
+                                           'appointment' => NULL));
+
+           if ($this->inside_break_time($startWhile->format('H:i:s'), $breaksArray)) {
+
+               $timeblockColl['break'] = 'break';
+
+           }
+
+           if (!empty($chairID = $this->inside_schedule_time($startWhile->format('H:i:s'), $chairScheduleArray))) {
+
+               $chairDescription = DB::select('SELECT `description` FROM `chair` WHERE `id` = "' . $chairID .'"');
+               $chairDescription = $chairDescription[0]->description;
+               $timeblockColl['scheduled'] = 'Ingeroosterd: ' . $chairDescription;
+
+               //Check for appointment for this chair, time and date
+               if ($appointm = $this->get_appointment($startWhile->format('H:i:s'), $chairID)) {
+
+                   $appointm = $appointm->toArray();
+                   $timeblockColl['appointment'] = $appointm;
+
+                   //change interval to appointment duration to skip blocks related to the appointment
+                   $interval = new \DateInterval('PT' .  $appointm[0]->duration . 'M');                   
+
+               }
+
+
+
+           }
+
+
               $startWhile->add($interval);
-              break;
 
-            case !empty($chairID = $this->inside_schedule_time($startWhile->format('H:i:s'), $chairScheduleArray)) :
+              if ($countLoop == $arrayCount - 1) {
+                  $countLoop = 0;
+              } else {
+               $countLoop++;
+             }
 
-                $chairDescription = DB::select('SELECT `description` FROM `chair` WHERE `id` = "' . $chairID .'"');
-                $chairDescription = $chairDescription[0]->description;
-                $timeBlocksArray[] = array('status' => 'Ingeroosterd: ' . $chairDescription, 'time' => $startWhile->format('H:i'));
-                $startWhile->add($interval);
-                break;
-
-            case $startWhile->format('H:i:s') == $endTime->format('H:i:s') :
-
-                $timeBlocksArray[] = array('status' => 'Einde werktijd', 'time' => $startWhile->format('H:i'));
-                $startWhile->add($interval);
-                break;
-
-            default :
-              $timeBlocksArray[] = array('status' => 'open', 'time' => $startWhile->format('H:i'));
-              $startWhile->add($interval);
-
-          }
-
-            if ($countLoop == $arrayCount - 1) {
-              $countLoop = 0;
-            } else {
-              $countLoop++;
-            }
+             $this->timeBlocksArray[] = $timeblockColl;
         }
 
-        $this->workdaySchedule = $timeBlocksArray;
-
     }
+
+
+
+
 
     //Function to check if time inside a break period
     //This fuction belongs too 'make_timeblocks()'

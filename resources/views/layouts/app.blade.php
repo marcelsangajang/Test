@@ -79,17 +79,11 @@
             </div>
         </nav>
     </div>
-<<<<<<< HEAD
+
         @yield('content')
 
         <script src="{{ asset('js/app.js') }}"></script>
 
-=======
-<<<<<<< HEAD
 
-=======
->>>>>>> 4b487473556c88b938e7079969dc9e636cbdbcd9
-    <script src="{{ asset('js/app.js') }}"></script>
->>>>>>> 80afc646c1eac8e1b3604c52e35488f5e83a0aee
 </body>
 </html>
