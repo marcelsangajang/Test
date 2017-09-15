@@ -14,28 +14,30 @@ use Input;
 use DB;
 
 class PatientController extends Controller
-{   
+{
     //------------------PATIENT SECTION -----------------------------------------------
     public function patientView() {
-        return view('PatientView');        
+        return view('PatientView');
     }
 
     //Create a patient and store in db
     public function createPatient() {
+
+    for ($i = 0 ; $i < 1000 ; $i++) {
         $input = Input::all();
         $patient = new PatientModel();
-        $patient->first_name = $input['first_name'];
-        $patient->last_name = $input['last_name'];
+        $patient->first_name = $input['first_name'] . $i;
+        $patient->last_name = $input['last_name'] . $i;
         $patient->date_of_birth = $input['date_of_birth'];
-        $patient->address = $input['address'];
+        $patient->address = $input['address'] . $i;
         $patient->zipcode = $input['zipcode'];
-        $patient->house_number = $input['house_number'];
-        $patient->city = $input['city'];
+        $patient->house_number = $input['house_number'] . $i;
+        $patient->city = $input['city'] . $i;
         $patient->phone_number_1 = $input['phone_number'];
-        $patient->phone_number_2 = 12345;
-        $patient->email = $input['email'];
+        $patient->phone_number_2 = $i;
+        $patient->email = $input['email'] . $i;
         $patient->save();
-
+    }
         return view('welcome');
     }
 
@@ -46,7 +48,7 @@ class PatientController extends Controller
         foreach ($allPatients as $patient) {
             $allPatientsArray[] = array('id' => $patient['id'], 'first_name' => $patient['first_name'], 'last_name' => $patient['last_name'], 'date_of_birth' => $patient['date_of_birth'], 'address' => $patient['address'], 'house_number' => $patient['house_number'], 'zipcode' => $patient['zipcode'], 'phone_number_1' => $patient['phone_number_1'], 'phone_number_2' => $patient['phone_number_2'], 'email' => $patient['email']);
         }
-        return view('PatientListView', compact('allPatientsArray'));  
+        return view('PatientListView', compact('allPatientsArray'));
     }
 
     //------------------ APPOINTMENT SECTION -----------------------------------------------
@@ -55,28 +57,28 @@ class PatientController extends Controller
         //return view('PatientAppointmentsFormView');
 
         $allPatients = PatientModel::get()->toArray();
-   
+
         foreach ($allPatients as $patient) {
-            $allPatientsArray[] = array('id' => $patient['id'], 'first_name' => $patient['first_name'], 'last_name' => 
+            $allPatientsArray[] = array('id' => $patient['id'], 'first_name' => $patient['first_name'], 'last_name' =>
                 $patient['last_name'], 'date_of_birth' => $patient['date_of_birth'], 'address' => $patient['address'], 'house_number' => $patient['house_number']);
         }
 
         $allAgendas = EmployeeModel::get()->toArray();
-  
+
         foreach ($allAgendas as $agenda) {
             $allAgendasArray[] = array('id' => $agenda['id'], 'description_intern' => $agenda['description_intern'], 'type' => $agenda['type']);
         }
-     
-        return view('PatientAppointmentView')->with(['allPatientsArray'=>$allPatientsArray])->with(['allAgendasArray' => $allAgendasArray]); 
+
+        return view('PatientAppointmentView')->with(['allPatientsArray'=>$allPatientsArray])->with(['allAgendasArray' => $allAgendasArray]);
     }
 
     public function findAppointmentType() {
         $inputForm = Input::all();
 
         if($inputForm['appointmentSelect'] == 'group')  {
-            return $this->createGroupAppointment($inputForm);  
+            return $this->createGroupAppointment($inputForm);
         }
-        if($inputForm['appointmentSelect'] == 'single') 
+        if($inputForm['appointmentSelect'] == 'single')
             $this->createAppointment($inputForm);
 
         return view('welcome');
@@ -134,7 +136,7 @@ class PatientController extends Controller
 
             //Select correct patient id for every single appointment
             $inputForm['patientSelect'] = $patient->id;
-            
+
             //Create a single appointment for each patient
             $appointmentID = $this->createAppointment($inputForm);
 

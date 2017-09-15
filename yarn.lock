@@ -6097,10 +6097,13 @@ vue-multiselect@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/vue-multiselect/-/vue-multiselect-2.0.2.tgz#9e5a05ace3ccca62fefa2c3b3dd1c484a8a20238"
 
+<<<<<<< HEAD
 vue-router@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.7.0.tgz#16d424493aa51c3c8cce8b7c7210ea4c3a89aff1"
 
+=======
+>>>>>>> 4d9b0cc0779f27529f74248947cd95cf21b2591f
 vue-search-select@^2.3.11:
   version "2.3.11"
   resolved "https://registry.yarnpkg.com/vue-search-select/-/vue-search-select-2.3.11.tgz#09a5578ee12cfb11c4bf0fafaca685e3100c27c4"
@@ -6134,6 +6137,7 @@ vuejs-datepicker@^0.9.11:
     babel-runtime "^6.0.0"
     coveralls "^2.13.1"
 
+<<<<<<< HEAD
 vuex-router-sync@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/vuex-router-sync/-/vuex-router-sync-4.3.1.tgz#962b342e54226ed887c5aa5b2dbced67c5621922"
@@ -6142,6 +6146,8 @@ vuex@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-2.4.0.tgz#e1d0430646282b40007fdd06ec6ae88a9f5a1e14"
 
+=======
+>>>>>>> 4d9b0cc0779f27529f74248947cd95cf21b2591f
 ware@^1.2.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/ware/-/ware-1.3.0.tgz#d1b14f39d2e2cb4ab8c4098f756fe4b164e473d4"

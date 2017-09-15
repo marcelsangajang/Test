@@ -26,7 +26,9 @@ class AgendaTimeBlocksAPI {
     if (!empty($_GET) && $_GET['option'] == 'chair') {
 
           $timeBlocksObj = new ChairTimeBlocksModel($_GET['chair'], $_GET['date']);
-          $test = $timeBlocksObj->workdaySchedule;
+          $test = $timeBlocksObj->timeBlocksColl;
+
+          var_dumpS($test);
 
           echo json_encode($test, true);
     }
@@ -35,8 +37,9 @@ class AgendaTimeBlocksAPI {
     if (!empty($_GET) && $_GET['option'] == 'employee') {
 
           $timeBlocksObj = new EmployeeTimeBlocksModel($_GET['chair'], $_GET['date']);
-          $test = $timeBlocksObj->workdaySchedule;
+          $test = $timeBlocksObj->timeBlocksColl;
 
+          $test = $test->toArray();
           echo json_encode($test, true);
     }
   }

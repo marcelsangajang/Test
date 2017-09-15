@@ -34,6 +34,7 @@ window.Vue = require('vue');
 
 // Vue.use('Vuex');
 
+<<<<<<< HEAD
 Vue.component('example', require('./components/Example.vue'));
 
 
@@ -44,3 +45,29 @@ Vue.component('example', require('./components/Example.vue'));
 //    render: h => h(App), 
 // }).$mount('#app');
 
+<<<<<<< HEAD
+ Vue.component('agendasearch', require('./components/AgendaPatientSearch.vue'));
+ Vue.component('agendatimeblocks', require('./components/AgendaTimeblocks.vue'));
+=======
+=======
+>>>>>>> 80afc646c1eac8e1b3604c52e35488f5e83a0aee
+
+ const app = new Vue({
+     el: '#app'
+ });
+
+
+<<<<<<< HEAD
+// import Vue from 'vue';
+// import AgendaPatientSearch from './components/AgendaPatientSearch.vue';
+// new Vue({
+//   el: '#app',
+//   components: { AgendaPatientSearch }
+// });
+=======
+new Vue({
+  el: '#test',
+  components: { Profile }
+});
+>>>>>>> 4b487473556c88b938e7079969dc9e636cbdbcd9
+>>>>>>> 80afc646c1eac8e1b3604c52e35488f5e83a0aee
