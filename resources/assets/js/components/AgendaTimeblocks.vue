@@ -29,9 +29,9 @@
                                     {{timeblock.time}}
                                     </td>
                                     <td>
-                                    <p v-for="(value, index) in timeblock.appointment">
-                                    {{index}}-{{value}}
-                                    </p>
+                                    <div v-for="(value, index) in timeblock.appointment">
+                
+                                    </div>
                                     </td>
                                     <td>
                                     {{timeblock.break}}
@@ -44,8 +44,6 @@
                                     </td>
                                 </tr>
                         </table>
-                      <span><pre>{{responseAPI}}</pre></span>
-
                     </div>
                 </div>
             </div>
@@ -64,7 +62,8 @@ table, th, td {
 
 th {
     height: 50px;
-    width: 100px;
+    width: 150px;
+    text-align: center;
 }
 
 

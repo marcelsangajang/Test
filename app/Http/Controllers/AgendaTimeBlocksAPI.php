@@ -37,10 +37,10 @@ class AgendaTimeBlocksAPI {
     if (!empty($_GET) && $_GET['option'] == 'employee') {
 
           $timeBlocksObj = new EmployeeTimeBlocksModel($_GET['chair'], $_GET['date']);
-          $test = $timeBlocksObj->timeBlocksColl;
+          $test = $timeBlocksObj->timeBlocksArray;
 
-          $test = $test->toArray();
           echo json_encode($test, true);
+
     }
   }
 

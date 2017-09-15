@@ -24,22 +24,23 @@
   "dependencies": {
     "axios": "^0.16.2",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "moment": "^2.18.1",
     "vue-date-picker": "^1.0.2",
 =======
 <<<<<<< HEAD
 >>>>>>> 4d9b0cc0779f27529f74248947cd95cf21b2591f
+=======
+>>>>>>> 60642d5096a654a3f836df2eddc3b658f34b5be7
     "vue-multiselect": "^2.0.2",
     "vue-router": "^2.7.0",
     "vue-search-select": "^2.3.11",
     "vuejs-datepicker": "^0.9.11",
     "vuex": "^2.4.0",
-    "vuex-router-sync": "^4.3.1"
-=======
+    "vuex-router-sync": "^4.3.1",
     "vue-date-picker": "^1.0.2",
     "vue-multiselect": "^2.0.2",
     "vue-search-select": "^2.3.11",
     "vuejs-datepicker": "^0.9.11"
->>>>>>> 4b487473556c88b938e7079969dc9e636cbdbcd9
   }
 }
