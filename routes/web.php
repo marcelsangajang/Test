@@ -11,6 +11,9 @@
 |
 */
 
+//Laravel standard routes
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,6 +25,7 @@ Route::get('Marcel1',  ['as' => 'Vue', 'uses' => 'TestController@marcel1']);
 Route::get('Toine1',  ['as' => 'Vue', 'uses' => 'TestController@toine1']);
 Route::get('Marcel2',  ['as' => 'Vue', 'uses' => 'TestController@marcel2']);
 Route::get('Toine2',  ['as' => 'Vue', 'uses' => 'TestController@toine2']);
+Route::get('WebAgenda',  ['as' => 'WebAgenda', 'uses' => 'TestController@WebAgenda']);
 Route::post('TestPost', 'TestController@post');
 
 // Employee functionality
@@ -56,6 +60,5 @@ Route::post('postSchedulePeriod', 'ScheduleController@createPeriod');
 Route::get('AgendaTimeBlocksSHOW', ['as' => 'AgendaTimeBlocksSHOW', 'uses' => 'AgendaTimeBlocksAPI@show']);
 Route::any('AgendaTimeBlocksAPI', ['as' => 'AgendaTimeBlocksAPI', 'uses' => 'AgendaTimeBlocksAPI@api']);
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//Patientlist API (test)
+Route::get('patientlistAPI', ['as' => 'patientlistAPI', 'uses' => 'PatientListAPI@get_all_patients']);

@@ -39,6 +39,10 @@ class TestController extends Controller
         return view('toine2');
     }
 
+    public function WebAgenda() {
+        return view('WebAgenda');
+    }
+
     //Create first employee, chair and patient for testing purposes
     public function post() {
     	//Create employee
