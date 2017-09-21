@@ -896,9 +896,14 @@ window.Vue = __webpack_require__(36);
 
 Vue.component('agendasearch', __webpack_require__(37));
 Vue.component('agendatimeblocks', __webpack_require__(40));
+// Vue.component('parkingpanel', require('./components/Parkingpanel.vue'));
+Vue.component('simplexcalendar', __webpack_require__(57));
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    test: 'dit is een test'
+  }
 });
 
 /***/ }),
@@ -41560,112 +41565,112 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      text: '',
-      responseAPI: '',
-      filtered: [],
-      filteredBackup: [],
-      inputName: '',
-      showName: false
-    };
-  },
-  beforeMount: function beforeMount() {
-    this.getpatients();
-  },
-  watch: {
-    text: function text() {
+	data: function data() {
+		return {
+			text: '',
+			responseAPI: '',
+			filtered: [],
+			filteredBackup: [],
+			inputName: '',
+			showName: false
+		};
+	},
+	beforeMount: function beforeMount() {
+		this.getpatients();
+	},
+	watch: {
+		text: function text() {
 
-      this.filtered = '';
-      this.filterName();
+			this.filtered = '';
+			this.filterName();
 
-      var input = this.text;
-      this.showName = false;
-      this.inputName = '';
+			var input = this.text;
+			this.showName = false;
+			this.inputName = '';
 
-      if (input.length == 8 && isFinite(input)) {
-        this.filterBirthdate();
-      }
-    },
-    inputName: function inputName() {
-      this.filterBirthdateName();
-    }
-  },
-  methods: {
-    getpatients: _.debounce(function () {
-      var app = this;
-      app.responseAPI = "Laden...";
-      axios.get('/patientlistAPI', {
-        params: {}
-      }).then(function (response) {
-        app.responseAPI = response.data;
-      }).catch(function (error) {
-        app.responseAPI = "ERROR" + error;
-      });
-    }, 500),
-    filterBirthdate: function filterBirthdate() {
-      var json = this.responseAPI;
-      var input = this.text;
-      var patients = [];
+			if (input.length == 8 && isFinite(input)) {
+				this.filterBirthdate();
+			}
+		},
+		inputName: function inputName() {
+			this.filterBirthdateName();
+		}
+	},
+	methods: {
+		getpatients: _.debounce(function () {
+			var app = this;
+			app.responseAPI = "Laden...";
+			axios.get('/patientlistAPI', {
+				params: {}
+			}).then(function (response) {
+				app.responseAPI = response.data;
+			}).catch(function (error) {
+				app.responseAPI = "ERROR" + error;
+			});
+		}, 500),
+		filterBirthdate: function filterBirthdate() {
+			var json = this.responseAPI;
+			var input = this.text;
+			var patients = [];
 
-      for (var i = 0; i < json.length; i++) {
-        var patient = json[i];
-        var birthdateAr = patient.date_of_birth.split("-");
-        var birthdate = birthdateAr[2] + birthdateAr[1] + birthdateAr[0];
+			for (var i = 0; i < json.length; i++) {
+				var patient = json[i];
+				var birthdateAr = patient.date_of_birth.split("-");
+				var birthdate = birthdateAr[2] + birthdateAr[1] + birthdateAr[0];
 
-        if (birthdate == input) {
-          patients.push(patient);
-        }
+				if (birthdate == input) {
+					patients.push(patient);
+				}
 
-        if (patients) {
-          if (patients.length > 1) {
-            this.showName = true;
-          }
-          this.filtered = patients;
-          this.filteredBackup = patients;
-        }
-      }
-    },
-    filterBirthdateName: function filterBirthdateName() {
-      var patientList = this.filtered;
-      var patientsNext = [];
-      var inputName = this.inputName;
+				if (patients) {
+					if (patients.length > 1) {
+						this.showName = true;
+					}
+					this.filtered = patients;
+					this.filteredBackup = patients;
+				}
+			}
+		},
+		filterBirthdateName: function filterBirthdateName() {
+			var patientList = this.filtered;
+			var patientsNext = [];
+			var inputName = this.inputName;
 
-      for (var i = 0; i < patientList.length; i++) {
-        var patient = patientList[i];
-        var name = patient.first_name;
+			for (var i = 0; i < patientList.length; i++) {
+				var patient = patientList[i];
+				var name = patient.first_name;
 
-        if (name == inputName) {
-          patientsNext.push(patient);
-        } else {
-          this.filtered = this.filteredBackup;
-        }
+				if (name == inputName) {
+					patientsNext.push(patient);
+				} else {
+					this.filtered = this.filteredBackup;
+				}
 
-        if (patientsNext != '') {
-          this.filtered = patientsNext;
-        }
-      }
-    },
-    filterName: function filterName() {
-      var patientList = this.responseAPI;
+				if (patientsNext != '') {
+					this.filtered = patientsNext;
+				}
+			}
+		},
+		filterName: function filterName() {
+			var patientList = this.responseAPI;
 
-      for (var i = 0; i < patientList.length; i++) {
-        var patient = patientList[i];
-        var firstName = patient.first_name;
-        var lastName = patient.last_name;
-        var input = this.text;
-        var patients = [];
+			for (var i = 0; i < patientList.length; i++) {
+				var patient = patientList[i];
+				var firstName = patient.first_name;
+				var lastName = patient.last_name;
+				var input = this.text;
+				var patients = [];
 
-        if (firstName == input | lastName == input) {
-          patients.push(patient);
-        }
+				if (firstName == input | lastName == input) {
+					patients.push(patient);
+				}
 
-        if (patients != '') {
-          this.filtered = patients;
-        }
-      }
-    }
-  }
+				if (patients != '') {
+					this.filtered = patients;
+				}
+			}
+		}
+	}
 });
 
 /***/ }),
@@ -41811,7 +41816,7 @@ exports = module.exports = __webpack_require__(43)(undefined);
 
 
 // module
-exports.push([module.i, "\ntable {\r\n    border-collapse: collapse;\n}\ntable, th, td {\r\n    border: 1px solid black;\n}\nth {\r\n    height: 50px;\r\n    width: 150px;\r\n    text-align: center;\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\ntable {\r\n    border-collapse: collapse;\n}\ntable,\r\nth,\r\ntd {\r\n    border: 1px solid black;\n}\nth {\r\n    height: 50px;\r\n    width: 150px;\r\n    text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -42158,9 +42163,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__(64);
 //
 //
 //
@@ -42230,23 +42233,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       ID: '1',
-      date: '2017-05-10',
-      option: '',
+      date: '',
+      option: 'employee',
       responseAPI: ''
     };
   },
   watch: {
-    option: function option() {
-      if (this.option.length > 0 & this.ID != '' & this.date != '') {
-        this.getAgendaData();
-      }
+    date: function date() {
+      this.getAgendaData();
     }
   },
+  created: function created() {
+    //Assign todays date to 'date' attribute
+    var dateToday = new Date().toJSON().slice(0, 10);
+
+    this.date = dateToday;
+    //Get date from SimplexCalendar.vue
+    __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* default */].$on('date-changed', function (date) {
+      this.showDate(Vue.util.extend({}, date));
+    }.bind(this));
+  },
   methods: {
+    showDate: function showDate(date) {
+      var dateInput = [date.year, date.month, date.date];
+      var dateNew = [];
+
+      for (var i = 0; i < dateInput.length; i++) {
+        if (dateInput[i].length < 2) {
+          dateNew.push(0 + dateInput[i]);
+        } else {
+          dateNew.push(dateInput[i]);
+        }
+      }
+
+      dateNew = dateNew.join("-");
+      this.date = dateNew;
+    },
     getAgendaData: _.debounce(function () {
       var app = this;
       app.responseAPI = "Searching...";
@@ -42345,9 +42374,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "employee"
     }
   }, [_vm._v("employee")])]), _vm._v(" "), _c('table', [_vm._m(0), _vm._v(" "), _vm._l((_vm.responseAPI), function(timeblock) {
-    return _c('tr', [_c('td', [_vm._v("\n                                " + _vm._s(timeblock.time) + "\n                                ")]), _vm._v(" "), _c('td', _vm._l((timeblock.appointment), function(value, index) {
-      return _c('div')
-    })), _vm._v(" "), _c('td', [_vm._v("\n                                " + _vm._s(timeblock.break) + "\n                                ")]), _vm._v(" "), _c('td', [_vm._v("\n                                " + _vm._s(timeblock.scheduled) + "\n                                ")]), _vm._v(" "), _c('td', [_vm._v("\n                                " + _vm._s(timeblock.text) + "\n                                ")])])
+    return _c('tr', [_c('td', [_vm._v("\r\n                        " + _vm._s(timeblock.time) + "\r\n                    ")]), _vm._v(" "), _c('td', [_c('div', {
+      attrs: {
+        "id": "appointment"
+      }
+    }, _vm._l((timeblock.appointment), function(appointdata, index) {
+      return _c('div', [_vm._v("\r\n                                " + _vm._s(index) + " : " + _vm._s(appointdata) + "\r\n                            ")])
+    }))]), _vm._v(" "), _c('td', [_vm._v("\r\n                        " + _vm._s(timeblock.break) + "\r\n                    ")]), _vm._v(" "), _c('td', [_vm._v("\r\n                        " + _vm._s(timeblock.scheduled) + "\r\n                    ")]), _vm._v(" "), _c('td', [_vm._v("\r\n                        " + _vm._s(timeblock.text) + "\r\n                    ")])])
   })], 2)])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', [_c('th', [_vm._v("Tijd")]), _vm._v(" "), _c('th', [_vm._v("Afspraak")]), _vm._v(" "), _c('th', [_vm._v("pauze")]), _vm._v(" "), _c('th', [_vm._v("Stoel")]), _vm._v(" "), _c('th', [_vm._v("Opmerking")])])
@@ -42365,6 +42398,476 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(58),
+  /* template */
+  __webpack_require__(65),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "c:\\wamp64\\www\\simplex2Lar\\resources\\assets\\js\\components\\SimplexCalendar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SimplexCalendar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0527373b", Component.options)
+  } else {
+    hotAPI.reload("data-v-0527373b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_calendar__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_calendar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_calendar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__(64);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    calendar: __WEBPACK_IMPORTED_MODULE_0_vuejs_calendar___default.a
+  },
+  methods: {
+    pre: function pre(from, to) {
+      //      console.group('pre month')
+      //        console.log('from',from)
+      //        console.log('to',to)
+      console.groupEnd();
+    },
+    next: function next(from, to) {
+      //      console.group('next month')
+      //        console.log('from',from)
+      //        console.log('to',to)
+      //      console.groupEnd()
+    },
+    changed: function changed(to) {
+      //        console.log('changed to',to)
+      __WEBPACK_IMPORTED_MODULE_1__event_bus_js__["a" /* default */].$emit('date-changed', to);
+    }
+  }
+});
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(60)
+}
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(62),
+  /* template */
+  __webpack_require__(63),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-7eb6f3c2",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "c:\\wamp64\\www\\simplex2Lar\\node_modules\\vuejs-calendar\\src\\components\\Calendar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Calendar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7eb6f3c2", Component.options)
+  } else {
+    hotAPI.reload("data-v-7eb6f3c2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(61);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(44)("0b5be2ab", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7eb6f3c2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./Calendar.vue", function() {
+     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7eb6f3c2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./Calendar.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(43)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n*[data-v-7eb6f3c2]{\n  cursor: default;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n.c-wrap[data-v-7eb6f3c2]{\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  width: 300px;\n  box-shadow: 0px 0px 2px grey;\n  text-align: center;\n}\n.c-header[data-v-7eb6f3c2]{\n  height:100px;\n  width: 100%;\n  background: #00B8EC;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n}\n.c-header .arrow[data-v-7eb6f3c2]{\n  font-size: 2.5rem;\n  color: #fff;\n  padding: 1.55rem;\n}\n.c-header .arrow[data-v-7eb6f3c2]:hover{\n  /*text-decoration: underline;*/\n}\n.c-header .detail[data-v-7eb6f3c2]{\n  color: #fff;\n  font-size: 2.56rem;\n}\n.c-header .detail .year[data-v-7eb6f3c2]{\n  font-size: 2.5rem;\n}\n.c-body[data-v-7eb6f3c2]{\n  flex:1;\n  width: 100%;\n  background-color: #fff;\n}\n.c-body-week[data-v-7eb6f3c2]{\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  width: 100%;\n  background-color: #00B8EC;\n}\n.c-body-week-label[data-v-7eb6f3c2]{\n  padding: 1rem;\n  color: #fff;\n}\n.c-body-week-label[data-v-7eb6f3c2]:hover{\n}\n.c-body-row[data-v-7eb6f3c2]{\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: center;\n}\n.c-body-date[data-v-7eb6f3c2]{\n  line-height: 40px;\n  font-size: 1.5rem;\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n}\n.c-body-date[data-v-7eb6f3c2]:active{\n  background-color: aliceblue;\n}\n.c-body-date.placeholder[data-v-7eb6f3c2]{\n  color: #aeaeae;\n}\n.c-body-date.today[data-v-7eb6f3c2]{\n  font-weight: bold;\n  color: deepskyblue;\n}\n.c-body-date.active[data-v-7eb6f3c2]{\n  background-color: #00B8EC;\n  color: #fff;\n}\n.c-body-date[data-v-7eb6f3c2]:hover{\n  background-color: #46ecb9;\n  color: #fff;\n  -webkit-transition: background-color 0.3s;\n  -moz-transition: background-color 0.3s;\n  -ms-transition: background-color 0.3s;\n  -o-transition: background-color 0.3s;\n  transition: background-color 0.3s;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    _activeDate: {
+      type: Object,
+      default: null,
+      validator: function validator(value) {
+        return value.hasOwnProperty('year') && value.hasOwnProperty('month') && value.hasOwnProperty('date');
+      }
+    },
+    debug: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data: function data() {
+    return {
+      today: new Date(),
+      active: {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1,
+        date: new Date().getDate()
+      },
+      weekList: [
+      // 'Zo','Ma','Di','Wo','Do','Vr','Za'
+      'Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'],
+      monthList: ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December']
+    };
+  },
+  methods: {
+    dateClicked: function dateClicked(e) {
+      var targetYear = e.target.dataset.year;
+      var targetMonth = e.target.dataset.month;
+      var targetDate = e.target.dataset.date;
+      //        console.log(e.target.dataset)
+      this.active.year = targetYear;
+      this.active.month = targetMonth;
+      this.active.date = targetDate;
+      var to = {
+        year: targetYear,
+        month: targetMonth,
+        date: targetDate
+      };
+      this.debug && console.info('Event: dateChanged', to);
+      this.$emit('dateChanged', to);
+    },
+    preMonth: function preMonth() {
+      // 上一月
+      //        当前 年月 可读值
+      var _year = this.active.year;
+      var _month = this.active.month;
+      //
+      var p_Date = new Date(_year, _month - 2);
+      var from = {
+        year: this.active.year,
+        month: this.active.month
+      };
+      var to = {
+        year: p_Date.getFullYear(),
+        month: p_Date.getMonth() + 1
+      };
+      this.active = {
+        year: to.year,
+        month: to.month,
+        date: this.active.date
+      };
+      if (this.debug) {
+        console.group('Evnt:month change');
+        console.log('from', from);
+        console.log('to', to);
+        console.groupEnd();
+      }
+      this.$emit('SwitchPreviousMonth', from, to);
+    },
+    nextMonth: function nextMonth() {
+      var _year = this.active.year;
+      var _month = this.active.month;
+      //        下月日期对象
+      var n_Date = new Date(_year, _month);
+      var from = {
+        year: this.active.year,
+        month: this.active.month
+      };
+      var to = {
+        year: n_Date.getFullYear(),
+        month: n_Date.getMonth() + 1
+      };
+      this.active = {
+        year: to.year,
+        month: to.month,
+        date: this.active.date
+      };
+      if (this.debug) {
+        console.group('Evnt:month change');
+        console.log('from', from);
+        console.log('to', to);
+        console.groupEnd();
+      }
+      this.$emit('SwitchNextMonth', from, to);
+    }
+  },
+  computed: {
+    activeDate: function activeDate() {
+      if (this._activeDate == null || this._activeDate == 'undefined') {
+        return {
+          year: this.today.year,
+          month: this.today.month,
+          date: this.today.date,
+          day: this.today.day
+        };
+      }
+      return this._activeDate;
+    },
+    weeks: function weeks() {
+      var days = {};
+
+      var firstDay = new Date(this.active.year, this.active.month - 1, 1).getDay();
+
+      var preMonthDays = [];
+      for (var i = firstDay - 1; i >= 0; i--) {
+        preMonthDays.push({
+          'year': this.active.year,
+          'month': this.active.month - 1,
+          'date': new Date(this.active.year, this.active.month - 1, -i).getDate()
+        });
+      }
+      var currentMonthDays = [];
+      for (var i = 1; i <= new Date(this.active.year, this.active.month, 0).getDate(); i++) {
+        currentMonthDays.push({
+          year: this.active.year,
+          month: this.active.month,
+          date: i
+        });
+      }
+      //        console.log(currentMonthDays)
+      var nextMonthDays = [];
+      var endDay = new Date(this.active.year, this.active.month, 0).getDay();
+      for (var i = 1; i < 7 - endDay; i++) {
+        //            console.log(i)
+        nextMonthDays.push({
+          year: this.active.year,
+          month: parseInt(this.active.month) + 1,
+          date: i
+        });
+      }
+      var totalDate = [];
+      totalDate = totalDate.concat(preMonthDays, currentMonthDays, nextMonthDays);
+      var weeks = [];
+      for (var i = 0; i < totalDate.length; i++) {
+        if (i % 7 == 0) {
+          weeks[parseInt(i / 7)] = new Array(7);
+        }
+        weeks[parseInt(i / 7)][i % 7] = totalDate[i];
+      }
+      return weeks;
+    }
+  }
+});
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "c-wrap"
+  }, [_c('div', {
+    staticClass: "c-header"
+  }, [_c('div', {
+    staticClass: "arrow",
+    on: {
+      "click": _vm.preMonth
+    }
+  }, [_vm._v(" ⟨\n    ")]), _vm._v(" "), _c('div', {
+    staticClass: "detail"
+  }, [_c('div', {
+    staticClass: "year"
+  }, [_vm._v(_vm._s(_vm.active.year))]), _vm._v(" "), _c('div', {
+    staticClass: "date"
+  }, [_vm._v(_vm._s(_vm.monthList[_vm.active.month - 1]))])]), _vm._v(" "), _c('div', {
+    staticClass: "arrow",
+    on: {
+      "click": _vm.nextMonth
+    }
+  }, [_vm._v("\n      ⟩\n    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "c-body"
+  }, [_c('div', {
+    staticClass: "c-body-week"
+  }, _vm._l((_vm.weekList), function(w) {
+    return _c('div', {
+      staticClass: "c-body-week-label"
+    }, [_vm._v(_vm._s(w))])
+  })), _vm._v(" "), _c('div', {
+    staticClass: "c-body-day"
+  }, _vm._l((_vm.weeks), function(week) {
+    return _c('div', {
+      staticClass: "c-body-row"
+    }, _vm._l((week), function(d) {
+      return _c('div', {
+        staticClass: "c-body-date",
+        class: {
+          placeholder: d.month != _vm.active.month, today: d.date == new Date().getDate() && d.month == new Date().getMonth() + 1, active: d.date == _vm.active.date && d.month == _vm.active.month
+        },
+        attrs: {
+          "data-year": d.year,
+          "data-month": d.month,
+          "data-date": d.date
+        },
+        on: {
+          "click": _vm.dateClicked
+        }
+      }, [_vm._v(_vm._s(d.date))])
+    }))
+  }))])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7eb6f3c2", module.exports)
+  }
+}
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = (new Vue());
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('calendar', {
+    attrs: {
+      "debug": false
+    },
+    on: {
+      "dateChanged": _vm.changed,
+      "SwitchPreviousMonth": _vm.pre,
+      "SwitchNextMonth": _vm.next
+    }
+  })], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-0527373b", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -38,8 +38,9 @@ class AgendaTimeBlocksAPI {
 
           $timeBlocksObj = new EmployeeTimeBlocksModel($_GET['chair'], $_GET['date']);
           $test = $timeBlocksObj->timeBlocksArray;
-
+          
           echo json_encode($test, true);
+
 
     }
   }

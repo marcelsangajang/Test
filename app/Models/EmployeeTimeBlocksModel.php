@@ -177,7 +177,6 @@ class EmployeeTimeBlocksModel {
             return false;
 
         }
-
     }
 
 
@@ -227,12 +226,9 @@ class EmployeeTimeBlocksModel {
                    $timeblockColl['appointment'] = $appointm;
 
                    //change interval to appointment duration to skip blocks related to the appointment
-                   $interval = new \DateInterval('PT' .  $appointm[0]->duration . 'M');                   
+                   $interval = new \DateInterval('PT' .  $appointm[0]->duration . 'M');
 
                }
-
-
-
            }
 
 

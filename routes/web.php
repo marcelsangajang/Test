@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 //Initialization of a few data objects in db (needed to prevent errors, because of no frontend)
 Route::get('Test', ['as' => 'Test', 'uses' => 'TestController@view']);
+Route::get('Webagenda', ['as' => 'WebAgenda', 'uses' => 'TestController@webagenda']);
 Route::get('Vue',  ['as' => 'Vue', 'uses' => 'TestController@vue']);
 Route::get('Marcel1',  ['as' => 'Vue', 'uses' => 'TestController@marcel1']);
 Route::get('Toine1',  ['as' => 'Vue', 'uses' => 'TestController@toine1']);

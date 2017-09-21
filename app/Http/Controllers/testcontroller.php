@@ -39,6 +39,10 @@ class TestController extends Controller
         return view('toine2');
     }
 
+    public function webagenda() {
+        return view('webagenda');
+    }
+
     //Create first employee, chair and patient for testing purposes
     public function post() {
     	//Create employee
@@ -60,7 +64,7 @@ class TestController extends Controller
     	//Create chair
         $chair = new ChairModel();
         $chair->description = 'Stoel 1';
-        $chair->save();      
+        $chair->save();
 
     	//Create patient
     	$patient = new PatientModel();
