@@ -16,162 +16,131 @@
 
 <body>
 
-<div id="root" class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Parkeer panel</div>
-                <div class="panel-body">
-
-        
-                      <parkingpanel v-bind:patient="patient"></parkingpanel>
-                      <br>Testcomponent hieronder <br>
-                      <testcomponent v-on:add-patient="addPatient"></testcomponent>
-                </div>
-            </div>
-        </div>
-    </div>
-    @{{$data}}
+<div id="app" class="wrapper">  
+  <calendar :events="events" :editable="true"></calendar>
 </div>
-
-<script>
-
-Vue.component('parkingpanel', {
-  template: '\
-  <div>\
-    <div>\
-        <button v-on:click=addPatient(1)>Add Marcel</button>\
-        <button v-on:click=addPatient(2)>Add Toine</button>\
-    \
-    </div>\
-    \
-    <div>\
-      <br>\
-      <div v-for="(patient, index) in parkingList">\
-          @{{patient}}\
-          <button v-on:click="createNextAppointment(patient.id)" title="Vervolg afspraak">V</button>\
-          <button v-on:click="remove(index)" title="Verwijder uit parkeerpanel">X</button>\
-      </div>\
-    </div>\
-  </div>\
-  ',
-
-   props: {
-     patient: ''
-   },
-
-  data: function() {
-    return {
-      patient1: {
-        id: '1',
-        firstName: 'Marcel',
-        lastName: 'Sang-Ajang'
-      },
-      patient2: {
-        id: '2',
-        name: 'Toine',
-        lastName: 'Koene'
-      },
-      parkingList: []
-    }
-  },
-
-   watch: {
-     patient: function() {
-       this.addPatient(this.patient);
-     }
-   },
-
-      
-  mounted(){// in component B's created hook
-  
-      this.$on('add-patient', function () {
-
-          console.log('parkingpanel mounted function');
-      });
-      
-    },
-
-  methods: {
-    addPatient: function(patient){
-   
-      this.parkingList.push(patient);
-
-
-    },
-    createNextAppointment: function(patientId){
-      console.log(patientId);
-    },
-    remove: function(index){
-      this.parkingList.splice(index, 1);
-    }
-  }
-
-
-});                                                                                                                                                                                                                                                                                                                  
-
-Vue.component('testcomponent', {
-  template: '\
-    <div>\
-    <input type="number" v-model="patient1.id" placeholder="id">\
-    <input type="text" v-model="patient1.firstName" placeholder="First name">\
-    <input type="text" v-model="patient1.lastName" placeholder="Last name">\
-    <button v-on:click=addPatient>Add patient</button>\
-    </div>\
-  ',
-
-  data: function() {
-    return {
-      patient1: {
-        firstName: '',
-        lastName: '',
-        id: '',
-      }
-    }
-  },
-  methods: {
-    addPatient: function() {
-      this.$emit('add-patient', this.patient1);
-    }
-  }
-});
-
-var vm = new Vue({
-  el: '#root',
-
-   data: {
-     patient: {
-      firstName: '',
-      lastName: '',
-      id: ''
-     }
-   },
-
-  methods: {
-    addPatient: function(patient) {
-      console.log('this.patient = ' + this.patient.firstName);
-      console.log('patient = ' + patient.firstName);
-
-      this.patient = patient;
-      // this.patient.firstName = patient.firstName;
-      // this.patient.lastName = patient.lastName;
-      // this.patient.id = patient.id;
-      
-      // this.patient.firstName = '';
-      // this.patient.lastName = '';
-      // this.patient.id = '';
-      
-
-    }
-  }
-
-});
-</script>
-
-
 
 </body>
 </html>
+<script>
+Vue.component('calendar', {
+  template: '<div ref="calendar"></div>',
+  
+  props: {
+    events: {
+      type: Array, 
+      required: true
+    },
+    
+    editable: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    
+    droppable: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+  },
+  
+  data () {
+    return {
+      cal: null
+    }
+  },
+  
+  mounted () {
+      var self = this;
+      self.cal = $(self.$refs.calendar);
+    
+    var args = {
+      firstDay: 1,
+      lang: 'ro',
+      header: {
+        left:   'prev,next today',
+        center: 'title',
+        right:  'month,agendaWeek,agendaDay'
+      },
+      height: "auto",
+      allDaySlot: false,
+      slotEventOverlap: false,
+      timeFormat: 'HH:mm',
+      
+      events: self.events,
+      
+      dayClick: function(date)
+      {
+            self.$emit('day::clicked', date);
+            self.cal.fullCalendar('gotoDate', date.start);
+            self.cal.fullCalendar('changeView', 'agendaDay');
+      },
+
+      eventClick: function(event)
+      {
+            self.$emit('event::clicked', event);
+      }
+    }
+    
+    if (self.editable)
+    {
+      args.editable = true;
+      args.eventResize = function(event)
+      {
+        self.$emit('event::resized', event);
+      }
+      
+      args.eventDrop = function(event)
+      {
+        self.$emit('event::dropped', event);
+      }
+    }
+    
+    if (self.droppable)
+    {
+      args.droppable = true;
+      args.eventReceive = function(event)
+      {
+        self.$emit('event::received', event);
+      }
+    }
+    
+    self.cal.fullCalendar(args);
+    
+  }
+  
+})
+
+let vm = new Vue({
+  el: '#app',
+  
+  data () {
+     return {
+        events: [
+           {
+              title: 'Event1',
+              start: '2015-10-10 12:30:00',
+              end: '2015-10-10 16:30:00'
+           },
+           {
+              title: 'Event2',
+              start: '2015-10-07 17:30:00',
+              end: '2015-10-07 21:30:00'
+           }
+        ],
+        editable: false
+     }
+  },
+  
+  events: {
+    'day::clicked': function(date) {
+      console.log(date);
+    }
+  }
+})
+
+</script>
 
 
 

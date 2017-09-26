@@ -127,13 +127,18 @@ class EmployeeTimeBlocksModel {
     //This function belongs to 'get_employee_availability()'
     private function make_break_array($dayBreaks) {
 
-        foreach ($dayBreaks as $break) {
+        if ($dayBreaks) {
 
-            $breakArray[] = array('start' => $break['start_time'], 'end' => $break['end_time']);
+            foreach ($dayBreaks as $break) {
 
+                $breakArray[] = array('start' => $break['start_time'], 'end' => $break['end_time']);
+
+            }
+
+            return $breakArray;
+        } else {
+            return false;
         }
-
-        return $breakArray;
     }
 
     private function get_appointment($time, $chairID) {
@@ -223,6 +228,7 @@ class EmployeeTimeBlocksModel {
                if ($appointm = $this->get_appointment($startWhile->format('H:i:s'), $chairID)) {
 
                    $appointm = $appointm->toArray();
+                //   vd($appointm[0]);
                    $timeblockColl['appointment'] = $appointm;
 
                    //change interval to appointment duration to skip blocks related to the appointment

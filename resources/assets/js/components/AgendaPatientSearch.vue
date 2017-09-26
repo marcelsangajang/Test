@@ -1,25 +1,48 @@
 <template>
-  <div class="container">
-              <div class="panel panel-default">
-                  <div class="panel-heading">Patientlijst widget</div>
-                  <div class="panel-body">
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Patientlijst widget</div>
+        <div class="panel-body">
 
-                    <label>Zoek:</label>
-                    <input type="text" placeholder="Zoek..." v-model="text">
-                    <input type="text" placeholder="naam..." id="showName" v-if="showName" v-model="inputName"><br>
-                    <span><pre>{{filtered}}</pre></span>
+            <label>Zoek:</label>
+            <input type="text" placeholder="Zoek..." v-model="text">
+            <input type="text" placeholder="naam..." id="showName" v-if="showName" v-model="inputName"><br>
 
-                    <!-- Respons API -->
+
+            <!-- Respons API
                     <span><pre>{{responseAPI}}</pre></span>
-
-
-
-                  </div>
-              </div>
-  </div>
+                    <span><pre>{{filtered}}</pre></span>-->
+            <div class="patients-list">
+                <div v-for="patient in filtered">
+                    <div @mousedown="dragPatient" draggable="true" class="patient">
+                        {{patient}}
+                    </div>
+                    <button v-on:click="test(patient.id)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </template>
 
+<style>
+.patients-list {
+    overflow-y: scroll;
+    height: 100px;
+}
+
+.patient {
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+    background: lightblue;
+}
+</style>
+
 <script>
+
+import bus from './event-bus.js'
+
 export default {
 	data: function () {
 		return {
@@ -28,7 +51,8 @@ export default {
 			filtered: [],
 			filteredBackup: [],
 			inputName: '',
-			showName: false
+			showName: false,
+            dragData: ''
 		}
 	},
 	beforeMount: function () {
@@ -50,9 +74,15 @@ export default {
 		},
 		inputName: function () {
 			this.filterBirthdateName()
-		}
+		},
+        dragData: function() {
+            bus.$emit('drag-patient', this.dragData);
+        }
 	},
 	methods: {
+        test: function(patientID) {
+            bus.$emit('drag-patient', patientID);
+        },
 		getpatients: _.debounce(function () {
 			var app = this
 			app.responseAPI = "Laden..."
@@ -127,7 +157,10 @@ export default {
 					this.filtered = patients
 				}
 			}
-		}
+		},
+        dragPatient: function (e) {
+            this.dragData = e.path[0].innerHTML
 	}
+    }
 }
  </script>

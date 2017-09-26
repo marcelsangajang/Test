@@ -2,8 +2,8 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">Agenda</div>
-        <div class="panel-body">
-            <label>Date</label>
+        <div class="panel-body timeblocks-table">
+            <!-- <label>Date</label>
             <input type="date" placeholder="Date" v-model="date"><br>
             <label>ID</label>
             <input type="text" placeholder="ID" v-model="ID"><br>
@@ -11,8 +11,7 @@
             <select v-model="option">
             <option name="chair">chair</option>
             <option name="employee">employee</option>
-         </select>
-            <!-- Respons API -->
+         </select> -->
             <table>
                 <tr>
                     <th>Tijd</th>
@@ -22,14 +21,12 @@
                     <th>Opmerking</th>
                 </tr>
                 <tr v-for="timeblock in responseAPI">
-                    <td>
+                    <td @dragover.prevent @drop="dropAppoint" id="appointment" >
                         {{timeblock.time}}
                     </td>
                     <td>
-                        <div id="appointment">
-                            <div v-for="(appointdata, index) in timeblock.appointment">
-                                {{index}} : {{appointdata}}
-                            </div>
+                        <div v-if="timeblock.appointment">
+                                <agenda-appointment :appointmentdata="timeblock.appointment "></agenda-appointment>
                         </div>
                     </td>
                     <td>
@@ -45,10 +42,17 @@
             </table>
         </div>
     </div>
+
 </div>
 </template>
 
 <style>
+
+.timeblocks-table {
+    overflow-y: scroll;
+    height: 400px;
+}
+
 table {
     border-collapse: collapse;
 }
@@ -73,10 +77,13 @@ import bus from './event-bus.js'
 export default {
      data: function () {
        return {
-       ID: '1',
        date: '',
+       ID: '',
        option: 'employee',
-       responseAPI: ''
+       responseAPI: '',
+       dragPatient: '',
+       dropPoint: [],
+       newAppointm: ''
        }
      },
      watch: {
@@ -86,19 +93,23 @@ export default {
     },
     created: function() {
             //Assign todays date to 'date' attribute
-            var dateToday = new Date().toJSON().slice(0,10)
+            var dateToday = '2017-09-26'//new Date().toJSON().slice(0,10)
 
             this.date = dateToday
             //Get date from SimplexCalendar.vue
             bus.$on('date-changed', function (date) {
               this.showDate(Vue.util.extend({}, date))
             }.bind(this))
+
+            bus.$on('drag-patient', function (patient) {
+            this.assignDragPatient(patient)
+            }.bind(this))
          },
+     props: ['agendaid'],
      methods: {
         showDate: function(date) {
         var dateInput  = [date.year, date.month, date.date]
         var dateNew    = []
-
 
         for (var i = 0 ; i < dateInput.length ;  i++) {
           if (dateInput[i].length < 2) {
@@ -107,16 +118,18 @@ export default {
             dateNew.push(dateInput[i])
           }
         }
-
         dateNew = dateNew.join("-")
         this.date = dateNew
+        },
+        assignDragPatient: function(patient) {
+            this.dragPatient = JSON.parse(patient)
         },
        getAgendaData: _.debounce(function() {
          var app = this
          app.responseAPI = "Searching..."
          axios.get('/AgendaTimeBlocksAPI', {
                   params: {
-                  chair:  this.ID,
+                  chair:  this.agendaid,
                   date:   this.date,
                   option: this.option
                   }
@@ -127,7 +140,40 @@ export default {
                .catch(function (error) {
                  app.responseAPI = "ERROR" + error
                })
-       }, 500)
+       }, 500),
+       dropAppoint: function(e) {
+          this.newAppointm = ''
+          var app = this
+
+          var time = e.path[0].innerHTML
+          time     = time.trim()
+          time     = time + ':00'
+
+          var appointmPar = {}
+
+          appointmPar['time']      = time
+          appointmPar['date']      = this.date
+          appointmPar['agendaID']  = this.agendaid
+          appointmPar['patientID'] = this.dragPatient.id
+          appointmPar['duration']  = 30
+
+          this.newAppointm = appointmPar
+
+          axios.post('/postAppointm', {
+              time:      appointmPar['time'],
+              date:      appointmPar['date'],
+              agendaID:  appointmPar['agendaID'],
+              patientID: appointmPar['patientID'],
+              duration:  appointmPar['duration']
+            })
+            .then(function (response) {
+              app.getAgendaData()
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+
+       }
      }
    }
 

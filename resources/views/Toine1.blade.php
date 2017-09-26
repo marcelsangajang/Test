@@ -3,9 +3,9 @@
 @section('content')
 
 <div id="app">
-    <simplexcalendar monday-first="true"></simplexcalendar>
-    <!-- <agendasearch></agendasearch> -->
-    <agendatimeblocks></agendatimeblocks>
+    <simplexcalendar></simplexcalendar>
+    <agendasearch></agendasearch>
+    <agendatimeblocks agendaid="1"></agendatimeblocks>
 </div>
 
 

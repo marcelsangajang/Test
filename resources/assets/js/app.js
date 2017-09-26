@@ -20,10 +20,11 @@ window.Vue = require('vue');
  Vue.component('agendatimeblocks', require('./components/AgendaTimeblocks.vue'));
  // Vue.component('parkingpanel', require('./components/Parkingpanel.vue'));
  Vue.component('simplexcalendar', require('./components/SimplexCalendar.vue'));
+ Vue.component('agenda-appointment', require('./components/agenda-appointment.vue'));
 
  const app = new Vue({
      el: '#app',
      data: {
-         test: 'dit is een test'
+
      }
  });

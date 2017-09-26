@@ -121,6 +121,7 @@
 
                 <h1>Vue Testomgeving</h1>
                 <div class="links">
+                    <a href="/WebAgenda">Web Agenda (home)</a>
                     <a href="/Vue">Vue</a>
                     <a href="/Marcel1">Marcel 1</a>
                     <a href="/Toine1">Toine 1</a>

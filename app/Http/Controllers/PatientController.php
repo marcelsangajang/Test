@@ -23,21 +23,20 @@ class PatientController extends Controller
     //Create a patient and store in db
     public function createPatient() {
 
-    for ($i = 0 ; $i < 1000 ; $i++) {
         $input = Input::all();
         $patient = new PatientModel();
-        $patient->first_name = $input['first_name'] . $i;
-        $patient->last_name = $input['last_name'] . $i;
+        $patient->first_name = $input['first_name'];
+        $patient->last_name = $input['last_name'];
         $patient->date_of_birth = $input['date_of_birth'];
-        $patient->address = $input['address'] . $i;
+        $patient->address = $input['address'];
         $patient->zipcode = $input['zipcode'];
-        $patient->house_number = $input['house_number'] . $i;
-        $patient->city = $input['city'] . $i;
+        $patient->house_number = $input['house_number'];
+        $patient->city = $input['city'];
         $patient->phone_number_1 = $input['phone_number'];
-        $patient->phone_number_2 = $i;
-        $patient->email = $input['email'] . $i;
+        $patient->phone_number_2 = NULL;
+        $patient->email = $input['email'];
         $patient->save();
-    }
+
         return view('welcome');
     }
 
